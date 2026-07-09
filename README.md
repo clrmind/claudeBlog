@@ -38,8 +38,8 @@
 
 ```bash
 pkg update && pkg upgrade
-pkg install python git cronie termux-services
-pip install requests
+pkg install python git cronie termux-services libjpeg-turbo
+pip install requests Pillow   # Pillow는 선택 — AI 이미지를 자동 압축해 저장소 용량 절약
 
 git clone https://github.com/clrmind/claudeblog.git
 cd claudeblog
@@ -98,6 +98,19 @@ crontab에 추가:
 | `counter_namespace` | 조회수 대시보드(admin.html) 네임스페이스. 비우면 비활성화 |
 | `max_posts_per_day` | 하루 최대 발행 수 (기본 3 — 대량 발행은 애드센스 정책 위반 위험) |
 | `git_branch` | 배포 브랜치 (GitHub Pages 설정과 일치시킬 것) |
+
+## 검색엔진 등록 (유입의 핵심 — 한 번만 하면 됨)
+
+글을 발행해도 검색엔진에 등록하지 않으면 방문자가 오지 않습니다. 배포 후 반드시 등록하세요.
+
+1. **[Google Search Console](https://search.google.com/search-console)**
+   — 도메인 등록(소유 확인) 후 `sitemap.xml` 제출. 애드센스 승인에도 사실상 필수.
+2. **[네이버 서치어드바이저](https://searchadvisor.naver.com)**
+   — **50대 유입의 최대 통로.** 한국 50대는 네이버 검색 비중이 매우 높습니다.
+   사이트 등록 후 `sitemap.xml`과 `rss.xml`을 모두 제출하세요.
+3. **[빙 웹마스터 도구](https://www.bing.com/webmasters)** — Search Console 연동으로 1분 만에 등록 가능.
+
+등록 후 색인까지 보통 며칠~몇 주 걸리므로, 그동안 글을 꾸준히 쌓아두는 것이 좋습니다.
 
 ## 보안
 

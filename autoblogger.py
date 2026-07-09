@@ -23,6 +23,7 @@ AutoBlogger v2 — 50대 타깃 실시간 트렌드 자동 블로그 발행기
 import argparse
 import base64
 import datetime
+import email.utils
 import html
 import json
 import os
@@ -280,11 +281,15 @@ def select_keyword_for_50s(candidates, history, api_key, model):
 
     result = call_gemini_json(prompt, api_key, model)
     if result and result.get("keyword"):
-        return {
-            "keyword": str(result["keyword"]).strip(),
-            "reason": str(result.get("selection_reason", "")).strip(),
-            "category": result.get("category") if result.get("category") in IMAGE_CATEGORIES else "society",
-        }
+        kw = str(result["keyword"]).strip()
+        if kw in recent:
+            print(f"⚠️ Gemini가 최근 발행 키워드를 다시 선택({kw}) → 대체 주제로 전환")
+        else:
+            return {
+                "keyword": kw,
+                "reason": str(result.get("selection_reason", "")).strip(),
+                "category": result.get("category") if result.get("category") in IMAGE_CATEGORIES else "society",
+            }
 
     # Gemini 실패 시: 이력에 없는 상시 인기 주제 중 랜덤 선택
     pool = [k for k in FALLBACK_KEYWORDS if k not in recent] or FALLBACK_KEYWORDS
@@ -371,6 +376,34 @@ def fetch_wikipedia_image(person_name):
     return None, None
 
 
+def optimize_ai_image(path):
+    """Pillow가 설치돼 있으면 JPEG로 압축해 저장 용량을 1/10 수준으로 줄인다 (선택 기능).
+
+    AI 이미지 PNG 원본은 장당 1~2MB라 그대로 쌓이면 저장소가 비대해져
+    폰에서의 git push가 점점 느려진다. `pip install Pillow` 권장.
+    """
+    try:
+        from PIL import Image
+    except ImportError:
+        print("ℹ️ Pillow 미설치 — 이미지 압축을 건너뜁니다 (pip install Pillow 권장)")
+        return path
+    try:
+        img = Image.open(path)
+        if img.mode != "RGB":
+            img = img.convert("RGB")
+        if img.width > 1280:
+            img = img.resize((1280, round(img.height * 1280 / img.width)))
+        new_path = os.path.splitext(path)[0] + ".jpg"
+        img.save(new_path, "JPEG", quality=82, optimize=True)
+        if new_path != path:
+            os.remove(path)
+        print(f"🗜️ 이미지 압축 완료: {os.path.getsize(new_path) // 1024}KB")
+        return new_path
+    except Exception as e:
+        print(f"⚠️ 이미지 압축 실패(원본 유지): {e}")
+        return path
+
+
 def generate_ai_image(image_prompt, api_key, model, filename):
     """Gemini 이미지 모델로 글 내용에 맞는 커버 이미지를 생성해 images/에 저장한다."""
     full_prompt = (
@@ -402,8 +435,10 @@ def generate_ai_image(image_prompt, api_key, model, filename):
                     path = os.path.join(IMAGES_DIR, filename + ext)
                     with open(path, "wb") as f:
                         f.write(base64.b64decode(inline["data"]))
-                    print(f"🎨 AI 이미지 저장 완료: images/{filename}{ext}")
-                    return f"/images/{filename}{ext}"
+                    path = optimize_ai_image(path)
+                    web_path = "/images/" + os.path.basename(path)
+                    print(f"🎨 AI 이미지 저장 완료: {web_path}")
+                    return web_path
             print("⚠️ 응답에 이미지 데이터가 없습니다.")
         except Exception as e:
             print(f"⚠️ AI 이미지 생성 실패: {e}")
@@ -831,24 +866,28 @@ def og_and_jsonld(cfg, post):
     url = f"{cfg['blog_domain']}/posts/{post['filename']}.html"
     desc = post.get("meta_description") or strip_tags(post["content"])[:150]
     img_url = absolute_image_url(cfg, post["image"])
+    # SVG는 카카오톡/페이스북 og:image 및 구글 리치 결과에서 지원되지 않으므로 제외
+    usable_img = "" if img_url.lower().endswith(".svg") else img_url
     og = (
         f"<meta property='og:type' content='article'>"
         f"<meta property='og:title' content='{html.escape(post['title'])}'>"
         f"<meta property='og:description' content='{html.escape(desc)}'>"
-        f"<meta property='og:image' content='{img_url}'>"
-        f"<meta property='og:url' content='{url}'>"
+        + (f"<meta property='og:image' content='{usable_img}'>" if usable_img else "")
+        + f"<meta property='og:url' content='{url}'>"
     )
-    jsonld = json.dumps({
+    data = {
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": post["title"],
         "description": desc,
-        "image": img_url,
         "datePublished": post["date"],
         "mainEntityOfPage": url,
         "publisher": {"@type": "Organization", "name": cfg["blog_name"]},
         "author": {"@type": "Organization", "name": cfg["blog_name"]},
-    }, ensure_ascii=False)
+    }
+    if usable_img:
+        data["image"] = usable_img
+    jsonld = json.dumps(data, ensure_ascii=False)
     return og + f"<script type='application/ld+json'>{jsonld}</script>"
 
 
@@ -912,12 +951,17 @@ def generate_rss(cfg, posts_data):
     items = []
     for p in posts_data[:20]:
         desc = p.get("meta_description") or strip_tags(p["content"])[:150]
+        try:
+            pub_date = email.utils.format_datetime(
+                datetime.datetime.strptime(p["date"], "%Y-%m-%d"))
+        except ValueError:
+            pub_date = p["date"]
         items.append(
             "<item>"
             f"<title>{html.escape(p['title'])}</title>"
             f"<link>{domain}/posts/{p['filename']}.html</link>"
             f"<guid>{domain}/posts/{p['filename']}.html</guid>"
-            f"<pubDate>{p['date']}</pubDate>"
+            f"<pubDate>{pub_date}</pubDate>"
             f"<description>{html.escape(desc)}</description>"
             "</item>"
         )
@@ -936,12 +980,37 @@ def generate_rss(cfg, posts_data):
 
 def generate_robots_and_ads(cfg):
     with open(os.path.join(BASE_DIR, "robots.txt"), "w", encoding="utf-8") as f:
-        f.write(f"User-agent: *\nAllow: /\nSitemap: {cfg['blog_domain']}/sitemap.xml\n")
+        f.write("User-agent: *\nAllow: /\nDisallow: /admin.html\n"
+                f"Sitemap: {cfg['blog_domain']}/sitemap.xml\n")
     client = cfg.get("adsense_client", "").strip()
     if client:
         pub_id = client.replace("ca-", "")
         with open(os.path.join(BASE_DIR, "ads.txt"), "w", encoding="utf-8") as f:
             f.write(f"google.com, {pub_id}, DIRECT, f08c47fec0942fa0\n")
+
+
+def write_404_page(cfg, posts_data):
+    """GitHub Pages 404 페이지 — 잘못 유입된 방문자를 최신 글로 되돌린다."""
+    cards = "".join(
+        f"<a href='/posts/{p['filename']}.html' class='recommend-card'>"
+        f"<img class='recommend-thumb' src='{p['image']}' alt='{html.escape(p['title'])}' loading='lazy'>"
+        f"<p class='recommend-title'>{html.escape(p['title'])}</p></a>"
+        for p in posts_data[:4]
+    )
+    body = (
+        "<div class='container' style='text-align:center; margin-top:60px;'>"
+        "<h1 style='font-size:48px; margin-bottom:10px;'>404</h1>"
+        "<p style='color:#777;'>찾으시는 페이지가 없습니다. 대신 최신 인사이트를 확인해보세요.</p>"
+        "<p><a href='/' style='display:inline-block; background:#00c73c; color:#fff; padding:12px 30px; "
+        "border-radius:30px; text-decoration:none; font-weight:700;'>홈으로 가기</a></p>"
+        + (f"<div class='recommend-grid' style='margin-top:40px; text-align:left;'>{cards}</div>" if cards else "")
+        + "</div>"
+    )
+    page = page_shell(cfg, f"페이지를 찾을 수 없습니다 - {cfg['blog_name']}", "404 Not Found",
+                      f"{cfg['blog_domain']}/404.html", body,
+                      extra_head="<meta name='robots' content='noindex'>")
+    with open(os.path.join(BASE_DIR, "404.html"), "w", encoding="utf-8") as f:
+        f.write(page)
 
 
 def write_admin_dashboard(cfg, posts_data):
@@ -985,7 +1054,8 @@ def write_admin_dashboard(cfg, posts_data):
         "<tbody id='statsTableBody'></tbody></table></div></div>" + script
     )
     page = page_shell(cfg, f"대시보드 - {cfg['blog_name']}", "관리자 대시보드",
-                      f"{cfg['blog_domain']}/admin.html", body, extra_head=admin_style)
+                      f"{cfg['blog_domain']}/admin.html", body,
+                      extra_head="<meta name='robots' content='noindex'>" + admin_style)
     with open(os.path.join(BASE_DIR, "admin.html"), "w", encoding="utf-8") as f:
         f.write(page)
 
@@ -1113,6 +1183,7 @@ def render_site(cfg):
         with open(os.path.join(POSTS_DIR, f"{p['filename']}.html"), "w", encoding="utf-8") as f:
             f.write(page)
 
+    write_404_page(cfg, posts_data)
     write_admin_dashboard(cfg, posts_data)
     print(f"🛠️ 사이트 빌드 완료 (총 {len(posts_data)}개 포스트, {total_pages}페이지)")
 
@@ -1135,7 +1206,12 @@ def git_sync(cfg, commit_message, max_retries=4):
         return False
 
     # 원격에서 다른 변경이 있었을 수 있으므로 rebase 후 push (충돌 자동 회피)
-    subprocess.run(["git", "pull", "--rebase", "origin", branch], cwd=BASE_DIR)
+    pull = subprocess.run(["git", "pull", "--rebase", "origin", branch], cwd=BASE_DIR)
+    if pull.returncode != 0:
+        # rebase가 중간에 멈춰 있으면 다음 스케줄 실행까지 전부 실패하므로 반드시 되돌린다
+        subprocess.run(["git", "rebase", "--abort"], cwd=BASE_DIR,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        print("⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.")
 
     delay = 2
     for attempt in range(1, max_retries + 1):
