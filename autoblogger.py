@@ -61,7 +61,8 @@ DEFAULT_CONFIG = {
     "counter_namespace": "",
     "git_branch": "main",
     "posts_per_page": 9,
-    "max_posts_per_day": 3
+    "max_posts_per_day": 3,
+    "keyword_source": "trends"
 }
 
 # 실시간 수집이 모두 실패했을 때 사용하는 50대 상시 인기 주제 (검색량/광고단가가 높은 주제 위주)
@@ -72,6 +73,26 @@ FALLBACK_KEYWORDS = [
     "노후 자산관리 포트폴리오", "개인연금 IRP 세액공제", "중장년 재취업 지원 제도",
     "기초연금 수급 자격", "상속세 절세 방법", "전원주택 귀촌 준비",
     "무릎 관절에 좋은 운동", "눈 건강 지키는 습관", "단백질 보충 식단",
+]
+
+# 50대 시청층이 두터운 건강/식품 정보 프로그램 (방송 직후 소재 검색량이 급증하고 경쟁 글은 적음)
+# 저작권 문제를 피하기 위해 '소재 키워드'만 참고하고 방송 내용 자체는 전재하지 않는다.
+TV_HEALTH_FOOD_PROGRAMS = [
+    "생로병사의 비밀", "무엇이든 물어보세요", "한국인의 밥상", "6시 내고향",
+    "나는 몸신이다", "엄지의 제왕", "천기누설", "알토란", "황금알",
+    "만물상", "건강한 집", "속풀이쇼 동치미",
+    "명의", "최고의 요리비결", "기분 좋은 날", "닥터스",
+]
+
+# 방송 소재 크롤링이 모두 실패했을 때 사용하는 건강/식품 상시 인기 주제
+TV_FALLBACK_KEYWORDS = [
+    "혈관에 좋은 음식과 혈관 청소 관리법", "간에 좋은 음식과 간 건강 지키는 법",
+    "혈압 낮추는 음식과 식습관", "혈당 잡는 식단과 당뇨 관리법",
+    "관절에 좋은 음식과 무릎 건강 운동", "장 건강에 좋은 발효 음식",
+    "면역력 높이는 음식과 생활 습관", "콜레스테롤 낮추는 식단",
+    "된장찌개 맛있게 끓이는 법", "김치 맛있게 담그는 비법",
+    "고등어조림 비린내 없이 만드는 법", "제철 나물 무침 레시피",
+    "눈 건강에 좋은 음식", "뼈 건강과 골다공증 예방 식품",
 ]
 
 IMAGE_CATEGORIES = ["health", "finance", "lifestyle", "food", "travel", "technology", "society", "nature"]
@@ -225,6 +246,69 @@ def fetch_trending_keywords():
 
 
 # ==========================================
+# 1-B단계: 방송 편성표 기반 건강/식품 소재 크롤링
+#   → 방송 직후 검색량이 급증하는 회차 소재를 수집한다.
+#   ⚠️ 방송 '내용'이 아니라 '소재 키워드'만 참고하여 저작권 문제를 피한다.
+# ==========================================
+
+def _extract_episode_topics(program, page_text):
+    """네이버 검색 결과 텍스트에서 해당 방송의 회차 부제(소재)로 보이는 구절을 추출한다.
+
+    검색 결과 HTML 구조는 수시로 바뀌므로 best-effort 방식이다.
+    실패해도 예외 없이 빈 리스트를 반환한다.
+    """
+    topics = []
+    text = html.unescape(page_text)
+    # '프로그램명 123회 부제' 또는 '프로그램명 - 부제' 형태의 회차 정보 추출
+    patterns = [
+        re.escape(program) + r"\s*\d+\s*회[,\s]*['\"]?([^'\"<>\n]{4,40})",
+        re.escape(program) + r"\s*[-–:]\s*([^'\"<>\n]{4,40})",
+    ]
+    for pat in patterns:
+        for m in re.finditer(pat, text):
+            phrase = re.sub(r"\s+", " ", m.group(1)).strip(" '\".-–")
+            # 방송/회차/날짜 같은 잡음 토큰은 제외
+            if phrase and not re.fullmatch(r"[\d회차년월일화수목금토\s]+", phrase):
+                topics.append(f"{program}: {phrase}")
+    return topics[:2]
+
+
+def fetch_tv_program_topics(programs=None, max_programs=8):
+    """오늘 방송되는 건강/식품 프로그램의 회차 소재를 크롤링한다 (best-effort)."""
+    programs = programs or TV_HEALTH_FOOD_PROGRAMS
+    collected, checked = [], 0
+    for program in programs:
+        if checked >= max_programs:
+            break
+        checked += 1
+        try:
+            r = requests.get(
+                "https://search.naver.com/search.naver",
+                params={"query": f"{program} 오늘 방송"},
+                timeout=8, headers={"User-Agent": UA},
+            )
+            if r.status_code != 200:
+                continue
+            found = _extract_episode_topics(program, r.text)
+            if found:
+                collected.extend(found)
+                print(f"  📺 {found[0]}")
+            time.sleep(0.5)  # 과도한 요청 방지
+        except Exception as e:
+            print(f"⚠️ '{program}' 방송 소재 수집 실패: {e}")
+            continue
+
+    if collected:
+        print(f"📺 방송 소재 후보 {len(collected)}개 수집 완료")
+    else:
+        # 크롤링이 모두 실패해도, 프로그램 목록 자체를 맥락으로 넘겨 Gemini가
+        # 해당 프로그램들이 다루는 건강/식품 주제를 생성하도록 한다.
+        print("📺 회차 소재 크롤링 실패 → 프로그램 목록을 맥락으로 사용")
+        collected = [f"{p} (건강/식품 정보 프로그램)" for p in (programs or [])[:8]]
+    return collected
+
+
+# ==========================================
 # 키워드 발행 이력 (중복 방지)
 # ==========================================
 
@@ -253,31 +337,60 @@ def posts_today(history):
 # 2단계: Gemini가 50대 타깃 키워드 선별
 # ==========================================
 
-def select_keyword_for_50s(candidates, history, api_key, model):
+def select_keyword_for_50s(candidates, history, api_key, model, source="trends"):
     recent = [h["keyword"] for h in history[-30:]]
-    candidates_text = "\n".join(f"- {k}" for k in candidates[:30]) if candidates else "(수집 실패 — 직접 제안 필요)"
     recent_text = "\n".join(f"- {k}" for k in recent) if recent else "(없음)"
 
-    prompt = (
-        "너는 대한민국 50대 독자를 겨냥한 정보 블로그의 편집장이다.\n"
-        "아래 '실시간 트렌드 후보' 중에서 50대 독자가 가장 많이 검색하고 클릭할 만한 키워드 1개를 골라라.\n\n"
-        "★선정 기준 (우선순위 순):\n"
-        "1. 건강/질병/의료 (갱년기, 관절, 혈압, 당뇨, 치매, 암 등)\n"
-        "2. 연금/재테크/부동산/세금 (국민연금, 주택연금, 상속, 금리 등 — 광고 단가가 높은 분야)\n"
-        "3. 생활 정보/정부 지원 제도 (지원금, 건강보험, 재취업 등)\n"
-        "4. 50대 인지도가 높은 유명인·방송·사회 이슈\n\n"
-        "★제외 기준:\n"
-        f"- 최근 발행 이력에 이미 있는 키워드/주제:\n{recent_text}\n"
-        "- 10~20대 위주의 게임/아이돌 이슈, 선정적/자극적 이슈\n\n"
-        f"★실시간 트렌드 후보:\n{candidates_text}\n\n"
-        "후보가 모두 부적합하거나 비어 있으면, 50대에게 유용하고 검색량이 많은 상시 인기 주제를 직접 1개 제안하라.\n\n"
-        "★출력 형식: 반드시 아래 JSON 구조로만 출력하라.\n"
-        "{\n"
-        '  "keyword": "선정한 키워드",\n'
-        '  "selection_reason": "50대 관점에서 이 키워드를 고른 이유 1~2문장",\n'
-        f'  "category": "{" | ".join(IMAGE_CATEGORIES)} 중 하나"\n'
-        "}"
-    )
+    if source == "tv":
+        candidates_text = ("\n".join(f"- {k}" for k in candidates[:30])
+                           if candidates else "(수집 실패 — 직접 제안 필요)")
+        prompt = (
+            "너는 대한민국 50대 독자를 겨냥한 건강·식품 정보 블로그의 편집장이다.\n"
+            "아래는 오늘 방송된 건강/식품 정보 프로그램의 회차 소재 목록이다.\n"
+            "이 중 검색 잠재력이 가장 큰 소재 1개를 골라, 방송 내용을 베끼지 말고\n"
+            "독립적인 '정보성 키워드'로 재구성하라.\n\n"
+            "★변환 예시:\n"
+            "- '엄지의 제왕: 혈관 청소 음식' → '혈관에 좋은 음식과 혈관 건강 관리법'\n"
+            "- '알토란: 고등어조림 비법' → '고등어조림 맛있게 만드는 법과 손질 요령'\n\n"
+            "★선정 기준:\n"
+            "1. 건강/질병/영양/식품 소재를 최우선으로 한다.\n"
+            "2. 50대가 실제로 검색할 법한 구체적이고 실용적인 소재를 고른다.\n"
+            "3. 특정 방송·출연자에 종속되지 않는, 언제 읽어도 유용한 정보성 주제로 만든다.\n\n"
+            "★제외 기준:\n"
+            f"- 최근 발행 이력에 이미 있는 키워드/주제:\n{recent_text}\n\n"
+            f"★오늘 방송 소재 후보:\n{candidates_text}\n\n"
+            "후보가 모두 부적합하거나 비어 있으면, 50대에게 유용하고 검색량이 많은\n"
+            "건강 또는 식품 관련 상시 인기 주제를 직접 1개 제안하라.\n\n"
+            "★출력 형식: 반드시 아래 JSON 구조로만 출력하라.\n"
+            "{\n"
+            '  "keyword": "정보성으로 재구성한 키워드",\n'
+            '  "selection_reason": "이 소재를 고르고 이렇게 재구성한 이유 1~2문장",\n'
+            f'  "category": "{" | ".join(IMAGE_CATEGORIES)} 중 하나 (건강이면 health, 음식이면 food)"\n'
+            "}"
+        )
+    else:
+        candidates_text = ("\n".join(f"- {k}" for k in candidates[:30])
+                           if candidates else "(수집 실패 — 직접 제안 필요)")
+        prompt = (
+            "너는 대한민국 50대 독자를 겨냥한 정보 블로그의 편집장이다.\n"
+            "아래 '실시간 트렌드 후보' 중에서 50대 독자가 가장 많이 검색하고 클릭할 만한 키워드 1개를 골라라.\n\n"
+            "★선정 기준 (우선순위 순):\n"
+            "1. 건강/질병/의료 (갱년기, 관절, 혈압, 당뇨, 치매, 암 등)\n"
+            "2. 연금/재테크/부동산/세금 (국민연금, 주택연금, 상속, 금리 등 — 광고 단가가 높은 분야)\n"
+            "3. 생활 정보/정부 지원 제도 (지원금, 건강보험, 재취업 등)\n"
+            "4. 50대 인지도가 높은 유명인·방송·사회 이슈\n\n"
+            "★제외 기준:\n"
+            f"- 최근 발행 이력에 이미 있는 키워드/주제:\n{recent_text}\n"
+            "- 10~20대 위주의 게임/아이돌 이슈, 선정적/자극적 이슈\n\n"
+            f"★실시간 트렌드 후보:\n{candidates_text}\n\n"
+            "후보가 모두 부적합하거나 비어 있으면, 50대에게 유용하고 검색량이 많은 상시 인기 주제를 직접 1개 제안하라.\n\n"
+            "★출력 형식: 반드시 아래 JSON 구조로만 출력하라.\n"
+            "{\n"
+            '  "keyword": "선정한 키워드",\n'
+            '  "selection_reason": "50대 관점에서 이 키워드를 고른 이유 1~2문장",\n'
+            f'  "category": "{" | ".join(IMAGE_CATEGORIES)} 중 하나"\n'
+            "}"
+        )
 
     result = call_gemini_json(prompt, api_key, model)
     if result and result.get("keyword"):
@@ -292,10 +405,12 @@ def select_keyword_for_50s(candidates, history, api_key, model):
             }
 
     # Gemini 실패 시: 이력에 없는 상시 인기 주제 중 랜덤 선택
-    pool = [k for k in FALLBACK_KEYWORDS if k not in recent] or FALLBACK_KEYWORDS
+    source_pool = TV_FALLBACK_KEYWORDS if source == "tv" else FALLBACK_KEYWORDS
+    pool = [k for k in source_pool if k not in recent] or source_pool
     kw = random.choice(pool)
+    default_cat = "food" if source == "tv" else "lifestyle"
     print(f"⚠️ 키워드 선별 실패 → 상시 인기 주제로 대체: {kw}")
-    return {"keyword": kw, "reason": "50대 상시 관심 주제(자동 대체)", "category": "lifestyle"}
+    return {"keyword": kw, "reason": "50대 상시 관심 주제(자동 대체)", "category": default_cat}
 
 
 # ==========================================
@@ -1233,6 +1348,9 @@ def git_sync(cfg, commit_message, max_retries=4):
 def main():
     parser = argparse.ArgumentParser(description="50대 타깃 트렌드 자동 블로그 발행기")
     parser.add_argument("--keyword", help="키워드 직접 지정 (트렌드 수집 생략)")
+    parser.add_argument("--source", choices=["trends", "tv"],
+                        help="키워드 소스 (trends: 실시간 트렌드 / tv: 방송 편성표 건강·식품). "
+                             "생략 시 config.json의 keyword_source를 따름")
     parser.add_argument("--render-only", action="store_true", help="글 생성 없이 사이트만 재빌드")
     parser.add_argument("--no-push", action="store_true", help="git 커밋/푸시 생략")
     args = parser.parse_args()
@@ -1257,12 +1375,17 @@ def main():
         return
 
     # 1) 키워드 결정
+    source = args.source or cfg.get("keyword_source", "trends")
     if args.keyword:
         selection = {"keyword": args.keyword, "reason": "사용자 직접 지정", "category": "society"}
+    elif source == "tv":
+        print("📺 방송 편성표에서 건강·식품 소재를 수집합니다...")
+        candidates = fetch_tv_program_topics()
+        selection = select_keyword_for_50s(candidates, history, api_key, cfg["model_name"], source="tv")
     else:
         print("📡 실시간 트렌드 키워드를 수집합니다...")
         candidates = fetch_trending_keywords()
-        selection = select_keyword_for_50s(candidates, history, api_key, cfg["model_name"])
+        selection = select_keyword_for_50s(candidates, history, api_key, cfg["model_name"], source="trends")
 
     keyword = selection["keyword"]
     print(f"🎯 선정 키워드: [{keyword}] — {selection['reason']}")

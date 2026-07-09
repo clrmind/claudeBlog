@@ -10,5 +10,6 @@
   "counter_namespace": "zionlabs_blog",
   "git_branch": "main",
   "posts_per_page": 9,
-  "max_posts_per_day": 3
+  "max_posts_per_day": 3,
+  "keyword_source": "trends"
 }
