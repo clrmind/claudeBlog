@@ -311,7 +311,9 @@ def generate_blog_content(keyword, context, api_key, model):
         "   Q&A 3개를 <h3>Q. 질문</h3><p>답변</p> 형식으로 작성.\n"
         "4. 강조: 핵심 문구 2~3곳만 <strong> 태그로 마킹. 목록이 어울리는 곳은 <ul><li> 사용.\n"
         "5. 정확성: 확실하지 않은 수치나 사실은 단정하지 말고 '~로 알려져 있다', '기관 확인이 필요하다'로 표현.\n"
-        "6. 제목: 검색 클릭을 부르되 낚시성이 아닌 제목. 핵심 키워드를 포함하고 60자 이내.\n\n"
+        "6. 제목: 검색 클릭을 부르되 낚시성이 아닌 제목. 핵심 키워드를 포함하고 60자 이내.\n"
+        "7. 도입부: 첫 문단은 독자 자신의 상황을 떠올리게 하는 질문이나 구체적 사례로 시작해\n"
+        "   끝까지 읽고 싶게 만들어라. 문단은 3~4문장 이내로 짧게 끊어 모바일 가독성을 높여라.\n\n"
         "★출력 형식: 반드시 아래 JSON 구조로만 출력하라.\n"
         "{\n"
         '  "title": "SEO 최적화된 블로그 제목 (키워드 포함, 60자 이내)",\n'
@@ -572,6 +574,28 @@ header a.logo { font-size: 22px; font-weight: 900; color: #1a1a1a; text-decorati
 .recommend-card:hover { border-color: #00c73c; }
 .recommend-thumb { width: 100%; height: 140px; object-fit: cover; }
 .recommend-title { padding: 12px; margin: 0; font-size: 14px; font-weight: 600; color: #333; line-height: 1.4; }
+.reading-progress { position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 200; pointer-events: none; }
+#progressBar { height: 100%; width: 0; background: #00c73c; transition: width 0.1s; }
+.font-controls { display: flex; justify-content: flex-end; gap: 8px; align-items: center; font-size: 13px; color: #888; margin: 10px 0; }
+.font-controls button { border: 1px solid #dde; background: #fff; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 14px; }
+.font-controls button:hover { border-color: #00c73c; color: #00a835; }
+.toc-box { background: #fff; border: 1px solid #edf2f7; border-radius: 12px; padding: 20px 25px; margin-bottom: 30px; font-size: 15px; }
+.toc-box .toc-title { font-weight: 700; margin-bottom: 10px; }
+.toc-box ol { margin: 0; padding-left: 20px; }
+.toc-box li { margin-bottom: 6px; }
+.toc-box a { color: #4a5568; text-decoration: none; }
+.toc-box a:hover { color: #00c73c; }
+.inline-link-box { background: #f6fbf7; border: 1px solid #d8f2e0; border-radius: 10px; padding: 15px 20px; margin: 35px 0; font-size: 15px; }
+.inline-link-box ul { margin: 8px 0 0 0; padding-left: 20px; }
+.inline-link-box li { margin-bottom: 6px; }
+.inline-link-box a { color: #0a7d3b; font-weight: 600; }
+.post-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 50px; }
+.post-nav a { border: 1px solid #edf2f7; background: #fff; border-radius: 10px; padding: 15px; text-decoration: none; color: #555; font-size: 13px; }
+.post-nav a span { display: block; margin-top: 6px; color: #1a1a1a; font-weight: 700; font-size: 15px; line-height: 1.4; }
+.post-nav a:hover { border-color: #00c73c; }
+.post-nav .next { text-align: right; }
+.tags a { display: inline-block; background: #eef2f7; color: #556; border-radius: 15px; padding: 5px 14px; font-size: 13px; margin: 0 6px 8px 0; text-decoration: none; }
+.tags a:hover { background: #e2fbf0; color: #0a7d3b; }
 footer { background: #fff; border-top: 1px solid #edf2f7; padding: 40px 20px; margin-top: 100px; text-align: center; font-size: 13px; color: #777; }
 .footer-info { margin-bottom: 15px; line-height: 1.6; }
 .footer-links a { margin: 0 10px; color: #666; text-decoration: none; }
@@ -612,8 +636,132 @@ function runBlogSearch() {
 """
 
 
+POST_ENGAGEMENT_JS = """
+<script>
+(function(){
+  var bar = document.getElementById('progressBar');
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    if (bar && max > 0) bar.style.width = ((h.scrollTop || document.body.scrollTop) / max * 100) + '%';
+  });
+  applyFont();
+})();
+function applyFont(){
+  var s = parseInt(localStorage.getItem('blogFontSize') || '17', 10);
+  var b = document.querySelector('.article-body');
+  if (b) b.style.fontSize = s + 'px';
+}
+function adjustFont(d){
+  var s = parseInt(localStorage.getItem('blogFontSize') || '17', 10) + d;
+  s = Math.max(15, Math.min(24, s));
+  localStorage.setItem('blogFontSize', s);
+  applyFont();
+}
+</script>
+"""
+
+FONT_CONTROLS_HTML = ("<div class='font-controls'>글자 크기 "
+                      "<button onclick='adjustFont(-1)' aria-label='글자 작게'>가-</button>"
+                      "<button onclick='adjustFont(1)' aria-label='글자 크게'>가+</button></div>")
+
+
 def strip_tags(text):
     return re.sub(r"<[^>]+>", " ", text or "").strip()
+
+
+def slugify_tag(tag):
+    slug = re.sub(r"[^0-9A-Za-z가-힣]+", "-", str(tag)).strip("-")
+    return slug.lower() or "etc"
+
+
+def related_posts(post, posts_data, n=4):
+    """태그/카테고리/제목 토큰 겹침으로 관련도를 계산해 상위 n개를 반환 (동점이면 최신순)."""
+    my_tags = {str(t) for t in (post.get("tags") or [])}
+    my_tokens = set(re.findall(r"[가-힣A-Za-z0-9]{2,}",
+                               f"{post.get('title', '')} {post.get('keyword', '')}"))
+    scored = []
+    for other in posts_data:
+        if other["filename"] == post["filename"]:
+            continue
+        other_tags = {str(t) for t in (other.get("tags") or [])}
+        other_tokens = set(re.findall(r"[가-힣A-Za-z0-9]{2,}", other.get("title", "")))
+        score = (3 * len(my_tags & other_tags)
+                 + len(my_tokens & other_tokens)
+                 + (2 if post.get("image_category")
+                    and post.get("image_category") == other.get("image_category") else 0))
+        scored.append((score, other))
+    scored.sort(key=lambda x: x[0], reverse=True)  # 정렬 안정성 덕분에 동점은 최신순 유지
+    return [o for _, o in scored[:n]]
+
+
+def add_section_ids_and_toc(content):
+    """<h2>마다 앵커 id를 붙이고, 소제목이 3개 이상이면 목차 HTML을 만들어 반환한다."""
+    sections = []
+
+    def _repl(m):
+        sid = f"sec{len(sections) + 1}"
+        sections.append((sid, strip_tags(m.group(1))))
+        return f"<h2 id='{sid}'>{m.group(1)}</h2>"
+
+    new_content = re.sub(r"<h2>(.*?)</h2>", _repl, content, flags=re.S)
+    toc = ""
+    if len(sections) >= 3:
+        items = "".join(f"<li><a href='#{sid}'>{html.escape(t)}</a></li>" for sid, t in sections)
+        toc = f"<nav class='toc-box'><div class='toc-title'>📑 목차</div><ol>{items}</ol></nav>"
+    return new_content, toc
+
+
+def inject_inline_related(content, related):
+    """본문 세 번째 소제목 앞에 '함께 읽으면 좋은 글' 내부링크 박스를 삽입한다."""
+    if not related:
+        return content
+    positions = [m.start() for m in re.finditer(r"<h2\b", content)]
+    if len(positions) < 3:
+        return content
+    links = "".join(f"<li><a href='/posts/{r['filename']}.html'>{html.escape(r['title'])}</a></li>"
+                    for r in related[:2])
+    box = ("<div class='inline-link-box'>📌 <strong>함께 읽으면 좋은 글</strong>"
+           f"<ul>{links}</ul></div>")
+    pos = positions[2]
+    return content[:pos] + box + content[pos:]
+
+
+def render_tag_pages(cfg, posts_data):
+    """태그별 허브 페이지(/tags/{슬러그}.html)를 생성하고 {슬러그: 태그명} 맵을 반환한다."""
+    tag_map = {}
+    for p in posts_data:
+        for t in (p.get("tags") or []):
+            slug = slugify_tag(t)
+            tag_map.setdefault(slug, {"name": str(t), "posts": []})
+            tag_map[slug]["posts"].append(p)
+
+    tags_dir = os.path.join(BASE_DIR, "tags")
+    os.makedirs(tags_dir, exist_ok=True)
+    for slug, info in tag_map.items():
+        cards = []
+        for p in info["posts"]:
+            summary = strip_tags(p["content"])[:140]
+            cards.append(
+                "<div class='post-card'>"
+                f"<a href='/posts/{p['filename']}.html'>"
+                "<div class='post-card-info'>"
+                f"<h2>{html.escape(p['title'])}</h2>"
+                f"<p>{html.escape(summary)}...</p>"
+                f"<div style='font-size:12px; color:#999;'>{p['date']}</div>"
+                "</div>"
+                f"<img class='post-card-img' src='{p['image']}' alt='{html.escape(p['title'])}' loading='lazy'>"
+                "</a></div>"
+            )
+        body = (f"<div class='container'><h1 style='margin-top:30px;'>#{html.escape(info['name'])}</h1>"
+                f"<p style='color:#777;'>'{html.escape(info['name'])}' 관련 글 {len(info['posts'])}건</p>"
+                f"<div class='main-content'>{''.join(cards)}</div></div>")
+        page = page_shell(cfg, f"#{info['name']} - {cfg['blog_name']}",
+                          f"{info['name']} 관련 최신 분석 글 모음",
+                          f"{cfg['blog_domain']}/tags/{slug}.html", body)
+        with open(os.path.join(tags_dir, f"{slug}.html"), "w", encoding="utf-8") as f:
+            f.write(page)
+    return {slug: info["name"] for slug, info in tag_map.items()}
 
 
 def adsense_head(cfg):
@@ -740,7 +888,7 @@ def generate_required_pages(cfg):
             f.write(page)
 
 
-def generate_sitemap(cfg, posts_data):
+def generate_sitemap(cfg, posts_data, tag_slugs=()):
     today = datetime.date.today().isoformat()
     domain = cfg["blog_domain"]
     xml = ['<?xml version="1.0" encoding="UTF-8"?>',
@@ -751,6 +899,9 @@ def generate_sitemap(cfg, posts_data):
     for p in posts_data:
         xml.append(f'<url><loc>{domain}/posts/{p["filename"]}.html</loc>'
                    f'<lastmod>{p["date"]}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>')
+    for slug in tag_slugs:
+        xml.append(f'<url><loc>{domain}/tags/{slug}.html</loc>'
+                   f'<changefreq>weekly</changefreq><priority>0.4</priority></url>')
     xml.append('</urlset>')
     with open(os.path.join(BASE_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write("\n".join(xml))
@@ -847,7 +998,8 @@ def render_site(cfg):
     posts_data = sorted(posts_data, key=lambda x: x.get("filename", ""), reverse=True)
 
     generate_required_pages(cfg)
-    generate_sitemap(cfg, posts_data)
+    tag_map = render_tag_pages(cfg, posts_data)
+    generate_sitemap(cfg, posts_data, sorted(tag_map.keys()))
     generate_rss(cfg, posts_data)
     generate_robots_and_ads(cfg)
 
@@ -895,8 +1047,8 @@ def render_site(cfg):
 
     # ---- 개별 포스트 페이지 ----
     os.makedirs(POSTS_DIR, exist_ok=True)
-    for p in posts_data:
-        others = [x for x in posts_data if x["filename"] != p["filename"]][:4]
+    for idx, p in enumerate(posts_data):
+        others = related_posts(p, posts_data, 4)
         recommend = ""
         if others:
             items = "".join(
@@ -907,6 +1059,24 @@ def render_site(cfg):
             )
             recommend = ("<div class='recommend-section'><h3>📰 함께 보면 좋은 인사이트</h3>"
                          f"<div class='recommend-grid'>{items}</div></div>")
+
+        # 이전(과거)/다음(최신) 글 내비게이션 — posts_data는 최신순 정렬
+        nav_items = []
+        older = posts_data[idx + 1] if idx + 1 < len(posts_data) else None
+        newer = posts_data[idx - 1] if idx > 0 else None
+        if older:
+            nav_items.append(f"<a class='prev' href='/posts/{older['filename']}.html'>"
+                             f"← 이전 글<span>{html.escape(older['title'])}</span></a>")
+        else:
+            nav_items.append("<span></span>")
+        if newer:
+            nav_items.append(f"<a class='next' href='/posts/{newer['filename']}.html'>"
+                             f"다음 글 →<span>{html.escape(newer['title'])}</span></a>")
+        post_nav = f"<div class='post-nav'>{''.join(nav_items)}</div>" if (older or newer) else ""
+
+        # 목차 + 본문 중간 내부링크 박스
+        content_html, toc_html = add_section_ids_and_toc(p["content"])
+        content_html = inject_inline_related(content_html, others)
 
         reason_box = ""
         if p.get("trend_reason"):
@@ -921,16 +1091,20 @@ def render_site(cfg):
         tags_html = ""
         if p.get("tags"):
             tags_html = "<div class='tags'>" + "".join(
-                f"<span>#{html.escape(str(t))}</span>" for t in p["tags"]) + "</div>"
+                f"<a href='/tags/{slugify_tag(t)}.html'>#{html.escape(str(t))}</a>"
+                for t in p["tags"]) + "</div>"
 
         body = (
+            "<div class='reading-progress'><div id='progressBar'></div></div>"
             "<div class='container'><div class='main-content'><article>"
             f"<h1>{html.escape(p['title'])}</h1>"
             f"<div style='color:#999;font-size:14px;margin-bottom:20px;'>{p['date']}</div>"
             f"<div class='featured-img-container'><img class='featured-img' src='{p['image']}' "
             f"alt='{html.escape(p['title'])}'>{credit_html}</div>"
-            f"{reason_box}<div class='article-body'>{p['content']}</div>"
-            f"{tags_html}{recommend}</article></div></div>"
+            f"{reason_box}{toc_html}{FONT_CONTROLS_HTML}"
+            f"<div class='article-body'>{content_html}</div>"
+            f"{tags_html}{post_nav}{recommend}</article></div></div>"
+            f"{POST_ENGAGEMENT_JS}"
         )
         desc = p.get("meta_description") or strip_tags(p["content"])[:150]
         canonical = f"{cfg['blog_domain']}/posts/{p['filename']}.html"
