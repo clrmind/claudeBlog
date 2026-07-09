@@ -21,6 +21,7 @@ AutoBlogger v2 — 50대 타깃 실시간 트렌드 자동 블로그 발행기
 """
 
 import argparse
+import base64
 import datetime
 import html
 import json
@@ -40,6 +41,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
 ENV_PATH = os.path.join(BASE_DIR, ".env")
 POSTS_DIR = os.path.join(BASE_DIR, "posts")
+IMAGES_DIR = os.path.join(BASE_DIR, "images")
 DATA_PATH = os.path.join(POSTS_DIR, "data.json")
 HISTORY_PATH = os.path.join(BASE_DIR, "data", "keyword_history.json")
 
@@ -52,6 +54,8 @@ DEFAULT_CONFIG = {
     "blog_domain": "https://blog.zionlabs.org",
     "contact_email": "contact@zionlabs.org",
     "model_name": "gemini-2.5-flash",
+    "image_model": "gemini-2.5-flash-image",
+    "image_mode": "ai",
     "adsense_client": "",
     "counter_namespace": "",
     "git_branch": "main",
@@ -315,6 +319,8 @@ def generate_blog_content(keyword, context, api_key, model):
         '  "trend_reason": "이 키워드가 현재 왜 중요한지 요약 2줄",\n'
         '  "tags": ["관련태그1", "관련태그2", "관련태그3"],\n'
         f'  "image_category": "{" | ".join(IMAGE_CATEGORIES)} 중 하나",\n'
+        '  "person_name": "글의 중심이 되는 실존 인물의 정확한 이름 (인물 중심 글이 아니면 빈 문자열)",\n'
+        '  "image_prompt": "대표 이미지 생성용 영어 프롬프트 1~2문장. 글의 주제를 상징하는 구체적 장면을 묘사하되 사람 얼굴과 글자는 넣지 말 것",\n'
         '  "content": "<h2>소제목</h2><p>본문... <strong>강조</strong></p>"\n'
         "}"
     )
@@ -332,6 +338,198 @@ def generate_blog_content(keyword, context, api_key, model):
 def pick_image(category):
     pool = IMAGE_POOL.get(category) or IMAGE_POOL["society"]
     return random.choice(pool)
+
+
+# ==========================================
+# 3.5단계: 대표 이미지 파이프라인
+#   ① 인물 글 → 위키백과 공식 사진 (자유 라이선스 + 출처 표기)
+#   ② AI 생성 (Gemini 이미지 모델, 실존 인물 얼굴/글자 배제)
+#   ③ Unsplash 검색 API (UNSPLASH_ACCESS_KEY 있을 때)
+#   ④ 브랜드 SVG 커버 카드 (항상 성공, 100% 유니크)
+# ==========================================
+
+def fetch_wikipedia_image(person_name):
+    """실존 인물 글은 위키백과 대표 사진을 사용한다 (초상권/저작권 안전 + 출처 표기)."""
+    for lang in ("ko", "en"):
+        try:
+            url = (f"https://{lang}.wikipedia.org/api/rest_v1/page/summary/"
+                   + requests.utils.quote(person_name))
+            r = requests.get(url, timeout=10, headers={"User-Agent": UA})
+            if r.status_code != 200:
+                continue
+            data = r.json()
+            img = ((data.get("originalimage") or {}).get("source")
+                   or (data.get("thumbnail") or {}).get("source"))
+            if img:
+                title = data.get("title", person_name)
+                print(f"🖼️ 위키백과 인물 사진 사용: {title} ({lang})")
+                return img, f"이미지 출처: 위키백과 '{title}'"
+        except Exception as e:
+            print(f"⚠️ 위키백과 이미지 조회 실패({lang}): {e}")
+    return None, None
+
+
+def generate_ai_image(image_prompt, api_key, model, filename):
+    """Gemini 이미지 모델로 글 내용에 맞는 커버 이미지를 생성해 images/에 저장한다."""
+    full_prompt = (
+        "Create a high-quality blog cover image, 16:9 wide aspect ratio. Scene: "
+        + image_prompt.strip()
+        + " Style: clean editorial photography or soft premium digital illustration, "
+          "warm and trustworthy mood suitable for readers in their 50s. "
+          "Strictly no text, no letters, no watermarks, and no recognizable real people or faces."
+    )
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+    payload = {"contents": [{"parts": [{"text": full_prompt}]}]}
+    headers = {"Content-Type": "application/json", "x-goog-api-key": api_key}
+
+    for attempt in (1, 2):
+        try:
+            print(f"🎨 AI 커버 이미지 생성 중... (시도 {attempt}/2)")
+            resp = requests.post(url, json=payload, headers=headers, timeout=90)
+            if resp.status_code != 200:
+                print(f"⚠️ 이미지 API 오류 (HTTP {resp.status_code})")
+                time.sleep(5)
+                continue
+            parts = resp.json()["candidates"][0]["content"]["parts"]
+            for part in parts:
+                inline = part.get("inlineData") or part.get("inline_data") or {}
+                if inline.get("data"):
+                    mime = inline.get("mimeType") or inline.get("mime_type") or "image/png"
+                    ext = ".png" if "png" in mime else ".jpg"
+                    os.makedirs(IMAGES_DIR, exist_ok=True)
+                    path = os.path.join(IMAGES_DIR, filename + ext)
+                    with open(path, "wb") as f:
+                        f.write(base64.b64decode(inline["data"]))
+                    print(f"🎨 AI 이미지 저장 완료: images/{filename}{ext}")
+                    return f"/images/{filename}{ext}"
+            print("⚠️ 응답에 이미지 데이터가 없습니다.")
+        except Exception as e:
+            print(f"⚠️ AI 이미지 생성 실패: {e}")
+            time.sleep(5)
+    return None
+
+
+def fetch_unsplash_search(query):
+    """UNSPLASH_ACCESS_KEY가 .env에 있으면 키워드 검색으로 매번 다른 사진을 가져온다."""
+    key = os.environ.get("UNSPLASH_ACCESS_KEY", "").strip()
+    if not key:
+        return None, None
+    try:
+        r = requests.get(
+            "https://api.unsplash.com/search/photos",
+            params={"query": query, "per_page": 10, "orientation": "landscape"},
+            headers={"Authorization": f"Client-ID {key}", "User-Agent": UA},
+            timeout=10,
+        )
+        r.raise_for_status()
+        results = r.json().get("results", [])
+        if results:
+            photo = random.choice(results)
+            credit = f"Photo by {photo['user']['name']} on Unsplash"
+            return photo["urls"]["regular"], credit
+    except Exception as e:
+        print(f"⚠️ Unsplash 검색 실패: {e}")
+    return None, None
+
+
+SVG_THEMES = {
+    "health":     ("#0f9b8e", "#38ef7d", "💚"),
+    "finance":    ("#1a2980", "#26d0ce", "💰"),
+    "lifestyle":  ("#f46b45", "#eea849", "🌿"),
+    "food":       ("#e96443", "#904e95", "🍲"),
+    "travel":     ("#2193b0", "#6dd5ed", "✈️"),
+    "technology": ("#141e30", "#2b5876", "📱"),
+    "society":    ("#3a6073", "#16222a", "📰"),
+    "nature":     ("#134e5e", "#71b280", "🌳"),
+}
+
+
+def _wrap_title(text, width=14, max_lines=3):
+    lines, current = [], ""
+    for word in text.split():
+        if not current or len(current) + 1 + len(word) <= width:
+            current = (current + " " + word).strip()
+        else:
+            lines.append(current)
+            current = word
+            if len(lines) == max_lines:
+                break
+    if current and len(lines) < max_lines:
+        lines.append(current)
+    if len(lines) == max_lines and len(" ".join(lines)) < len(text):
+        lines[-1] = lines[-1][:width - 1] + "…"
+    return lines or [text[:width]]
+
+
+def generate_svg_cover(title, category, blog_name, filename):
+    """제목 텍스트가 들어간 브랜드 커버 카드를 SVG로 생성한다 (외부 의존성 없음, 항상 유니크)."""
+    c1, c2, emoji = SVG_THEMES.get(category, SVG_THEMES["society"])
+    lines = _wrap_title(title)
+    y_start = 330 - (len(lines) - 1) * 40
+    tspans = "".join(
+        f"<tspan x='80' y='{y_start + i * 80}'>{html.escape(line)}</tspan>"
+        for i, line in enumerate(lines)
+    )
+    svg = (
+        "<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'>"
+        "<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>"
+        f"<stop offset='0%' stop-color='{c1}'/><stop offset='100%' stop-color='{c2}'/>"
+        "</linearGradient></defs>"
+        "<rect width='1200' height='630' fill='url(#g)'/>"
+        "<circle cx='1060' cy='110' r='190' fill='rgba(255,255,255,0.08)'/>"
+        "<circle cx='960' cy='540' r='130' fill='rgba(255,255,255,0.06)'/>"
+        f"<text x='80' y='150' font-size='64'>{emoji}</text>"
+        f"<text font-family=\"'Apple SD Gothic Neo','Malgun Gothic',sans-serif\" "
+        f"font-size='58' font-weight='800' fill='#ffffff'>{tspans}</text>"
+        f"<text x='80' y='565' font-family=\"'Apple SD Gothic Neo','Malgun Gothic',sans-serif\" "
+        f"font-size='26' font-weight='600' fill='rgba(255,255,255,0.85)'>{html.escape(blog_name)}</text>"
+        "</svg>"
+    )
+    try:
+        os.makedirs(IMAGES_DIR, exist_ok=True)
+        path = os.path.join(IMAGES_DIR, filename + ".svg")
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(svg)
+        print(f"🖼️ 브랜드 커버 카드 생성: images/{filename}.svg")
+        return f"/images/{filename}.svg"
+    except Exception as e:
+        print(f"⚠️ SVG 커버 생성 실패: {e}")
+        return None
+
+
+def resolve_post_image(cfg, api_key, blog_json, category):
+    """대표 이미지 결정: 위키 인물 사진 → AI 생성 → Unsplash 검색 → SVG 카드 → 고정 풀."""
+    filename = blog_json["filename"]
+
+    # ① 실존 인물 중심의 글이면 위키백과 공식 사진
+    person = str(blog_json.get("person_name") or "").strip()
+    if person and person.lower() not in ("null", "none", "없음"):
+        img, credit = fetch_wikipedia_image(person)
+        if img:
+            return img, credit
+
+    # ② 생성형 AI 커버 이미지
+    if cfg.get("image_mode", "ai") == "ai":
+        image_prompt = str(blog_json.get("image_prompt") or "").strip()
+        if not image_prompt:
+            image_prompt = f"an abstract scene representing the topic '{blog_json['title']}'"
+        img = generate_ai_image(image_prompt, api_key, cfg.get("image_model", "gemini-2.5-flash-image"), filename)
+        if img:
+            return img, "AI 생성 이미지"
+
+    # ③ Unsplash 키워드 검색 (선택)
+    search_term = " ".join(str(blog_json.get("image_prompt") or "").split()[:6]) or category
+    img, credit = fetch_unsplash_search(search_term)
+    if img:
+        return img, credit
+
+    # ④ 브랜드 SVG 커버 카드 (항상 성공)
+    img = generate_svg_cover(blog_json["title"], category, cfg["blog_name"], filename)
+    if img:
+        return img, ""
+
+    # ⑤ 최후의 보루: 고정 풀
+    return pick_image(category), ""
 
 
 # ==========================================
@@ -474,14 +672,22 @@ def page_shell(cfg, title, meta_description, canonical, body_html, extra_head=""
     )
 
 
+def absolute_image_url(cfg, image):
+    """로컬 이미지 경로(/images/...)를 og:image 등에 쓸 절대 URL로 변환한다."""
+    if image.startswith("http"):
+        return image
+    return cfg["blog_domain"] + image
+
+
 def og_and_jsonld(cfg, post):
     url = f"{cfg['blog_domain']}/posts/{post['filename']}.html"
     desc = post.get("meta_description") or strip_tags(post["content"])[:150]
+    img_url = absolute_image_url(cfg, post["image"])
     og = (
         f"<meta property='og:type' content='article'>"
         f"<meta property='og:title' content='{html.escape(post['title'])}'>"
         f"<meta property='og:description' content='{html.escape(desc)}'>"
-        f"<meta property='og:image' content='{post['image']}'>"
+        f"<meta property='og:image' content='{img_url}'>"
         f"<meta property='og:url' content='{url}'>"
     )
     jsonld = json.dumps({
@@ -489,7 +695,7 @@ def og_and_jsonld(cfg, post):
         "@type": "Article",
         "headline": post["title"],
         "description": desc,
-        "image": post["image"],
+        "image": img_url,
         "datePublished": post["date"],
         "mainEntityOfPage": url,
         "publisher": {"@type": "Organization", "name": cfg["blog_name"]},
@@ -707,6 +913,11 @@ def render_site(cfg):
             reason_box = (f"<div class='trend-reason-box'><strong>💡 분석 배경:</strong> "
                           f"{html.escape(p['trend_reason'])}</div>")
 
+        credit_html = ""
+        if p.get("image_credit"):
+            credit_html = (f"<div style='font-size:12px;color:#aaa;margin-top:6px;'>"
+                           f"{html.escape(p['image_credit'])}</div>")
+
         tags_html = ""
         if p.get("tags"):
             tags_html = "<div class='tags'>" + "".join(
@@ -717,7 +928,7 @@ def render_site(cfg):
             f"<h1>{html.escape(p['title'])}</h1>"
             f"<div style='color:#999;font-size:14px;margin-bottom:20px;'>{p['date']}</div>"
             f"<div class='featured-img-container'><img class='featured-img' src='{p['image']}' "
-            f"alt='{html.escape(p['title'])}'></div>"
+            f"alt='{html.escape(p['title'])}'>{credit_html}</div>"
             f"{reason_box}<div class='article-body'>{p['content']}</div>"
             f"{tags_html}{recommend}</article></div></div>"
         )
@@ -820,7 +1031,9 @@ def main():
     category = blog_json.get("image_category")
     if category not in IMAGE_CATEGORIES:
         category = selection.get("category", "society")
-    blog_json["image"] = pick_image(category)
+    image, image_credit = resolve_post_image(cfg, api_key, blog_json, category)
+    blog_json["image"] = image
+    blog_json["image_credit"] = image_credit
 
     posts_data = []
     if os.path.exists(DATA_PATH):

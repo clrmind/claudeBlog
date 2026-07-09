@@ -4,6 +4,8 @@
   "blog_domain": "https://blog.zionlabs.org",
   "contact_email": "contact@zionlabs.org",
   "model_name": "gemini-2.5-flash",
+  "image_model": "gemini-2.5-flash-image",
+  "image_mode": "ai",
   "adsense_client": "",
   "counter_namespace": "zionlabs_blog",
   "git_branch": "main",
