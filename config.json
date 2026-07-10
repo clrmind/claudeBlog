@@ -1,0 +1,15 @@
+{
+  "blog_name": "ZionLabs Trend Insights",
+  "blog_description": "50대가 꼭 알아야 할 건강·연금·재테크·생활 트렌드를 매일 분석하는 프리미엄 칼럼 채널",
+  "blog_domain": "https://blog.zionlabs.org",
+  "contact_email": "contact@zionlabs.org",
+  "model_name": "gemini-2.5-flash",
+  "image_model": "gemini-2.5-flash-image",
+  "image_mode": "ai",
+  "adsense_client": "",
+  "counter_namespace": "zionlabs_blog",
+  "git_branch": "main",
+  "posts_per_page": 9,
+  "max_posts_per_day": 3,
+  "keyword_source": "trends"
+}
