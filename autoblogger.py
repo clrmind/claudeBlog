@@ -1104,6 +1104,18 @@ def generate_robots_and_ads(cfg):
             f.write(f"google.com, {pub_id}, DIRECT, f08c47fec0942fa0\n")
 
 
+def generate_pages_meta(cfg):
+    """GitHub Pages 커스텀 도메인용 CNAME과 Jekyll 비활성화용 .nojekyll을 생성한다."""
+    # blog_domain에서 호스트만 추출 (https://blog.zionlabs.org -> blog.zionlabs.org)
+    host = re.sub(r"^https?://", "", cfg["blog_domain"]).strip("/").split("/")[0]
+    # localhost/기본 github.io는 CNAME이 필요 없으므로 건너뛴다
+    if host and "github.io" not in host and "localhost" not in host and "." in host:
+        with open(os.path.join(BASE_DIR, "CNAME"), "w", encoding="utf-8") as f:
+            f.write(host + "\n")
+    # 정적 사이트를 Jekyll이 건드리지 않도록 (빌드 지연/누락 방지)
+    open(os.path.join(BASE_DIR, ".nojekyll"), "w").close()
+
+
 def write_404_page(cfg, posts_data):
     """GitHub Pages 404 페이지 — 잘못 유입된 방문자를 최신 글로 되돌린다."""
     cards = "".join(
@@ -1187,6 +1199,7 @@ def render_site(cfg):
     generate_sitemap(cfg, posts_data, sorted(tag_map.keys()))
     generate_rss(cfg, posts_data)
     generate_robots_and_ads(cfg)
+    generate_pages_meta(cfg)
 
     # ---- 메인(목록) 페이지 + 페이지네이션 ----
     per_page = int(cfg.get("posts_per_page", 9))
