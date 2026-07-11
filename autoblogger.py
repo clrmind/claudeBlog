@@ -62,7 +62,8 @@ DEFAULT_CONFIG = {
     "git_branch": "main",
     "posts_per_page": 9,
     "max_posts_per_day": 3,
-    "keyword_source": "trends"
+    "keyword_source": "trends",
+    "verification_meta": {}
 }
 
 # 실시간 수집이 모두 실패했을 때 사용하는 50대 상시 인기 주제 (검색량/광고단가가 높은 주제 위주)
@@ -965,8 +966,21 @@ def page_shell(cfg, title, meta_description, canonical, body_html, extra_head=""
         f"<meta name='description' content='{html.escape(meta_description)}'>"
         f"<link rel='canonical' href='{canonical}'>"
         f"<link rel='alternate' type='application/rss+xml' title='{name}' href='/rss.xml'>"
-        f"{adsense_head(cfg)}{extra_head}{CSS_STYLE}</head><body>"
+        f"{verification_meta(cfg)}{adsense_head(cfg)}{extra_head}{CSS_STYLE}</head><body>"
         f"{header_html}{body_html}{footer_html}{analytics_script(cfg)}</body></html>"
+    )
+
+
+def verification_meta(cfg):
+    """검색엔진 소유 확인용 메타태그를 생성한다.
+    config.json의 "verification_meta"에 {"google-site-verification": "코드", ...} 형태로 넣으면
+    모든 페이지 <head>에 삽입된다 (구글 서치콘솔 / 네이버 서치어드바이저 HTML 태그 인증)."""
+    metas = cfg.get("verification_meta") or {}
+    if not isinstance(metas, dict):
+        return ""
+    return "".join(
+        f"<meta name='{html.escape(str(k))}' content='{html.escape(str(v))}'>"
+        for k, v in metas.items() if v
     )
 
 
