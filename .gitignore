@@ -3,6 +3,7 @@
 __pycache__/
 auto_run.log
 autoblogger_atlas_v0.1.py
+data/government/queue/
 data/government/raw/
 grant_sample.json
 logs/
