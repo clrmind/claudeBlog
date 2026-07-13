@@ -1,5 +1,6 @@
-.env
-logs/
-auto_run.log
-__pycache__/
 *.pyc
+.env
+__pycache__/
+auto_run.log
+data/government/raw/
+logs/
