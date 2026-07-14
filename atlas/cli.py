@@ -145,6 +145,10 @@ def command_ai_smoke(args: argparse.Namespace) -> int:
     return run_module("atlas.ai.smoke", command)
 
 
+def command_verify(_args: argparse.Namespace) -> int:
+    return run_module("atlas.verify.cli", [])
+
+
 def command_doctor(_args: argparse.Namespace) -> int:
     return run_module("atlas.doctor.cli", [])
 
@@ -341,6 +345,12 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
     )
     ai_smoke_parser.set_defaults(func=command_ai_smoke)
+
+    verify_parser = subparsers.add_parser(
+        "verify",
+        help="Atlas 핵심 흐름 검증",
+    )
+    verify_parser.set_defaults(func=command_verify)
 
     doctor_parser = subparsers.add_parser(
         "doctor",
