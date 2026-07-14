@@ -145,6 +145,10 @@ def command_ai_smoke(args: argparse.Namespace) -> int:
     return run_module("atlas.ai.smoke", command)
 
 
+def command_doctor(_args: argparse.Namespace) -> int:
+    return run_module("atlas.doctor.cli", [])
+
+
 def command_metrics(args: argparse.Namespace) -> int:
     return run_module(
         "atlas.metrics.reporter",
@@ -337,6 +341,12 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
     )
     ai_smoke_parser.set_defaults(func=command_ai_smoke)
+
+    doctor_parser = subparsers.add_parser(
+        "doctor",
+        help="Atlas 시스템 진단",
+    )
+    doctor_parser.set_defaults(func=command_doctor)
 
     metrics_parser = subparsers.add_parser(
         "metrics",
