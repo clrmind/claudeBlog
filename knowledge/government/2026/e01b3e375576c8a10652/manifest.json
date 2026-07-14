@@ -1,0 +1,20 @@
+{
+  "source": "bizinfo",
+  "source_id": "e01b3e375576c8a10652",
+  "title": "2026년 디자인북페어 참가사(부스) 모집 공고",
+  "year": "2026",
+  "created_at": "2026-07-14T01:58:01.043763+00:00",
+  "updated_at": "2026-07-14T01:58:01.043789+00:00",
+  "latest_version": 1,
+  "latest_hash": "e1ea3cb14ebfce2f5d8144193bc09da6aaae12b48724a420d62d967045e86477",
+  "latest_file": "knowledge/government/2026/e01b3e375576c8a10652/latest.json",
+  "versions": [
+    {
+      "version": 1,
+      "file": "knowledge/government/2026/e01b3e375576c8a10652/versions/v0001.json",
+      "record_hash": "e1ea3cb14ebfce2f5d8144193bc09da6aaae12b48724a420d62d967045e86477",
+      "stored_at": "2026-07-14T01:58:01.043789+00:00",
+      "content_hash": "0bf6ef4889532e9220fdfcda8e8369b1b96920e9f4bba40d8d2c2f8b5b612805"
+    }
+  ]
+}

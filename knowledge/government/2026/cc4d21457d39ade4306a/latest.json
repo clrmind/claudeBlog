@@ -17,5 +17,43 @@
   "fetched_at": "2026-07-13T23:35:10.786134+00:00",
   "knowledge_version": 1,
   "record_hash": "7f556ad0727db887d190525ad60a553ce6680bf47389888d0d1d5a97c527460b",
-  "stored_at": "2026-07-14T00:19:27.460043+00:00"
+  "stored_at": "2026-07-14T00:19:27.460043+00:00",
+  "enrichment": {
+    "regions": [
+      "경남"
+    ],
+    "target_groups": [
+      "중소기업",
+      "벤처기업"
+    ],
+    "industries": [
+      "수출"
+    ],
+    "technologies": [],
+    "support_types": [
+      "수출",
+      "행사·전시"
+    ],
+    "amounts": [],
+    "recommendation_score": 95,
+    "recommendation_reasons": [
+      "마감일이 명확함",
+      "지원대상이 명확함",
+      "지원형태가 명확함",
+      "지원내용이 구체적임",
+      "신청방법이 명시됨"
+    ],
+    "difficulty": "보통",
+    "keywords": [
+      "경남",
+      "벤처기업",
+      "수출",
+      "중소기업",
+      "행사·전시"
+    ],
+    "tagger_mode": "rules",
+    "tagger_version": "0.1",
+    "tagged_at": "2026-07-14T01:56:13.018533+00:00"
+  },
+  "enriched_at": "2026-07-14T01:56:13.019942+00:00"
 }

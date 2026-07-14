@@ -31,6 +31,7 @@ from pathlib import Path
 
 from plugins.government.collector import collect
 from plugins.government.normalizer import normalize
+from plugins.government.ai_tagger import tag_opportunity
 from plugins.government.knowledge_store import store_knowledge
 
 
@@ -175,6 +176,19 @@ def main() -> int:
             )
         else:
             print(f"📚 Knowledge 변경 없음: v{knowledge_version:04d}")
+
+        print("\n🧠 AI Tagger")
+        try:
+            tag_output, tag_path, tag_knowledge_path = tag_opportunity(
+                normalized_path
+            )
+            score = tag_output.get("enrichment", {}).get(
+                "recommendation_score", 0
+            )
+            print(f"🏷️ 태그 저장: {tag_path.relative_to(BASE_DIR)}")
+            print(f"⭐ 추천도: {score}점")
+        except Exception as exc:
+            print(f"⚠️ AI Tagger 실패(계속 진행): {exc}")
 
         if is_already_published(
             opportunity.source,
