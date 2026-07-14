@@ -14,11 +14,16 @@ class NormalizedOpportunity:
     application_period:str; application_start:str; application_deadline:str; target:str
     support_summary:str; application_method:str; contact:str; content:str; content_hash:str; fetched_at:str
 
-def clean_text(value:str)->str:
-    value=(value or '').replace('\xa0',' ')
-    value=re.sub(r'[ \t\r\f\v]+',' ',value)
-    value=re.sub(r'\n\s*\n+','\n',value)
-    return value.strip()
+def clean_text(value: str) -> str:
+    value = (value or "").replace("\xa0", " ")
+
+    lines = []
+    for raw_line in value.splitlines():
+        line = " ".join(raw_line.split())
+        if line:
+            lines.append(line)
+
+    return "\n".join(lines)
 
 def remove_noise(soup):
     for tag in soup(['script','style','noscript','svg','nav','footer','header','form','button']): tag.decompose()

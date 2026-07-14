@@ -46,6 +46,13 @@ def load_json(path: Path) -> dict[str, Any]:
         raise ValueError("최상위 JSON 값은 객체여야 합니다.")
     return data
 
+def portable_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(BASE_DIR))
+    except ValueError:
+        return str(path)
+
+
 def write_json_atomic(path: Path, data: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temp_path = path.with_suffix(path.suffix + ".tmp")
@@ -98,7 +105,7 @@ def store_knowledge(normalized_path: Path) -> tuple[str, Path, int]:
         versions = []
     versions.append({
         "version": next_version,
-        "file": str(version_path.relative_to(BASE_DIR)),
+        "file": portable_path(version_path),
         "record_hash": record_hash,
         "stored_at": stored["stored_at"],
         "content_hash": str(data.get("content_hash") or ""),
@@ -113,7 +120,7 @@ def store_knowledge(normalized_path: Path) -> tuple[str, Path, int]:
         "updated_at": stored["stored_at"],
         "latest_version": next_version,
         "latest_hash": record_hash,
-        "latest_file": str(latest_path.relative_to(BASE_DIR)),
+        "latest_file": portable_path(latest_path),
         "versions": versions,
     }
     write_json_atomic(manifest_path, updated_manifest)
