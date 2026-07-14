@@ -101,3 +101,31 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [치매 예방에 좋은 음식과 뇌 건강 관리법] → 「50대 필독: 치매 예방에 좋은 음식과 뇌 건강 관리법, 더 늦기 전에」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main ed3fe9a] post: 50대 필독! '가족관계증명서', 상속부터 정부 지원금까지 100% 활용 전략
+ 23 files changed, 607 insertions(+), 14 deletions(-)
+ create mode 100644 images/post_20260714_080108.svg
+ create mode 100644 posts/post_20260714_080108.html
+ create mode 100644 "tags/\352\260\200\354\241\261\352\264\200\352\263\204\354\246\235\353\252\205\354\204\234.html"
+ create mode 100644 "tags/\354\203\201\354\206\215.html"
+ create mode 100644 "tags/\354\203\235\355\231\234\353\262\225\353\245\240.html"
+ create mode 100644 "tags/\354\240\225\353\266\200\354\247\200\354\233\220\352\270\210.html"
+ create mode 100644 "tags/\355\226\211\354\240\225\354\204\234\353\245\230.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+   943995b..ed3fe9a  main -> main
+branch 'main' set up to track 'origin/main'.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 20개 수집 완료
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+🎯 선정 키워드: [가족관계증명서] — 50대가 상속, 재산, 정부 지원금 신청 등 다양한 생활 및 법률 정보 활용 시 필수적으로 검색하고 활용하는 생활 밀착형 정보입니다. 특히 중장년층에게 실질적인 도움이 되는 정보성 콘텐츠로 적합합니다.
+🤖 Gemini(gemini-2.5-flash)가 '가족관계증명서' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260714_080108.svg
+🛠️ 사이트 빌드 완료 (총 9개 포스트, 1페이지)
+🎉 발행 완료! [가족관계증명서] → 「50대 필독! '가족관계증명서', 상속부터 정부 지원금까지 100% 활용 전략」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+🎉 GitHub 배포 완료!
