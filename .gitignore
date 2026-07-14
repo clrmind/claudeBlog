@@ -5,5 +5,6 @@ auto_run.log
 autoblogger_atlas_v0.1.py
 data/government/queue/
 data/government/raw/
+data/government/search.db
 grant_sample.json
 logs/
