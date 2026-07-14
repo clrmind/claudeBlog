@@ -31,6 +31,7 @@ from pathlib import Path
 
 from plugins.government.collector import collect
 from plugins.government.normalizer import normalize
+from plugins.government.knowledge_store import store_knowledge
 
 
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -162,6 +163,18 @@ def main() -> int:
         print(f"🏢 수행기관: {opportunity.organization}")
         print(f"📅 마감일: {opportunity.application_deadline}")
         print(f"💾 표준 JSON: {normalized_path.relative_to(BASE_DIR)}")
+
+        knowledge_status, knowledge_path, knowledge_version = store_knowledge(
+            normalized_path
+        )
+        if knowledge_status == "stored":
+            print(
+                f"📚 Knowledge 저장: "
+                f"{knowledge_path.relative_to(BASE_DIR)} "
+                f"(v{knowledge_version:04d})"
+            )
+        else:
+            print(f"📚 Knowledge 변경 없음: v{knowledge_version:04d}")
 
         if is_already_published(
             opportunity.source,
