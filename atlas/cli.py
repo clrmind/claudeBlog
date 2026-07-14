@@ -131,6 +131,27 @@ def command_recommend(args: argparse.Namespace) -> int:
     )
 
 
+def command_ask(args: argparse.Namespace) -> int:
+    return run_module(
+        "atlas.assistant",
+        [args.query, "--limit", str(args.limit)],
+    )
+
+
+def command_ai_smoke(args: argparse.Namespace) -> int:
+    command = [args.prompt]
+    if args.no_cache:
+        command.append("--no-cache")
+    return run_module("atlas.ai.smoke", command)
+
+
+def command_metrics(args: argparse.Namespace) -> int:
+    return run_module(
+        "atlas.metrics.reporter",
+        ["--hours", str(args.hours)],
+    )
+
+
 def command_test(_args: argparse.Namespace) -> int:
     command = [
         sys.executable,
@@ -293,6 +314,40 @@ def build_parser() -> argparse.ArgumentParser:
     recommend_parser.add_argument("--keyword", default="")
     recommend_parser.add_argument("--limit", type=int, default=10)
     recommend_parser.set_defaults(func=command_recommend)
+
+    ask_parser = subparsers.add_parser(
+        "ask",
+        help="자연어로 정부지원사업 추천 질문",
+    )
+    ask_parser.add_argument("query")
+    ask_parser.add_argument("--limit", type=int, default=5)
+    ask_parser.set_defaults(func=command_ask)
+
+    ai_smoke_parser = subparsers.add_parser(
+        "ai-smoke",
+        help="AI Runtime 실호출 점검",
+    )
+    ai_smoke_parser.add_argument(
+        "prompt",
+        nargs="?",
+        default="한 단어로 OK라고 답하세요.",
+    )
+    ai_smoke_parser.add_argument(
+        "--no-cache",
+        action="store_true",
+    )
+    ai_smoke_parser.set_defaults(func=command_ai_smoke)
+
+    metrics_parser = subparsers.add_parser(
+        "metrics",
+        help="AI 호출 Metrics 확인",
+    )
+    metrics_parser.add_argument(
+        "--hours",
+        type=int,
+        default=24,
+    )
+    metrics_parser.set_defaults(func=command_metrics)
 
     test_parser = subparsers.add_parser(
         "test",
