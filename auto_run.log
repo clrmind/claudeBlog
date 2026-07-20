@@ -415,3 +415,32 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [골다공증 예방을 위한 뼈 건강 관리법과 영양 식단] → 「50대 필독: 골다공증 예방을 위한 뼈 건강 관리법과 영양 식단」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main ac1635f] post: 50대 필독: 민생지원금, 놓치지 말아야 할 정부 지원 제도 완벽 분석
+ 26 files changed, 839 insertions(+), 15 deletions(-)
+ create mode 100644 images/post_20260720_080042.svg
+ create mode 100644 index3.html
+ create mode 100644 posts/post_20260720_080042.html
+ create mode 100644 "tags/\353\257\274\354\203\235\354\247\200\354\233\220\352\270\210.html"
+ create mode 100644 "tags/\353\263\265\354\247\200\354\240\234\353\217\204.html"
+ create mode 100644 "tags/\354\203\235\355\231\234\353\271\204\354\240\210\354\225\275.html"
+ create mode 100644 "tags/\354\203\235\355\231\234\354\225\210\354\240\225.html"
+ create mode 100644 "tags/\354\240\225\353\266\200\354\247\200\354\233\220.html"
+ create mode 100644 "tags/\354\247\200\354\233\220\352\270\210\354\213\240\354\262\255.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+   4faff60..ac1635f  main -> main
+branch 'main' set up to track 'origin/main'.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+🎯 선정 키워드: [민생지원금] — 50대 독자들은 정부 지원 제도에 대한 관심이 높으며, 민생지원금은 직접적으로 생활에 도움을 받을 수 있는 실용적인 정보이므로 검색 및 클릭률이 높을 것으로 예상됩니다.
+🤖 Gemini(gemini-2.5-flash)가 '민생지원금' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260720_080042.svg
+🛠️ 사이트 빌드 완료 (총 19개 포스트, 3페이지)
+🎉 발행 완료! [민생지원금] → 「50대 필독: 민생지원금, 놓치지 말아야 할 정부 지원 제도 완벽 분석」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+🎉 GitHub 배포 완료!
