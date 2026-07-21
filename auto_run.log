@@ -479,3 +479,30 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [혈관성 치매 진단 후 관리법과 환자 및 가족을 위한 지침] → 「혈관성 치매 진단 후 관리법: 50대 가족을 위한 실질적 지침」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main 556b401] post: 50대, 구조조정 파고 넘어설 현명한 재도약 전략
+ 24 files changed, 640 insertions(+), 14 deletions(-)
+ create mode 100644 images/post_20260721_080056.svg
+ create mode 100644 posts/post_20260721_080056.html
+ create mode 100644 "tags/50\353\214\200-\354\236\254\354\267\250\354\227\205.html"
+ create mode 100644 "tags/\352\265\254\354\241\260\354\241\260\354\240\225.html"
+ create mode 100644 "tags/\353\205\270\355\233\204-\354\204\244\352\263\204.html"
+ create mode 100644 "tags/\354\213\244\354\227\205\352\270\211\354\227\254.html"
+ create mode 100644 "tags/\355\207\264\354\247\201\352\270\210-\352\264\200\353\246\254.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+   4144985..556b401  main -> main
+branch 'main' set up to track 'origin/main'.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 19개 수집 완료
+🎯 선정 키워드: [구조조정] — 50대 독자에게는 재취업, 퇴직금 관리, 노후 재정 설계 등 직접적인 생활 및 재정 문제와 밀접하게 연관되어 가장 중요한 정보가 될 수 있습니다.
+🤖 Gemini(gemini-2.5-flash)가 '구조조정' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260721_080056.svg
+🛠️ 사이트 빌드 완료 (총 21개 포스트, 3페이지)
+🎉 발행 완료! [구조조정] → 「50대, 구조조정 파고 넘어설 현명한 재도약 전략」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+🎉 GitHub 배포 완료!
