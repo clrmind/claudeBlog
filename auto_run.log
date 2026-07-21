@@ -506,3 +506,42 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [구조조정] → 「50대, 구조조정 파고 넘어설 현명한 재도약 전략」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main 76c1249] post: 50대 간 건강 적신호? 간에 좋은 음식과 간 지키는 법 총정리
+ 25 files changed, 608 insertions(+), 16 deletions(-)
+ create mode 100644 images/post_20260721_220208.svg
+ create mode 100644 posts/post_20260721_220208.html
+ create mode 100644 "tags/\352\260\204-\352\261\264\352\260\225.html"
+ create mode 100644 "tags/\352\260\204-\354\247\210\355\231\230-\354\230\210\353\260\251.html"
+ create mode 100644 "tags/\352\260\204\354\227\220-\354\242\213\354\235\200-\354\235\214\354\213\235.html"
+ create mode 100644 "tags/\352\261\264\352\260\225-\354\212\265\352\264\200.html"
+ create mode 100644 "tags/\353\247\214\354\204\261-\355\224\274\353\241\234.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+   b68a584..76c1249  main -> main
+branch 'main' set up to track 'origin/main'.
+📺 방송 편성표에서 건강·식품 소재를 수집합니다...
+  📺 생로병사의 비밀: [2011년7월16일(토)] 방송 \u003c내몸살리는 똑똑한 등산\u
+  📺 한국인의 밥상: 출연 후기
+  📺 6시 내고향: 나무위키 6시 내고향
+  📺 나는 몸신이다: (유료)
+  📺 엄지의 제왕: : “내 팔 어디 갔냐?” 3년 전 치매로 아기가 된 어머니의 상태는?
+  📺 천기누설: 방송~
+  📺 알토란: 오늘의요리
+📺 방송 소재 후보 14개 수집 완료
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+⚠️ 키워드 선별 실패 → 상시 인기 주제로 대체: 간에 좋은 음식과 간 건강 지키는 법
+🎯 선정 키워드: [간에 좋은 음식과 간 건강 지키는 법] — 50대 상시 관심 주제(자동 대체)
+🤖 Gemini(gemini-2.5-flash)가 '간에 좋은 음식과 간 건강 지키는 법' 칼럼을 집필 중입니다...
+⚠️ Gemini 호출 중 오류: Invalid control character at: line 9 column 2002 (char 2727) — 시도 1/3
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260721_220208.svg
+🛠️ 사이트 빌드 완료 (총 23개 포스트, 3페이지)
+🎉 발행 완료! [간에 좋은 음식과 간 건강 지키는 법] → 「50대 간 건강 적신호? 간에 좋은 음식과 간 지키는 법 총정리」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+🎉 GitHub 배포 완료!
