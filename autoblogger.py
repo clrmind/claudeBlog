@@ -51,7 +51,7 @@ UA = ("Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 "
 
 DEFAULT_CONFIG = {
     "blog_name": "ZionLabs Trend Insights",
-    "blog_description": "50대가 꼭 알아야 할 건강·연금·재테크·생활 트렌드를 매일 분석하는 프리미엄 칼럼 채널",
+    "blog_description": "건강·재테크·생활 정보와 트렌드를 매일 분석하는 프리미엄 칼럼 채널",
     "blog_domain": "https://blog.zionlabs.org",
     "contact_email": "contact@zionlabs.org",
     "model_name": "gemini-2.5-flash",
@@ -63,7 +63,9 @@ DEFAULT_CONFIG = {
     "posts_per_page": 9,
     "max_posts_per_day": 3,
     "keyword_source": "trends",
-    "verification_meta": {}
+    "verification_meta": {},
+    "target_audience": "",
+    "topic_focus": ""
 }
 
 # 실시간 수집이 모두 실패했을 때 사용하는 50대 상시 인기 주제 (검색량/광고단가가 높은 주제 위주)
@@ -338,15 +340,30 @@ def posts_today(history):
 # 2단계: Gemini가 50대 타깃 키워드 선별
 # ==========================================
 
-def select_keyword_for_50s(candidates, history, api_key, model, source="trends"):
+def audience_lines(cfg):
+    """config의 target_audience / topic_focus를 프롬프트용 문장으로 변환한다.
+    비어 있으면 특정 연령·집단에 얽매이지 않는 일반 독자 기준."""
+    aud = (cfg.get("target_audience") or "").strip()
+    focus = (cfg.get("topic_focus") or "").strip()
+    if aud:
+        a = f"이 블로그의 주요 독자층은 '{aud}'이다. 눈높이는 여기에 맞추되, 그 표현을 제목·본문에 반복하지 마라."
+    else:
+        a = "특정 연령대나 집단을 지칭하지 말고, 폭넓은 일반 독자에게 유용하게 써라."
+    f = f"\n주제 분야: '{focus}' — 이 분야에 부합하는 소재를 우선한다." if focus else ""
+    return a + f
+
+
+def select_keyword(cfg, candidates, history, api_key, model, source="trends"):
     recent = [h["keyword"] for h in history[-30:]]
     recent_text = "\n".join(f"- {k}" for k in recent) if recent else "(없음)"
+    aud = audience_lines(cfg)
+    candidates_text = ("\n".join(f"- {k}" for k in candidates[:30])
+                       if candidates else "(수집 실패 — 직접 제안 필요)")
 
     if source == "tv":
-        candidates_text = ("\n".join(f"- {k}" for k in candidates[:30])
-                           if candidates else "(수집 실패 — 직접 제안 필요)")
         prompt = (
-            "너는 대한민국 50대 독자를 겨냥한 건강·식품 정보 블로그의 편집장이다.\n"
+            "너는 대한민국 건강·식품 정보 블로그의 편집장이다.\n"
+            f"{aud}\n"
             "아래는 오늘 방송된 건강/식품 정보 프로그램의 회차 소재 목록이다.\n"
             "이 중 검색 잠재력이 가장 큰 소재 1개를 골라, 방송 내용을 베끼지 말고\n"
             "독립적인 '정보성 키워드'로 재구성하라.\n\n"
@@ -355,13 +372,12 @@ def select_keyword_for_50s(candidates, history, api_key, model, source="trends")
             "- '알토란: 고등어조림 비법' → '고등어조림 맛있게 만드는 법과 손질 요령'\n\n"
             "★선정 기준:\n"
             "1. 건강/질병/영양/식품 소재를 최우선으로 한다.\n"
-            "2. 50대가 실제로 검색할 법한 구체적이고 실용적인 소재를 고른다.\n"
+            "2. 사람들이 실제로 검색할 법한 구체적이고 실용적인 소재를 고른다.\n"
             "3. 특정 방송·출연자에 종속되지 않는, 언제 읽어도 유용한 정보성 주제로 만든다.\n\n"
             "★제외 기준:\n"
             f"- 최근 발행 이력에 이미 있는 키워드/주제:\n{recent_text}\n\n"
             f"★오늘 방송 소재 후보:\n{candidates_text}\n\n"
-            "후보가 모두 부적합하거나 비어 있으면, 50대에게 유용하고 검색량이 많은\n"
-            "건강 또는 식품 관련 상시 인기 주제를 직접 1개 제안하라.\n\n"
+            "후보가 모두 부적합하거나 비어 있으면, 검색량이 많은 건강 또는 식품 관련 상시 인기 주제를 직접 1개 제안하라.\n\n"
             "★출력 형식: 반드시 아래 JSON 구조로만 출력하라.\n"
             "{\n"
             '  "keyword": "정보성으로 재구성한 키워드",\n'
@@ -370,25 +386,23 @@ def select_keyword_for_50s(candidates, history, api_key, model, source="trends")
             "}"
         )
     else:
-        candidates_text = ("\n".join(f"- {k}" for k in candidates[:30])
-                           if candidates else "(수집 실패 — 직접 제안 필요)")
         prompt = (
-            "너는 대한민국 50대 독자를 겨냥한 정보 블로그의 편집장이다.\n"
-            "아래 '실시간 트렌드 후보' 중에서 50대 독자가 가장 많이 검색하고 클릭할 만한 키워드 1개를 골라라.\n\n"
+            "너는 대한민국 정보 블로그의 편집장이다.\n"
+            f"{aud}\n"
+            "아래 '실시간 트렌드 후보' 중에서 독자가 가장 많이 검색하고 클릭할 만한 키워드 1개를 골라라.\n\n"
             "★선정 기준 (우선순위 순):\n"
-            "1. 건강/질병/의료 (갱년기, 관절, 혈압, 당뇨, 치매, 암 등)\n"
-            "2. 연금/재테크/부동산/세금 (국민연금, 주택연금, 상속, 금리 등 — 광고 단가가 높은 분야)\n"
-            "3. 생활 정보/정부 지원 제도 (지원금, 건강보험, 재취업 등)\n"
-            "4. 50대 인지도가 높은 유명인·방송·사회 이슈\n\n"
+            "1. 광고 단가가 높은 분야 (건강/의료, 금융/재테크/보험, 법률, 부동산·세금 등)\n"
+            "2. 검색량이 많고 경쟁이 적은 구체적인 질문형·정보성 키워드\n"
+            "3. 시의성 있는 트렌드 이슈 (단, 광고·유입 가치가 있는 것)\n\n"
             "★제외 기준:\n"
             f"- 최근 발행 이력에 이미 있는 키워드/주제:\n{recent_text}\n"
-            "- 10~20대 위주의 게임/아이돌 이슈, 선정적/자극적 이슈\n\n"
+            "- 선정적/자극적이거나 논란·비방성 이슈\n\n"
             f"★실시간 트렌드 후보:\n{candidates_text}\n\n"
-            "후보가 모두 부적합하거나 비어 있으면, 50대에게 유용하고 검색량이 많은 상시 인기 주제를 직접 1개 제안하라.\n\n"
+            "후보가 모두 부적합하거나 비어 있으면, 검색량이 많은 상시 인기 주제를 직접 1개 제안하라.\n\n"
             "★출력 형식: 반드시 아래 JSON 구조로만 출력하라.\n"
             "{\n"
             '  "keyword": "선정한 키워드",\n'
-            '  "selection_reason": "50대 관점에서 이 키워드를 고른 이유 1~2문장",\n'
+            '  "selection_reason": "이 키워드를 고른 이유 1~2문장",\n'
             f'  "category": "{" | ".join(IMAGE_CATEGORIES)} 중 하나"\n'
             "}"
         )
@@ -411,20 +425,20 @@ def select_keyword_for_50s(candidates, history, api_key, model, source="trends")
     kw = random.choice(pool)
     default_cat = "food" if source == "tv" else "lifestyle"
     print(f"⚠️ 키워드 선별 실패 → 상시 인기 주제로 대체: {kw}")
-    return {"keyword": kw, "reason": "50대 상시 관심 주제(자동 대체)", "category": default_cat}
+    return {"keyword": kw, "reason": "상시 관심 주제(자동 대체)", "category": default_cat}
 
 
 # ==========================================
 # 3단계: 본문 생성
 # ==========================================
 
-def generate_blog_content(keyword, context, api_key, model):
+def generate_blog_content(cfg, keyword, context, api_key, model):
     prompt = (
-        "너는 대한민국 50대 독자를 위한 프리미엄 정보 칼럼을 기고하는 전문 칼럼니스트이자 SEO 전문가다.\n"
+        "너는 대한민국 독자를 위한 프리미엄 정보 칼럼을 기고하는 전문 칼럼니스트이자 SEO 전문가다.\n"
         f"핵심 키워드: '{keyword}'\n"
-        f"참고 맥락: '{context}'\n\n"
-        "★독자 페르소나: 50대 남녀. 건강, 노후 준비, 자산 관리, 가족에 관심이 많고,\n"
-        "  신뢰할 수 있는 구체적 정보(수치, 제도, 절차)를 원한다. 어려운 용어는 풀어서 설명해야 한다.\n\n"
+        f"참고 맥락: '{context}'\n"
+        f"{audience_lines(cfg)}\n\n"
+        "★독자: 신뢰할 수 있는 구체적 정보(수치, 제도, 절차)를 원하는 독자. 어려운 용어는 풀어서 설명한다.\n\n"
         "★필수 지시사항:\n"
         "1. 말투: 전문 칼럼니스트의 객관적이고 무게감 있는 문어체('~다', '~에 주목할 필요가 있다').\n"
         "2. 분량: 본문 공백 제외 최소 2,000자 이상. 실질적으로 도움이 되는 구체적 정보 위주로 작성.\n"
@@ -433,6 +447,7 @@ def generate_blog_content(keyword, context, api_key, model):
         "4. 강조: 핵심 문구 2~3곳만 <strong> 태그로 마킹. 목록이 어울리는 곳은 <ul><li> 사용.\n"
         "5. 정확성: 확실하지 않은 수치나 사실은 단정하지 말고 '~로 알려져 있다', '기관 확인이 필요하다'로 표현.\n"
         "6. 제목: 검색 클릭을 부르되 낚시성이 아닌 제목. 핵심 키워드를 포함하고 60자 이내.\n"
+        "   ★특정 연령대·집단을 지칭하는 표현('50대', '중장년' 등)을 제목이나 본문에 반복해서 넣지 마라.\n"
         "7. 도입부: 첫 문단은 독자 자신의 상황을 떠올리게 하는 질문이나 구체적 사례로 시작해\n"
         "   끝까지 읽고 싶게 만들어라. 문단은 3~4문장 이내로 짧게 끊어 모바일 가독성을 높여라.\n\n"
         "★출력 형식: 반드시 아래 JSON 구조로만 출력하라.\n"
@@ -526,7 +541,7 @@ def generate_ai_image(image_prompt, api_key, model, filename):
         "Create a high-quality blog cover image, 16:9 wide aspect ratio. Scene: "
         + image_prompt.strip()
         + " Style: clean editorial photography or soft premium digital illustration, "
-          "warm and trustworthy mood suitable for readers in their 50s. "
+          "warm and trustworthy editorial mood. "
           "Strictly no text, no letters, no watermarks, and no recognizable real people or faces."
     )
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
@@ -1048,8 +1063,8 @@ def generate_required_pages(cfg):
     if not os.path.exists(os.path.join(BASE_DIR, "about.html")):
         body = (
             "<div class='container' style='margin-top:40px;'><h1>소개</h1>"
-            f"<p><strong>{name}</strong>는 50대 독자를 위해 건강, 연금, 재테크, 생활 정보 등 "
-            "꼭 필요한 트렌드를 매일 분석하여 전달하는 정보 칼럼 채널입니다.</p>"
+            f"<p><strong>{name}</strong>는 건강, 생활, 재테크 등 일상에 꼭 필요한 정보와 "
+            "트렌드를 매일 분석하여 전달하는 정보 칼럼 채널입니다.</p>"
             "<p>모든 콘텐츠는 공개된 자료와 시장 동향을 바탕으로 작성되며, "
             "의료·금융 관련 결정은 반드시 전문가와 상담하시기 바랍니다.</p>"
             f"<p>제휴 및 문의: {html.escape(cfg['contact_email'])}</p></div>"
@@ -1395,7 +1410,7 @@ def git_sync(cfg, commit_message, max_retries=4):
 # ==========================================
 
 def main():
-    parser = argparse.ArgumentParser(description="50대 타깃 트렌드 자동 블로그 발행기")
+    parser = argparse.ArgumentParser(description="AI 자동 블로그 발행기")
     parser.add_argument("--keyword", help="키워드 직접 지정 (트렌드 수집 생략)")
     parser.add_argument("--source", choices=["trends", "tv"],
                         help="키워드 소스 (trends: 실시간 트렌드 / tv: 방송 편성표 건강·식품). "
@@ -1434,17 +1449,17 @@ def main():
     elif source == "tv":
         print("📺 방송 편성표에서 건강·식품 소재를 수집합니다...")
         candidates = fetch_tv_program_topics()
-        selection = select_keyword_for_50s(candidates, history, api_key, cfg["model_name"], source="tv")
+        selection = select_keyword(cfg, candidates, history, api_key, cfg["model_name"], source="tv")
     else:
         print("📡 실시간 트렌드 키워드를 수집합니다...")
         candidates = fetch_trending_keywords()
-        selection = select_keyword_for_50s(candidates, history, api_key, cfg["model_name"], source="trends")
+        selection = select_keyword(cfg, candidates, history, api_key, cfg["model_name"], source="trends")
 
     keyword = selection["keyword"]
     print(f"🎯 선정 키워드: [{keyword}] — {selection['reason']}")
 
     # 2) 본문 생성
-    blog_json = generate_blog_content(keyword, selection["reason"], api_key, cfg["model_name"])
+    blog_json = generate_blog_content(cfg, keyword, selection["reason"], api_key, cfg["model_name"])
     if not blog_json:
         print("❌ 콘텐츠 생성에 실패하여 종료합니다.")
         sys.exit(1)

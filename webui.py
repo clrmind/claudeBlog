@@ -552,6 +552,11 @@ def settings():
       <input type='text' name='adsense_client' value="{g('adsense_client')}">
       <label>하루 최대 발행 수</label>
       <input type='number' name='max_posts_per_day' value="{g('max_posts_per_day', 3)}">
+      <label>주요 독자층 (비우면 일반 독자)</label>
+      <input type='text' name='target_audience' value="{g('target_audience')}" placeholder='예: 3040 직장인 / 비우면 일반'>
+      <small class='hint'>글에 특정 표현을 반복하지 않고 눈높이만 맞춥니다.</small>
+      <label>주제 분야 (비우면 종합)</label>
+      <input type='text' name='topic_focus' value="{g('topic_focus')}" placeholder='예: 육아, 반려동물, 재테크'>
       <label>기본 키워드 소스</label>
       <select name='keyword_source'>
         <option value='trends' {'selected' if g('keyword_source')=='trends' else ''}>실시간 트렌드</option>
@@ -599,7 +604,7 @@ def settings():
 def settings_save():
     cfg = load_config()
     for k in ("blog_name", "blog_domain", "contact_email", "adsense_client",
-              "keyword_source", "image_mode"):
+              "keyword_source", "image_mode", "target_audience", "topic_focus"):
         cfg[k] = request.form.get(k, cfg.get(k, ""))
     try:
         cfg["max_posts_per_day"] = int(request.form.get("max_posts_per_day", 3))
