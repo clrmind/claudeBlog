@@ -650,6 +650,28 @@ def generate_svg_cover(title, category, blog_name, filename):
         return None
 
 
+def use_uploaded_image(src_path, filename):
+    """사용자가 직접 첨부한 이미지를 images/에 복사(+압축)해 웹 경로를 반환한다."""
+    import shutil
+    if not os.path.exists(src_path):
+        print(f"⚠️ 첨부 이미지 파일을 찾을 수 없습니다: {src_path}")
+        return None
+    try:
+        ext = os.path.splitext(src_path)[1].lower() or ".jpg"
+        if ext not in (".jpg", ".jpeg", ".png", ".webp", ".gif"):
+            ext = ".jpg"
+        os.makedirs(IMAGES_DIR, exist_ok=True)
+        dst = os.path.join(IMAGES_DIR, filename + ext)
+        shutil.copyfile(src_path, dst)
+        dst = optimize_ai_image(dst)  # Pillow 있으면 자동 압축/리사이즈
+        web_path = "/images/" + os.path.basename(dst)
+        print(f"🖼️ 첨부 이미지 사용: {web_path}")
+        return web_path
+    except Exception as e:
+        print(f"⚠️ 첨부 이미지 처리 실패: {e}")
+        return None
+
+
 def resolve_post_image(cfg, api_key, blog_json, category):
     """대표 이미지 결정: 위키 인물 사진 → AI 생성 → Unsplash 검색 → SVG 카드 → 고정 풀."""
     filename = blog_json["filename"]
@@ -1380,6 +1402,10 @@ def main():
                              "생략 시 config.json의 keyword_source를 따름")
     parser.add_argument("--render-only", action="store_true", help="글 생성 없이 사이트만 재빌드")
     parser.add_argument("--no-push", action="store_true", help="git 커밋/푸시 생략")
+    parser.add_argument("--image", help="대표 이미지로 쓸 로컬 이미지 파일 경로 (자동 생성 대신 직접 첨부)")
+    parser.add_argument("--title", help="제목 직접 지정 (생략 시 AI가 생성)")
+    parser.add_argument("--ignore-daily-limit", action="store_true",
+                        help="하루 발행량 제한 무시 (수동 발행용)")
     args = parser.parse_args()
 
     load_env_file()
@@ -1397,7 +1423,7 @@ def main():
 
     # 하루 발행량 제한 (스팸성 대량 발행 방지 — 애드센스 정책 보호)
     limit = int(cfg.get("max_posts_per_day", 3))
-    if posts_today(history) >= limit:
+    if not args.ignore_daily_limit and posts_today(history) >= limit:
         print(f"ℹ️ 오늘 발행량({limit}개)을 이미 채웠습니다. 종료합니다.")
         return
 
@@ -1425,13 +1451,22 @@ def main():
 
     # 3) 포스트 데이터 저장
     now = datetime.datetime.now()
+    if args.title:
+        blog_json["title"] = args.title
     blog_json["keyword"] = keyword
     blog_json["filename"] = f"post_{now.strftime('%Y%m%d_%H%M%S')}"
     blog_json["date"] = now.strftime("%Y-%m-%d")
     category = blog_json.get("image_category")
     if category not in IMAGE_CATEGORIES:
         category = selection.get("category", "society")
-    image, image_credit = resolve_post_image(cfg, api_key, blog_json, category)
+    image_credit = ""
+    if args.image:
+        # 사용자가 직접 첨부한 이미지를 대표 이미지로 사용
+        image = use_uploaded_image(args.image, blog_json["filename"])
+        if not image:  # 첨부 실패 시 자동 이미지로 폴백
+            image, image_credit = resolve_post_image(cfg, api_key, blog_json, category)
+    else:
+        image, image_credit = resolve_post_image(cfg, api_key, blog_json, category)
     blog_json["image"] = image
     blog_json["image_credit"] = image_credit
 

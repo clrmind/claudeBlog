@@ -3,3 +3,6 @@ logs/
 auto_run.log
 __pycache__/
 *.pyc
+uploads/
+webui_run.log
+.webui_secret
