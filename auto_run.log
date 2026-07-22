@@ -609,3 +609,4 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ⚠️ push 실패 — 8초 후 재시도 (3/4)
 ⚠️ push 실패 — 16초 후 재시도 (4/4)
 ❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
+ℹ️ 오늘 발행량(3개)을 이미 채웠습니다. 종료합니다.
