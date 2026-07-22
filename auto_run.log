@@ -545,3 +545,67 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [간에 좋은 음식과 간 건강 지키는 법] → 「50대 간 건강 적신호? 간에 좋은 음식과 간 지키는 법 총정리」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main 8478b18] post: 50대, 줄기세포의 미래를 읽다: 건강한 노년을 위한 현명한 선택
+ 25 files changed, 736 insertions(+), 14 deletions(-)
+ create mode 100644 images/post_20260722_080130.svg
+ create mode 100644 posts/post_20260722_080130.html
+ create mode 100644 "tags/\352\261\264\352\260\225\352\264\200\353\246\254.html"
+ create mode 100644 "tags/\353\205\270\355\231\224\353\260\251\354\247\200.html"
+ create mode 100644 "tags/\354\204\261\354\262\264\354\244\204\352\270\260\354\204\270\355\217\254.html"
+ create mode 100644 "tags/\354\236\254\354\203\235\354\235\230\355\225\231.html"
+ create mode 100644 "tags/\354\244\204\352\270\260\354\204\270\355\217\254.html"
+ create mode 100644 "tags/\354\247\210\353\263\221\354\271\230\353\243\214.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 17개 수집 완료
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+🎯 선정 키워드: [줄기세포] — 50대 독자들은 노화 및 질병 치료, 건강 증진에 대한 관심이 높습니다. 줄기세포는 이러한 분야에서 미래 의학 기술로서 큰 잠재력을 가지고 있어 검색량과 클릭률이 높을 것으로 예상됩니다.
+🤖 Gemini(gemini-2.5-flash)가 '줄기세포' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260722_080130.svg
+🛠️ 사이트 빌드 완료 (총 24개 포스트, 3페이지)
+🎉 발행 완료! [줄기세포] → 「50대, 줄기세포의 미래를 읽다: 건강한 노년을 위한 현명한 선택」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+⚠️ push 실패 — 2초 후 재시도 (1/4)
+⚠️ push 실패 — 4초 후 재시도 (2/4)
+⚠️ push 실패 — 8초 후 재시도 (3/4)
+⚠️ push 실패 — 16초 후 재시도 (4/4)
+❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
