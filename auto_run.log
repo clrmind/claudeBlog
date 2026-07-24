@@ -675,3 +675,32 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [건강을 위한 올바른 등산법: 자세, 안전, 장비 가이드] → 「건강을 위한 올바른 등산법: 자세, 안전, 장비 완벽 가이드」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main 2088984] post: 스페이스X 주가, 베일에 싸인 우주 기업 투자의 모든 것
+ 26 files changed, 824 insertions(+), 16 deletions(-)
+ create mode 100644 images/post_20260724_080043.svg
+ create mode 100644 posts/post_20260724_080043.html
+ create mode 100644 "tags/\354\203\201\354\236\245.html"
+ create mode 100644 "tags/\354\212\244\355\203\200\353\247\201\355\201\254.html"
+ create mode 100644 "tags/\354\212\244\355\216\230\354\235\264\354\212\244x.html"
+ create mode 100644 "tags/\354\232\260\354\243\274\354\202\260\354\227\205.html"
+ create mode 100644 "tags/\354\232\260\354\243\274\355\225\255\352\263\265.html"
+ create mode 100644 "tags/\354\235\274\353\241\240\353\250\270\354\212\244\355\201\254.html"
+ create mode 100644 "tags/\354\243\274\354\213\235\355\210\254\354\236\220.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+   6b9246d..2088984  main -> main
+branch 'main' set up to track 'origin/main'.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+🎯 선정 키워드: [스페이스x 주가] — 이 키워드는 광고 단가가 높은 금융/재테크 분야에 속하며, 스페이스X는 대중적 인지도가 높아 기술과 투자에 관심 있는 폭넓은 독자층의 검색량과 클릭 유발 가능성이 높습니다. 특정 연령대나 집단에 한정되지 않고, 일반 독자에게 유용한 정보성 콘텐츠를 제공할 수 있습니다.
+🤖 Gemini(gemini-2.5-flash)가 '스페이스x 주가' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260724_080043.svg
+🛠️ 사이트 빌드 완료 (총 40개 포스트, 5페이지)
+🎉 발행 완료! [스페이스x 주가] → 「스페이스X 주가, 베일에 싸인 우주 기업 투자의 모든 것」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+🎉 GitHub 배포 완료!
