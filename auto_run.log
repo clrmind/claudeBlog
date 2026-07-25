@@ -743,3 +743,35 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [장 건강을 위한 식단과 생활 습관 관리법] → 「장 건강을 위한 식단과 생활 습관 관리법: 건강한 삶의 필수 전략」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main cae1148] post: 최태원 노소영 이혼, 1.38조원 재산분할: 세기의 판결이 던진 메시지
+ 27 files changed, 918 insertions(+), 15 deletions(-)
+ create mode 100644 images/post_20260725_080112.svg
+ create mode 100644 posts/post_20260725_080112.html
+ create mode 100644 "tags/sk\352\267\270\353\243\271.html"
+ create mode 100644 "tags/\352\260\200\354\202\254\354\206\214\354\206\241.html"
+ create mode 100644 "tags/\352\270\260\354\227\205\354\247\200\353\260\260\352\265\254\354\241\260.html"
+ create mode 100644 "tags/\353\205\270\354\206\214\354\230\201.html"
+ create mode 100644 "tags/\353\262\225\353\245\240\354\240\225\353\263\264.html"
+ create mode 100644 "tags/\354\235\264\355\230\274.html"
+ create mode 100644 "tags/\354\236\254\354\202\260\353\266\204\355\225\240.html"
+ create mode 100644 "tags/\354\265\234\355\203\234\354\233\220.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+   240c696..cae1148  main -> main
+branch 'main' set up to track 'origin/main'.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+🎯 선정 키워드: [세기의 이혼 최태원, 노소영 9440억 지급] — 이 키워드는 거액의 이혼 소송 결과를 다루며, 법률 및 재테크/금융 분야의 높은 광고 단가와 대중의 폭넓은 관심이 결합된 시의성 있는 주제입니다. 독자들이 재산 분할 및 관련 법률 정보에 대해 궁금해하며 검색할 가능성이 높습니다.
+🤖 Gemini(gemini-2.5-flash)가 '세기의 이혼 최태원, 노소영 9440억 지급' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260725_080112.svg
+🛠️ 사이트 빌드 완료 (총 42개 포스트, 5페이지)
+🎉 발행 완료! [세기의 이혼 최태원, 노소영 9440억 지급] → 「최태원 노소영 이혼, 1.38조원 재산분할: 세기의 판결이 던진 메시지」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+🎉 GitHub 배포 완료!
