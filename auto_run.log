@@ -873,3 +873,31 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [맛있는 집밥 레시피와 요리 팁] → 「맛있는 집밥 레시피와 요리 팁: 알토란 비법을 내 식탁으로」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main 462cf69] post: 새마을금고, 현명한 재테크의 시작: 금리, 예금, 대출 핵심 분석
+ 30 files changed, 653 insertions(+), 21 deletions(-)
+ create mode 100644 images/post_20260727_080051.svg
+ create mode 100644 posts/post_20260727_080051.html
+ create mode 100644 "tags/\352\270\210\354\234\265\354\203\201\355\222\210.html"
+ create mode 100644 "tags/\353\271\204\352\263\274\354\204\270.html"
+ create mode 100644 "tags/\354\203\210\353\247\210\354\235\204\352\270\210\352\263\240.html"
+ create mode 100644 "tags/\354\225\210\354\240\225\354\204\261.html"
+ create mode 100644 "tags/\354\247\200\354\227\255\352\270\210\354\234\265.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+   6d380a6..462cf69  main -> main
+branch 'main' set up to track 'origin/main'.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 16개 수집 완료
+🎯 선정 키워드: [새마을금고] — 이 키워드는 광고 단가가 높은 금융/재테크 분야에 속하며, 금리, 대출, 예금 등 일반 독자들이 궁금해하는 실용적인 재테크 정보를 제공하여 높은 검색량과 유입 가치를 기대할 수 있습니다.
+🤖 Gemini(gemini-2.5-flash)가 '새마을금고' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260727_080051.svg
+🛠️ 사이트 빌드 완료 (총 47개 포스트, 6페이지)
+🎉 발행 완료! [새마을금고] → 「새마을금고, 현명한 재테크의 시작: 금리, 예금, 대출 핵심 분석」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+🎉 GitHub 배포 완료!
