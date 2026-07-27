@@ -901,3 +901,45 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [새마을금고] → 「새마을금고, 현명한 재테크의 시작: 금리, 예금, 대출 핵심 분석」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main ea74c59] post: 현대인의 눈 건강 지킴이: 과학으로 입증된 눈 건강에 좋은 음식 총정리
+ 27 files changed, 994 insertions(+), 12 deletions(-)
+ create mode 100644 images/post_20260727_220123.svg
+ create mode 100644 posts/post_20260727_220123.html
+ create mode 100644 "tags/\353\210\210-\352\261\264\352\260\225.html"
+ create mode 100644 "tags/\353\210\210\354\227\220-\354\242\213\354\235\200-\354\235\214\354\213\235.html"
+ create mode 100644 "tags/\353\243\250\355\205\214\354\235\270.html"
+ create mode 100644 "tags/\353\271\204\355\203\200\353\257\274a.html"
+ create mode 100644 "tags/\354\213\234\353\240\245-\353\263\264\355\230\270.html"
+ create mode 100644 "tags/\354\225\210\352\265\254\352\261\264\354\241\260\354\246\235.html"
+ create mode 100644 "tags/\354\230\244\353\251\224\352\260\2003.html"
+ create mode 100644 "tags/\355\225\255\354\202\260\355\231\224.html"
+ create mode 100644 "tags/\355\231\251\353\260\230\353\263\200\354\204\261.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+   462cf69..ea74c59  main -> main
+branch 'main' set up to track 'origin/main'.
+📺 방송 편성표에서 건강·식품 소재를 수집합니다...
+  📺 생로병사의 비밀: [2011년7월16일(토)] 방송 \u003c내몸살리는 똑똑한 등산\u
+  📺 한국인의 밥상: 출연 후기
+  📺 6시 내고향: 나무위키 6시 내고향
+  📺 나는 몸신이다: (유료)
+  📺 엄지의 제왕: : “내 팔 어디 갔냐?” 3년 전 치매로 아기가 된 어머니의 상태는?
+  📺 천기누설: 방송~
+  📺 알토란: 오늘의요리
+📺 방송 소재 후보 14개 수집 완료
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+⚠️ 키워드 선별 실패 → 상시 인기 주제로 대체: 눈 건강에 좋은 음식
+🎯 선정 키워드: [눈 건강에 좋은 음식] — 상시 관심 주제(자동 대체)
+🤖 Gemini(gemini-2.5-flash)가 '눈 건강에 좋은 음식' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260727_220123.svg
+🛠️ 사이트 빌드 완료 (총 48개 포스트, 6페이지)
+🎉 발행 완료! [눈 건강에 좋은 음식] → 「현대인의 눈 건강 지킴이: 과학으로 입증된 눈 건강에 좋은 음식 총정리」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+🎉 GitHub 배포 완료!
