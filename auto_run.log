@@ -1012,3 +1012,36 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [뇌출혈 환자 회복을 위한 생활 관리 및 재활 정보] → 「뇌출혈 환자 회복을 위한 생활 관리 및 재활 정보: 성공적인 사회 복귀 전략」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main 4d8ea87] post: 혈당 관리에 좋은 음식과 효과적인 생활 습관: 건강한 삶을 위한 실천 지침
+ 28 files changed, 623 insertions(+), 19 deletions(-)
+ create mode 100644 images/post_20260731_220107.svg
+ create mode 100644 posts/post_20260731_220107.html
+ create mode 100644 "tags/\352\261\264\352\260\225\354\213\235\353\213\250.html"
+ create mode 100644 "tags/\353\213\271\353\207\250\354\230\210\353\260\251.html"
+ create mode 100644 "tags/\354\213\235\354\235\264\354\232\224\353\262\225.html"
+ create mode 100644 "tags/\355\230\210\353\213\271\352\264\200\353\246\254.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+   edb6e08..4d8ea87  main -> main
+branch 'main' set up to track 'origin/main'.
+📺 방송 편성표에서 건강·식품 소재를 수집합니다...
+  📺 생로병사의 비밀: [2011년7월16일(토)] 방송 \u003c내몸살리는 똑똑한 등산\u
+  📺 한국인의 밥상: 출연 후기
+  📺 6시 내고향: 나무위키 6시 내고향
+  📺 나는 몸신이다: loading=
+  📺 엄지의 제왕: : (닥터 검증)
+  📺 천기누설: 방송~
+  📺 알토란: 오늘의요리
+📺 방송 소재 후보 14개 수집 완료
+🎯 선정 키워드: [혈당 관리에 좋은 음식과 효과적인 생활 습관] — 제공된 후보 목록의 모든 항목이 부적합하거나 제외 기준에 해당하여, 폭넓은 일반 독자에게 유용하고 검색 잠재력이 높은 상시 인기 주제인 혈당 관리를 선정했습니다. 건강한 식단과 생활 습관을 통해 혈당을 관리하는 구체적인 정보를 제공하는 키워드로 재구성했습니다.
+🤖 Gemini(gemini-2.5-flash)가 '혈당 관리에 좋은 음식과 효과적인 생활 습관' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260731_220107.svg
+🛠️ 사이트 빌드 완료 (총 51개 포스트, 6페이지)
+🎉 발행 완료! [혈당 관리에 좋은 음식과 효과적인 생활 습관] → 「혈당 관리에 좋은 음식과 효과적인 생활 습관: 건강한 삶을 위한 실천 지침」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+🎉 GitHub 배포 완료!
