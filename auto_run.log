@@ -1161,3 +1161,38 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [2026년 세제개편안] → 「2026년 세제개편안, 당신의 자산과 미래에 미칠 영향 심층 분석」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main 61161e8] post: 콜레스테롤 수치를 낮추는 식단과 생활 습관: 건강한 미래를 위한 필수 지침
+ 38 files changed, 506 insertions(+), 30 deletions(-)
+ create mode 100644 images/post_20260804_220244.svg
+ create mode 100644 posts/post_20260804_220244.html
+ create mode 100644 "tags/\352\263\240\354\247\200\355\230\210\354\246\235.html"
+ create mode 100644 "tags/\354\213\235\354\235\264\354\204\254\354\234\240.html"
+ create mode 100644 "tags/\354\230\210\353\260\251.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+   225818c..61161e8  main -> main
+branch 'main' set up to track 'origin/main'.
+📺 방송 편성표에서 건강·식품 소재를 수집합니다...
+  📺 생로병사의 비밀: [2011년7월16일(토)] 방송 \u003c내몸살리는 똑똑한 등산\u
+  📺 한국인의 밥상: 출연 후기
+  📺 6시 내고향: 나무위키 6시 내고향
+  📺 나는 몸신이다: loading=
+  📺 엄지의 제왕: : (닥터 검증)
+  📺 천기누설: 방송~
+  📺 알토란: 오늘의요리
+📺 방송 소재 후보 14개 수집 완료
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+🎯 선정 키워드: [콜레스테롤 수치를 낮추는 식단과 생활 습관 개선법] — 제시된 방송 소재 후보들이 대부분 내용이 불분명하거나 이미 발행된 주제와 겹쳐 활용하기 어려웠습니다. 이에 따라 검색량이 많고 폭넓은 독자에게 유용한 상시 인기 주제인 콜레스테롤 관리를 선정했습니다.
+🤖 Gemini(gemini-2.5-flash)가 '콜레스테롤 수치를 낮추는 식단과 생활 습관 개선법' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260804_220244.svg
+🛠️ 사이트 빌드 완료 (총 56개 포스트, 7페이지)
+🎉 발행 완료! [콜레스테롤 수치를 낮추는 식단과 생활 습관 개선법] → 「콜레스테롤 수치를 낮추는 식단과 생활 습관: 건강한 미래를 위한 필수 지침」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+🎉 GitHub 배포 완료!
