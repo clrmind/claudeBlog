@@ -1,0 +1,16 @@
+[Unit]
+Description=AutoBlogger web control panel (claudeBlog)
+After=network.target
+
+[Service]
+Type=simple
+User=medi
+WorkingDirectory=/home/medi/claudeBlog
+Environment=WEBUI_HOST=127.0.0.1
+Environment=WEBUI_PORT=8091
+ExecStart=/home/medi/claudeBlog/venv/bin/python webui.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
