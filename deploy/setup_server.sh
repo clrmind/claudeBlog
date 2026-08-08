@@ -6,10 +6,11 @@
 #   - webui.py         : 폰 브라우저로 접속하는 컨트롤 패널 (systemd 서비스로 상주)
 #   - autoblogger.py   : 실제 글 생성+GitHub Pages 배포 (webui가 crontab에 스케줄 등록)
 #
-# 서버에 root로 SSH 접속한 뒤 한 번만 실행:
+# 서버에 root로 SSH 접속한 뒤 한 번만 실행. (저장소가 private이므로 토큰으로 clone)
 #   ssh root@158.247.239.7
-#   curl -fsSL https://raw.githubusercontent.com/clrmind/claudeBlog/main/deploy/setup_server.sh | bash
-# (또는 이 파일을 서버에 올려 `bash setup_server.sh`)
+#   read -rsp 'GitHub token: ' T; echo
+#   sudo -u medi git clone https://clrmind:$T@github.com/clrmind/claudeBlog.git /home/medi/claudeBlog
+#   bash /home/medi/claudeBlog/deploy/setup_server.sh
 #
 # 멱등(idempotent): 다시 실행해도 안전하며, 이미 설정된 항목은 건너뛴다.
 # =============================================================================
@@ -60,7 +61,10 @@ echo "==> 5/7  git 신원 + GitHub 푸시 인증(토큰)"
 sudo -u "${APP_USER}" git -C "${APP_DIR}" config user.name  "ZionLabs AutoBlogger"
 sudo -u "${APP_USER}" git -C "${APP_DIR}" config user.email "contact@zionlabs.org"
 CRED_FILE="/home/${APP_USER}/.git-credentials"
-if [ ! -s "${CRED_FILE}" ]; then
+ORIGIN_URL="$(sudo -u "${APP_USER}" git -C "${APP_DIR}" remote get-url origin 2>/dev/null || echo '')"
+if printf '%s' "${ORIGIN_URL}" | grep -q '@github.com'; then
+  echo "    clone 시 토큰이 이미 origin URL에 들어 있음 — push 인증 준비됨(건너뜀)."
+elif [ ! -s "${CRED_FILE}" ]; then
   echo "    autoblogger가 GitHub(main)로 글을 push하려면 Personal Access Token이 필요합니다."
   echo "    (github.com > Settings > Developer settings > Tokens, repo/contents write 권한)"
   read -rp "    GitHub 사용자명 [clrmind]: " GHUSER
