@@ -1196,3 +1196,63 @@ branch 'main' set up to track 'origin/main'.
 🎉 발행 완료! [콜레스테롤 수치를 낮추는 식단과 생활 습관 개선법] → 「콜레스테롤 수치를 낮추는 식단과 생활 습관: 건강한 미래를 위한 필수 지침」
 ⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
 🎉 GitHub 배포 완료!
+[main 7ee40ad] post: 네이버 카카오 AI 기술 전쟁: 서비스별 특징과 미래 활용 전략 총정리
+ 24 files changed, 606 insertions(+), 15 deletions(-)
+ create mode 100644 images/post_20260809_103039.svg
+ create mode 100644 posts/post_20260809_103039.html
+ create mode 100644 "tags/it\355\212\270\353\240\214\353\223\234.html"
+ create mode 100644 "tags/\353\204\244\354\235\264\353\262\204-\354\271\264\354\271\264\354\230\244-ai.html"
+ create mode 100644 "tags/\354\203\235\354\204\261\355\230\225ai.html"
+ create mode 100644 "tags/\354\271\264\353\202\230\353\202\230.html"
+ create mode 100644 "tags/\355\225\230\354\235\264\355\215\274\355\201\264\353\241\234\353\260\224x.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 17개 수집 완료
+🎯 선정 키워드: [네이버 카카오 AI] — 국내 대표 IT 기업들의 AI 서비스 및 기술 경쟁은 대중적 관심도가 매우 높고 관련 키워드의 광고 가치와 정보 검색량이 뛰어납니다.
+🤖 Gemini(gemini-flash-latest)가 '네이버 카카오 AI' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260809_103039.svg
+🛠️ 사이트 빌드 완료 (총 60개 포스트, 7페이지)
+🎉 발행 완료! [네이버 카카오 AI] → 「네이버 카카오 AI 기술 전쟁: 서비스별 특징과 미래 활용 전략 총정리」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+⚠️ push 실패 — 2초 후 재시도 (1/4)
+⚠️ push 실패 — 4초 후 재시도 (2/4)
+⚠️ push 실패 — 8초 후 재시도 (3/4)
+⚠️ push 실패 — 16초 후 재시도 (4/4)
+❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
