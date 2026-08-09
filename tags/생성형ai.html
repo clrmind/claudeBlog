@@ -1,8 +1,4 @@
-<!DOCTYPE html><html lang='ko'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>대시보드 - ZionLabs Trend Insights</title><meta name='description' content='관리자 대시보드'><link rel='canonical' href='https://blog.zionlabs.org/admin.html'><link rel='alternate' type='application/rss+xml' title='ZionLabs Trend Insights' href='/rss.xml'><meta name='naver-site-verification' content='5085c30a26ad2d1ede612aa6b646ff288e680427'><meta name='google-site-verification' content='OzInJE6Z3j4irpLggWnM71EZmlrR-uRxzTkTbMOme78'><meta name='robots' content='noindex'><style>.admin-card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }
-.stats-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-.stats-table th, .stats-table td { padding: 12px; border-bottom: 1px solid #edf2f7; text-align: left; font-size: 14px; }
-.stats-table th { background-color: #f7fafc; color: #4a5568; font-weight: 600; }
-.badge { background: #e2fbf0; color: #2ed573; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }</style>
+<!DOCTYPE html><html lang='ko'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>#생성형AI - ZionLabs Trend Insights</title><meta name='description' content='생성형AI 관련 최신 분석 글 모음'><link rel='canonical' href='https://blog.zionlabs.org/tags/생성형ai.html'><link rel='alternate' type='application/rss+xml' title='ZionLabs Trend Insights' href='/rss.xml'><meta name='naver-site-verification' content='5085c30a26ad2d1ede612aa6b646ff288e680427'><meta name='google-site-verification' content='OzInJE6Z3j4irpLggWnM71EZmlrR-uRxzTkTbMOme78'>
 <style>
 body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; line-height: 1.75; color: #333; margin: 0; padding: 0; background-color: #f9f9fb; }
 .container { max-width: 900px; margin: 0 auto; padding: 4px 20px 80px 20px; box-sizing: border-box; }
@@ -77,25 +73,7 @@ footer { background: #fff; border-top: 1px solid #edf2f7; padding: 40px 20px; ma
 .recommend-grid { grid-template-columns: 1fr; }
 }
 </style>
-</head><body><header><a class='logo' href='/'>ZionLabs Trend Insights</a><div class='nav-links'><a href='/about.html'>About</a><a href='/privacy.html'>개인정보처리방침</a></div></header><div class='container'><div class='admin-card' style='margin-top: 30px;'><h2>📈 페이지별 조회수 대시보드</h2><table class='stats-table'><thead><tr><th>페이지 경로</th><th>상태</th><th>조회수(PV)</th></tr></thead><tbody id='statsTableBody'></tbody></table></div></div><script>
-var NS = 'zionlabs_blog';
-var posts = ["post_20260809_103039", "post_20260809_034137", "post_20260808_180034", "post_20260805_080047", "post_20260804_220244", "post_20260804_080148", "post_20260803_220054", "post_20260803_080046", "post_20260802_220104", "post_20260731_220107", "post_20260728_220120", "post_20260728_080104", "post_20260727_220123", "post_20260727_080051", "post_20260726_220110", "post_20260726_080049", "post_20260725_220052", "post_20260725_102834", "post_20260725_080112", "post_20260724_220119", "post_20260724_080043", "post_20260723_220113", "post_20260723_080109", "post_20260722_203509", "post_20260722_194004", "post_20260722_190759", "post_20260722_190126", "post_20260722_185803", "post_20260722_151358", "post_20260722_142523", "post_20260722_140826", "post_20260722_140721", "post_20260722_123956", "post_20260722_123548", "post_20260722_123228", "post_20260722_122207", "post_20260722_080130", "post_20260721_220208", "post_20260721_091140", "post_20260721_080056", "post_20260720_220147", "post_20260720_080042", "post_20260719_220102", "post_20260719_092145", "post_20260718_220057", "post_20260718_080127", "post_20260717_080050", "post_20260716_220112", "post_20260716_080213", "post_20260715_080159", "post_20260714_220118", "post_20260714_080108", "post_20260714_014046", "post_20260713_220133", "post_20260713_083212", "post_20260712_102630", "post_20260712_080102", "post_20260711_113139", "post_20260711_012255", "post_20260711_002230"];
-var tb = document.getElementById('statsTableBody');
-var seq = 0;
-function addRow(label, key) {
-  var id = 'cnt_' + (seq++);
-  var tr = document.createElement('tr');
-  tr.innerHTML = '<td>' + label + '</td><td><span class="badge">Active</span></td>' +
-    '<td id="' + id + '">불러오는 중...</td>';
-  tb.appendChild(tr);
-  fetch('https://api.counterapi.dev/v1/' + NS + '/' + key)
-    .then(function(r){ return r.json(); })
-    .then(function(d){ document.getElementById(id).innerText = (d.count || 0) + ' 회'; })
-    .catch(function(){ document.getElementById(id).innerText = '0 회'; });
-}
-addRow('/ (메인)', 'main_root');
-posts.forEach(function(f){ addRow('/posts/' + f + '.html', '_posts_' + f + '_html'); });
-</script><footer><div class='footer-info'><strong>ZionLabs Trend Insights</strong><br>문의: contact@zionlabs.org</div><div class='footer-links'><a href='/about.html'>About</a><a href='/privacy.html'>Privacy Policy</a><a href='/rss.xml'>RSS</a></div></footer><script>
+</head><body><header><a class='logo' href='/'>ZionLabs Trend Insights</a><div class='nav-links'><a href='/about.html'>About</a><a href='/privacy.html'>개인정보처리방침</a></div></header><div class='container'><h1 style='margin-top:30px;'>#생성형AI</h1><p style='color:#777;'>'생성형AI' 관련 글 1건</p><div class='main-content'><div class='post-card'><a href='/posts/post_20260809_103039.html'><div class='post-card-info'><h2>네이버 카카오 AI 기술 전쟁: 서비스별 특징과 미래 활용 전략 총정리</h2><p>매일 아침 사용하는 검색창과 모바일 메신저에서 인공지능이 내 의도를 정확히 파악하고 맞춤형 답변을 제시한다면 우리의 일상은 어떻게 변화할까요? 이미 국내 대표 IT 기업들은 생성형 인공지능 기술을 자사 핵심 플랫폼에 깊숙이 이식하며 거대한 기술 전환점...</p><div style='font-size:12px; color:#999;'>2026-08-09</div></div><img class='post-card-img' src='/images/post_20260809_103039.svg' alt='네이버 카카오 AI 기술 전쟁: 서비스별 특징과 미래 활용 전략 총정리' loading='lazy'></a></div></div></div><footer><div class='footer-info'><strong>ZionLabs Trend Insights</strong><br>문의: contact@zionlabs.org</div><div class='footer-links'><a href='/about.html'>About</a><a href='/privacy.html'>Privacy Policy</a><a href='/rss.xml'>RSS</a></div></footer><script>
 window.addEventListener('DOMContentLoaded', function() {
   setTimeout(function() {
     try {
