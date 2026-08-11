@@ -1435,3 +1435,63 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ⚠️ push 실패 — 8초 후 재시도 (3/4)
 ⚠️ push 실패 — 16초 후 재시도 (4/4)
 ❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
+[main 04be6d8] post: 청년미래적금 자격조건과 혜택 정리: 정부 지원금 활용한 목돈 마련 전략
+ 33 files changed, 689 insertions(+), 22 deletions(-)
+ create mode 100644 images/post_20260810_223031.svg
+ create mode 100644 index8.html
+ create mode 100644 posts/post_20260810_223031.html
+ create mode 100644 "tags/\353\252\251\353\217\210\353\247\210\353\240\250.html"
+ create mode 100644 "tags/\353\271\204\352\263\274\354\204\270\355\230\234\355\203\235.html"
+ create mode 100644 "tags/\354\240\225\353\266\200\354\247\200\354\233\220\354\240\201\352\270\210.html"
+ create mode 100644 "tags/\354\262\255\353\205\204\353\257\270\353\236\230\354\240\201\352\270\210.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 17개 수집 완료
+🎯 선정 키워드: [청년미래적금] — 광고 단가가 높은 금융·재테크 분야의 정부 지원 정책 상품으로, 최신 이슈성과 함께 혜택 및 신청 조건 등 실용적인 정보 검색 수요가 매우 높기 때문에 선정했습니다.
+🤖 Gemini(gemini-flash-latest)가 '청년미래적금' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260810_223031.svg
+🛠️ 사이트 빌드 완료 (총 64개 포스트, 8페이지)
+🎉 발행 완료! [청년미래적금] → 「청년미래적금 자격조건과 혜택 정리: 정부 지원금 활용한 목돈 마련 전략」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+⚠️ push 실패 — 2초 후 재시도 (1/4)
+⚠️ push 실패 — 4초 후 재시도 (2/4)
+⚠️ push 실패 — 8초 후 재시도 (3/4)
+⚠️ push 실패 — 16초 후 재시도 (4/4)
+❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
