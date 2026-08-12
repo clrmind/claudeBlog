@@ -1732,3 +1732,63 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ⚠️ push 실패 — 8초 후 재시도 (3/4)
 ⚠️ push 실패 — 16초 후 재시도 (4/4)
 ❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
+[main 668100c] post: 코스피 매수 사이드카 발동 원리와 조건: 증시 영향과 대응 전략
+ 31 files changed, 669 insertions(+), 20 deletions(-)
+ create mode 100644 images/post_20260812_150057.svg
+ create mode 100644 posts/post_20260812_150057.html
+ create mode 100644 "tags/\353\247\244\354\210\230\354\202\254\354\235\264\353\223\234\354\271\264\353\260\234\353\217\231.html"
+ create mode 100644 "tags/\354\243\274\354\213\235\354\213\234\354\236\245.html"
+ create mode 100644 "tags/\354\246\235\354\213\234\354\240\204\353\247\235.html"
+ create mode 100644 "tags/\354\275\224\354\212\244\355\224\274.html"
+ create mode 100644 "tags/\355\224\204\353\241\234\352\267\270\353\236\250\353\247\244\353\247\244.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+🎯 선정 키워드: [코스피 매수 사이드카 발동] — 금융 및 재테크 분야로 고단가 광고 유치가 유리하며, 사이드카의 개념과 발동 조건 및 증시 영향을 궁금해하는 일반 독자들의 정보 검색 수요를 효과적으로 흡수할 수 있습니다.
+🤖 Gemini(gemini-flash-latest)가 '코스피 매수 사이드카 발동' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260812_150057.svg
+🛠️ 사이트 빌드 완료 (총 69개 포스트, 8페이지)
+🎉 발행 완료! [코스피 매수 사이드카 발동] → 「코스피 매수 사이드카 발동 원리와 조건: 증시 영향과 대응 전략」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+⚠️ push 실패 — 2초 후 재시도 (1/4)
+⚠️ push 실패 — 4초 후 재시도 (2/4)
+⚠️ push 실패 — 8초 후 재시도 (3/4)
+⚠️ push 실패 — 16초 후 재시도 (4/4)
+❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
