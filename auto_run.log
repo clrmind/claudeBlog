@@ -1970,3 +1970,74 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ⚠️ push 실패 — 8초 후 재시도 (3/4)
 ⚠️ push 실패 — 16초 후 재시도 (4/4)
 ❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
+[main 7623366] post: KB국민은행 환전 eSIM 혜택 총정리: 해외여행 수수료 절감과 로밍 팁
+ 25 files changed, 770 insertions(+), 13 deletions(-)
+ create mode 100644 images/post_20260813_223059.svg
+ create mode 100644 index9.html
+ create mode 100644 posts/post_20260813_223059.html
+ create mode 100644 tags/esim.html
+ create mode 100644 "tags/kb\352\265\255\353\257\274\354\235\200\355\226\211\355\231\230\354\240\204.html"
+ create mode 100644 "tags/\355\225\264\354\231\270\353\241\234\353\260\215.html"
+ create mode 100644 "tags/\355\225\264\354\231\270\354\227\254\355\226\211\354\244\200\353\271\204.html"
+ create mode 100644 "tags/\355\231\230\354\234\250\354\232\260\353\214\200.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+🎯 선정 키워드: [KB국민은행 환전 eSIM] — 해외여행객에게 유용한 금융 환전 혜택과 eSIM 관련 실용적 정보를 동시에 제공할 수 있어 검색 유입량과 광고 단가 가치가 모두 높습니다.
+🤖 Gemini(gemini-flash-latest)가 'KB국민은행 환전 eSIM' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260813_223059.svg
+🛠️ 사이트 빌드 완료 (총 73개 포스트, 9페이지)
+🎉 발행 완료! [KB국민은행 환전 eSIM] → 「KB국민은행 환전 eSIM 혜택 총정리: 해외여행 수수료 절감과 로밍 팁」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+⚠️ push 실패 — 2초 후 재시도 (1/4)
+⚠️ push 실패 — 4초 후 재시도 (2/4)
+⚠️ push 실패 — 8초 후 재시도 (3/4)
+⚠️ push 실패 — 16초 후 재시도 (4/4)
+❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 19개 수집 완료
+⚠️ Gemini 호출 중 오류: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=60) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+🎯 선정 키워드: [AI 활용 확산] — 업무와 일상 전반에서 AI 툴 활용법에 대한 검색 수요가 꾸준히 증가하고 있으며, 테크 및 생산성 분야의 높은 광고 단가를 기대할 수 있기 때문입니다.
+🤖 Gemini(gemini-flash-latest)가 'AI 활용 확산' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+❌ 콘텐츠 생성에 실패하여 종료합니다.
