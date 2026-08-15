@@ -2041,3 +2041,76 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ❌ Gemini API 오류 (HTTP 503) — 시도 2/3
 ❌ Gemini API 오류 (HTTP 503) — 시도 3/3
 ❌ 콘텐츠 생성에 실패하여 종료합니다.
+[main b91d7d4] post: 7월 가계대출 증가 원인과 금리 전망: 차주가 알아야 할 대응 전략
+ 35 files changed, 688 insertions(+), 25 deletions(-)
+ create mode 100644 images/post_20260814_150112.svg
+ create mode 100644 posts/post_20260814_150112.html
+ create mode 100644 "tags/7\354\233\224-\352\260\200\352\263\204\353\214\200\354\266\234-\354\246\235\352\260\200.html"
+ create mode 100644 "tags/\352\260\200\352\263\204\353\266\200\354\261\204-\352\264\200\353\246\254.html"
+ create mode 100644 "tags/\353\214\200\354\266\234-\352\270\210\353\246\254-\354\266\224\354\235\264.html"
+ create mode 100644 "tags/\353\214\200\355\231\230\353\214\200\354\266\234.html"
+ create mode 100644 "tags/\354\212\244\355\212\270\353\240\210\354\212\244-dsr.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+🎯 선정 키워드: [7월 가계대출 증가] — 대출 금리 추이와 가계부채 관리 등 금융·재테크 분야의 고단가 광고 유치가 가능하며, 실생활 이자 부담과 관련된 폭넓은 대중적 정보 수요를 충족할 수 있어 선정했습니다.
+🤖 Gemini(gemini-flash-latest)가 '7월 가계대출 증가' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260814_150112.svg
+🛠️ 사이트 빌드 완료 (총 74개 포스트, 9페이지)
+🎉 발행 완료! [7월 가계대출 증가] → 「7월 가계대출 증가 원인과 금리 전망: 차주가 알아야 할 대응 전략」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+⚠️ push 실패 — 2초 후 재시도 (1/4)
+⚠️ push 실패 — 4초 후 재시도 (2/4)
+⚠️ push 실패 — 8초 후 재시도 (3/4)
+⚠️ push 실패 — 16초 후 재시도 (4/4)
+❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+⚠️ Gemini 호출 중 오류: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=60) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+⚠️ 키워드 선별 실패 → 상시 인기 주제로 대체: 당뇨 초기 증상과 관리법
+🎯 선정 키워드: [당뇨 초기 증상과 관리법] — 상시 관심 주제(자동 대체)
+🤖 Gemini(gemini-flash-latest)가 '당뇨 초기 증상과 관리법' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+❌ 콘텐츠 생성에 실패하여 종료합니다.
