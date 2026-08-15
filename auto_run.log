@@ -2114,3 +2114,72 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ❌ Gemini API 오류 (HTTP 503) — 시도 2/3
 ❌ Gemini API 오류 (HTTP 503) — 시도 3/3
 ❌ 콘텐츠 생성에 실패하여 종료합니다.
+[main 7fd47c9] post: 송도 럭스 오션 sk뷰 완벽 입지 분석 및 시세 전망 총정리
+ 31 files changed, 685 insertions(+), 21 deletions(-)
+ create mode 100644 images/post_20260815_103027.svg
+ create mode 100644 posts/post_20260815_103027.html
+ create mode 100644 "tags/\353\266\204\354\226\221\352\266\214\354\213\234\354\204\270.html"
+ create mode 100644 "tags/\354\206\241\353\217\204-\353\237\255\354\212\244-\354\230\244\354\205\230-sk\353\267\260.html"
+ create mode 100644 "tags/\354\206\241\353\217\204\352\265\255\354\240\234\353\217\204\354\213\234.html"
+ create mode 100644 "tags/\354\206\241\353\217\204\353\266\200\353\217\231\354\202\260.html"
+ create mode 100644 "tags/\354\230\244\354\205\230\353\267\260\354\225\204\355\214\214\355\212\270.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+🎯 선정 키워드: [송도 럭스 오션 sk뷰] — 광고 단가가 높은 부동산 분야의 구체적인 키워드로, 입지 분석 및 시세, 분양 정보에 대한 실수요자의 검색 유입 가치가 매우 큽니다.
+🤖 Gemini(gemini-flash-latest)가 '송도 럭스 오션 sk뷰' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260815_103027.svg
+🛠️ 사이트 빌드 완료 (총 75개 포스트, 9페이지)
+🎉 발행 완료! [송도 럭스 오션 sk뷰] → 「송도 럭스 오션 sk뷰 완벽 입지 분석 및 시세 전망 총정리」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+⚠️ push 실패 — 2초 후 재시도 (1/4)
+⚠️ push 실패 — 4초 후 재시도 (2/4)
+⚠️ push 실패 — 8초 후 재시도 (3/4)
+⚠️ push 실패 — 16초 후 재시도 (4/4)
+❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 17개 수집 완료
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+🎯 선정 키워드: [민생지원금] — 전 국민적 관심도가 높은 정부 지원 정책 이슈로, 신청 대상과 지급 방식 등 구체적인 실용 정보를 찾는 대규모 검색 유입 및 관련 금융 광고 단가 가치가 높기 때문입니다.
+🤖 Gemini(gemini-flash-latest)가 '민생지원금' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+❌ 콘텐츠 생성에 실패하여 종료합니다.
