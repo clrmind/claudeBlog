@@ -2183,3 +2183,56 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ❌ Gemini API 오류 (HTTP 503) — 시도 2/3
 ❌ Gemini API 오류 (HTTP 503) — 시도 3/3
 ❌ 콘텐츠 생성에 실패하여 종료합니다.
+[main 0e72008] post: 세계 최대 자산운용사 블랙록의 영향력과 개인 투자자를 위한 포트폴리오 전략
+ 31 files changed, 501 insertions(+), 23 deletions(-)
+ create mode 100644 posts/post_20260815_223018.html
+ create mode 100644 tags/ishares.html
+ create mode 100644 "tags/\352\270\200\353\241\234\353\262\214\355\210\254\354\236\220.html"
+ create mode 100644 "tags/\353\270\224\353\236\231\353\241\235.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 17개 수집 완료
+🎯 선정 키워드: [블랙록] — 세계 최대 자산운용사로서 글로벌 ETF 및 자산배분 투자 관련 금융 광고 단가가 매우 높고, 재테크에 관심 있는 대중의 검색 수요가 꾸준하기 때문입니다.
+🤖 Gemini(gemini-flash-latest)가 '블랙록' 칼럼을 집필 중입니다...
+🖼️ 위키백과 인물 사진 사용: 래리 핑크 (ko)
+🛠️ 사이트 빌드 완료 (총 76개 포스트, 9페이지)
+🎉 발행 완료! [블랙록] → 「세계 최대 자산운용사 블랙록의 영향력과 개인 투자자를 위한 포트폴리오 전략」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+⚠️ push 실패 — 2초 후 재시도 (1/4)
+⚠️ push 실패 — 4초 후 재시도 (2/4)
+⚠️ push 실패 — 8초 후 재시도 (3/4)
+⚠️ push 실패 — 16초 후 재시도 (4/4)
+❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
