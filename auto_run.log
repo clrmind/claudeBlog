@@ -2236,3 +2236,80 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ⚠️ push 실패 — 8초 후 재시도 (3/4)
 ⚠️ push 실패 — 16초 후 재시도 (4/4)
 ❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
+[main 4108106] post: 소형모듈원자로(SMR) 완벽 가이드: 원리와 글로벌 동향 및 수혜 산업
+ 29 files changed, 754 insertions(+), 19 deletions(-)
+ create mode 100644 images/post_20260816_103019.svg
+ create mode 100644 posts/post_20260816_103019.html
+ create mode 100644 "tags/ai\354\240\204\353\240\245\354\210\230\354\232\224.html"
+ create mode 100644 tags/i-smr.html
+ create mode 100644 tags/smr.html
+ create mode 100644 "tags/\354\206\214\355\230\225\353\252\250\353\223\210\354\233\220\354\236\220\353\241\234.html"
+ create mode 100644 "tags/\354\233\220\354\236\220\353\240\245\353\260\234\354\240\204.html"
+ create mode 100644 "tags/\354\260\250\354\204\270\353\214\200-\354\227\220\353\204\210\354\247\200.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+🎯 선정 키워드: [소형모듈원자로] — 미래 핵심 에너지원이자 투자 시장에서 주목받는 분야로, 차세대 기술 원리와 관련 수혜 산업에 대한 대중적 정보 수요 및 광고 가치가 높기 때문입니다.
+🤖 Gemini(gemini-flash-latest)가 '소형모듈원자로' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260816_103019.svg
+🛠️ 사이트 빌드 완료 (총 77개 포스트, 9페이지)
+🎉 발행 완료! [소형모듈원자로] → 「소형모듈원자로(SMR) 완벽 가이드: 원리와 글로벌 동향 및 수혜 산업」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+⚠️ push 실패 — 2초 후 재시도 (1/4)
+⚠️ push 실패 — 4초 후 재시도 (2/4)
+⚠️ push 실패 — 8초 후 재시도 (3/4)
+⚠️ push 실패 — 16초 후 재시도 (4/4)
+❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 17개 수집 완료
+🎯 선정 키워드: [최태원 재산분할 재상고] — 대중적 관심이 집중된 시의성 높은 이슈이면서, 고단가 키워드인 이혼 재산분할 기준, 특유재산 인정 요건, 관련 세금 등 법률·금융 정보로 확장하여 폭넓은 독자층을 유입시킬 수 있습니다.
+🤖 Gemini(gemini-flash-latest)가 '최태원 재산분할 재상고' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+❌ 콘텐츠 생성에 실패하여 종료합니다.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+🎯 선정 키워드: [수익률] — 금융 및 재테크 분야의 고단가 핵심 키워드로, 다양한 금융 상품의 실질 수익률 계산법과 절세 팁 등 폭넓은 독자층의 검색 수요를 충족할 수 있습니다.
+🤖 Gemini(gemini-flash-latest)가 '수익률' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+❌ 콘텐츠 생성에 실패하여 종료합니다.
