@@ -2313,3 +2313,117 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 ❌ Gemini API 오류 (HTTP 503) — 시도 2/3
 ❌ Gemini API 오류 (HTTP 503) — 시도 3/3
 ❌ 콘텐츠 생성에 실패하여 종료합니다.
+[main ae7c46c] post: 이혼 절차와 재산분할 완벽 가이드: 서류 준비부터 소송 기준까지
+ 32 files changed, 600 insertions(+), 23 deletions(-)
+ create mode 100644 images/post_20260817_103022.svg
+ create mode 100644 posts/post_20260817_103022.html
+ create mode 100644 "tags/\353\262\225\353\245\240\354\203\201\353\213\264.html"
+ create mode 100644 "tags/\354\226\221\354\234\241\352\266\214.html"
+ create mode 100644 "tags/\354\234\204\354\236\220\353\243\214.html"
+ create mode 100644 "tags/\354\235\264\355\230\274\354\240\210\354\260\250.html"
+error: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+To https://github.com/clrmind/claudeBlog.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/clrmind/claudeBlog.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+🎯 선정 키워드: [이혼] — 법률 상담 및 재산분할 등 고단가 광고 연계 효과가 뛰어나며, 절차와 서류 준비에 대한 일반 독자들의 실질적인 정보성 검색 수요가 매우 높기 때문입니다.
+🤖 Gemini(gemini-flash-latest)가 '이혼' 칼럼을 집필 중입니다...
+🎨 AI 커버 이미지 생성 중... (시도 1/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🎨 AI 커버 이미지 생성 중... (시도 2/2)
+⚠️ 이미지 API 오류 (HTTP 429)
+🖼️ 브랜드 커버 카드 생성: images/post_20260817_103022.svg
+🛠️ 사이트 빌드 완료 (총 78개 포스트, 9페이지)
+🎉 발행 완료! [이혼] → 「이혼 절차와 재산분할 완벽 가이드: 서류 준비부터 소송 기준까지」
+⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.
+⚠️ push 실패 — 2초 후 재시도 (1/4)
+⚠️ push 실패 — 4초 후 재시도 (2/4)
+⚠️ push 실패 — 8초 후 재시도 (3/4)
+⚠️ push 실패 — 16초 후 재시도 (4/4)
+❌ GitHub push에 최종 실패했습니다. 네트워크/인증 상태를 확인하세요.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 17개 수집 완료
+🎯 선정 키워드: [서울 아파트 월세화] — 전세 사기 우려와 고금리 여파로 서울 아파트의 월세 전환 및 주거비 부담에 대한 대중적 관심이 높으며, 부동산·금융 관련 고단가 광고 유치에 매우 유리하기 때문입니다.
+🤖 Gemini(gemini-flash-latest)가 '서울 아파트 월세화' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+❌ 콘텐츠 생성에 실패하여 종료합니다.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+🎯 선정 키워드: [도지코인] — 광고 단가가 높은 가상자산 및 금융·재테크 분야의 핵심 키워드로 대중적 검색 수요와 정보 탐색 가치가 높기 때문입니다.
+🤖 Gemini(gemini-flash-latest)가 '도지코인' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+❌ 콘텐츠 생성에 실패하여 종료합니다.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+🎯 선정 키워드: [미국 30년물 국채금리] — 글로벌 기준금리 방향성과 자산 시장에 지대한 영향을 미치는 고단가 금융 키워드로, 환율과 채권 투자에 관심 있는 폭넓은 재테크 독자의 정보 수요가 높습니다.
+🤖 Gemini(gemini-flash-latest)가 '미국 30년물 국채금리' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+❌ 콘텐츠 생성에 실패하여 종료합니다.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+🎯 선정 키워드: [nh농협금융지주] — 광고 단가가 높은 금융 분야 키워드로, 주요 예적금 및 대출 상품 정보, 배당금 등 일반 독자들이 관심 가질 만한 실용적 금융 정보로 확장하기에 매우 유리합니다.
+🤖 Gemini(gemini-flash-latest)가 'nh농협금융지주' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+❌ 콘텐츠 생성에 실패하여 종료합니다.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+🎯 선정 키워드: [해고] — 해고예고수당, 부당해고 구제신청, 실업급여 등 노동법률 및 금융 지원 정보와 직결되어 광고 단가가 높고 일반 독자의 실질적인 검색 수요가 풍부합니다.
+🤖 Gemini(gemini-flash-latest)가 '해고' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+❌ 콘텐츠 생성에 실패하여 종료합니다.
+📡 실시간 트렌드 키워드를 수집합니다...
+📡 실시간 트렌드 후보 18개 수집 완료
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+🎯 선정 키워드: [3기 신도시] — 부동산 및 청약 분야는 광고 단가가 매우 높고, 사전청약 일정 및 분양가 정보 등 내 집 마련을 준비하는 폭넓은 독자층의 검색 수요가 크기 때문입니다.
+🤖 Gemini(gemini-flash-latest)가 '3기 신도시' 칼럼을 집필 중입니다...
+❌ Gemini API 오류 (HTTP 503) — 시도 1/3
+❌ Gemini API 오류 (HTTP 503) — 시도 2/3
+❌ Gemini API 오류 (HTTP 503) — 시도 3/3
+❌ 콘텐츠 생성에 실패하여 종료합니다.
