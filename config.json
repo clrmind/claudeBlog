@@ -3,7 +3,7 @@
   "blog_description": "건강·재테크·생활 정보와 트렌드를 매일 분석하는 프리미엄 칼럼 채널",
   "blog_domain": "https://blog.zionlabs.org",
   "contact_email": "contact@zionlabs.org",
-  "model_name": "gemini-flash-latest",
+  "model_name": "gemini-flash-lite-latest",
   "image_model": "gemini-2.5-flash-image",
   "image_mode": "ai",
   "adsense_client": "",
