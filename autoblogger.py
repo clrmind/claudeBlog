@@ -182,12 +182,19 @@ def get_api_key():
 
 # 재시도해볼 가치가 있는(일시적) HTTP 상태들 — 과부하/속도제한/게이트웨이 오류
 RETRYABLE_STATUS = {429, 500, 502, 503, 504}
-# 텍스트 생성에 부적합해 폴백 대상에서 제외할 모델 키워드
-_NON_TEXT_HINTS = ("image", "vision", "embedding", "aqa", "tts", "audio", "-live", "gemma")
-# 자동탐색이 실패하거나 비어도 시도해볼 안정 폴백 후보 (앞에서부터 순서대로)
+# 텍스트 생성(칼럼 작성)에 부적합해 폴백 대상에서 제외할 모델 키워드.
+# 이미지/음성/음악/로보틱스/리서치 등 특수 모델은 generateContent 텍스트 용도가 아니다.
+_NON_TEXT_HINTS = (
+    "image", "vision", "embedding", "aqa", "tts", "audio", "-live", "gemma",
+    "lyria", "robotics", "computer-use", "deep-research", "banana",
+    "antigravity", "omni",
+)
+# 자동탐색이 실패하거나 비어도 시도해볼 안정 폴백 후보 (앞에서부터 순서대로).
+# 실제 존재하는 최신 ID 위주 — 자동탐색이 되면 이 목록보다 탐색 결과를 우선 사용한다.
 _HARDCODED_FALLBACKS = [
-    "gemini-flash-latest", "gemini-2.5-flash", "gemini-2.0-flash",
-    "gemini-2.5-flash-lite", "gemini-2.0-flash-001", "gemini-2.5-pro",
+    "gemini-flash-latest", "gemini-2.5-flash", "gemini-3.5-flash",
+    "gemini-3.7-flash", "gemini-flash-lite-latest", "gemini-2.5-flash-lite",
+    "gemini-pro-latest",
 ]
 _MODELS_CACHE = None
 
