@@ -219,11 +219,14 @@ def text_model_chain(primary, api_key):
         return not any(h in low for h in _NON_TEXT_HINTS)
 
     found = [m for m in discover_models(api_key) if usable(m)]
+    if found:
+        print(f"🔎 이 키로 사용 가능한 텍스트 모델 {len(found)}개: {', '.join(found)}")
     flash = [m for m in found if "flash" in m.lower()]
     pro   = [m for m in found if "pro" in m.lower() and "flash" not in m.lower()]
     other = [m for m in found if m not in flash and m not in pro]
 
     chain = []
+    # 자동탐색으로 찾은 실제 모델을 우선 사용하고, 없을 때만 하드코딩 후보로 폴백
     for m in [primary] + flash + other + pro + _HARDCODED_FALLBACKS:
         if m and m not in chain:
             chain.append(m)
