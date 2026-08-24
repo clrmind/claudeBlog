@@ -180,28 +180,95 @@ def get_api_key():
 # Gemini 호출 공통
 # ==========================================
 
-def call_gemini_json(prompt, api_key, model, max_retries=3, retry_delay=5):
-    """Gemini에 JSON 응답을 요청하고 파싱된 dict를 반환한다. 실패 시 None."""
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+# 재시도해볼 가치가 있는(일시적) HTTP 상태들 — 과부하/속도제한/게이트웨이 오류
+RETRYABLE_STATUS = {429, 500, 502, 503, 504}
+# 텍스트 생성에 부적합해 폴백 대상에서 제외할 모델 키워드
+_NON_TEXT_HINTS = ("image", "vision", "embedding", "aqa", "tts", "audio", "-live", "gemma")
+# 자동탐색이 실패하거나 비어도 시도해볼 안정 폴백 후보 (앞에서부터 순서대로)
+_HARDCODED_FALLBACKS = [
+    "gemini-flash-latest", "gemini-2.5-flash", "gemini-2.0-flash",
+    "gemini-2.5-flash-lite", "gemini-2.0-flash-001", "gemini-2.5-pro",
+]
+_MODELS_CACHE = None
+
+
+def discover_models(api_key):
+    """이 키로 generateContent 가능한 모델 ID 목록을 1회 조회하고 캐시한다."""
+    global _MODELS_CACHE
+    if _MODELS_CACHE is not None:
+        return _MODELS_CACHE
+    ids = []
+    try:
+        r = requests.get("https://generativelanguage.googleapis.com/v1beta/models",
+                         headers={"x-goog-api-key": api_key}, timeout=30)
+        if r.status_code == 200:
+            for m in r.json().get("models", []):
+                if "generateContent" in m.get("supportedGenerationMethods", []):
+                    ids.append(m["name"].replace("models/", ""))
+    except Exception as e:
+        print(f"⚠️ 모델 목록 조회 실패(폴백 후보로 진행): {e}")
+    _MODELS_CACHE = ids
+    return ids
+
+
+def text_model_chain(primary, api_key):
+    """primary를 맨 앞에 두고, 과부하(503) 대비 폴백 순서로 텍스트 모델 목록을 만든다.
+    flash → flash-lite → 기타 → pro → 하드코딩 후보 순. 중복은 제거."""
+    def usable(name):
+        low = name.lower()
+        return not any(h in low for h in _NON_TEXT_HINTS)
+
+    found = [m for m in discover_models(api_key) if usable(m)]
+    flash = [m for m in found if "flash" in m.lower()]
+    pro   = [m for m in found if "pro" in m.lower() and "flash" not in m.lower()]
+    other = [m for m in found if m not in flash and m not in pro]
+
+    chain = []
+    for m in [primary] + flash + other + pro + _HARDCODED_FALLBACKS:
+        if m and m not in chain:
+            chain.append(m)
+    return chain
+
+
+def call_gemini_json(prompt, api_key, model, max_retries=4, retry_delay=4):
+    """여러 모델을 폴백하며 Gemini에 JSON 응답을 요청하고 파싱된 dict를 반환한다.
+    한 모델이 과부하(503)/속도제한(429)이면 지수 백오프로 재시도하고, 그래도 안 되면
+    다음 모델로 자동 전환한다. 모든 모델이 실패하면 None."""
+    primary = model
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"responseMimeType": "application/json", "temperature": 0.8},
     }
     headers = {"Content-Type": "application/json", "x-goog-api-key": api_key}
 
-    for attempt in range(1, max_retries + 1):
-        try:
-            resp = requests.post(url, json=payload, headers=headers, timeout=60)
-            if resp.status_code != 200:
-                print(f"❌ Gemini API 오류 (HTTP {resp.status_code}) — 시도 {attempt}/{max_retries}")
-                time.sleep(retry_delay * attempt)
-                continue
-            raw = resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-            raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw)
-            return json.loads(raw)
-        except Exception as e:
-            print(f"⚠️ Gemini 호출 중 오류: {e} — 시도 {attempt}/{max_retries}")
-            time.sleep(retry_delay * attempt)
+    for cand in text_model_chain(primary, api_key):
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{cand}:generateContent"
+        for attempt in range(1, max_retries + 1):
+            try:
+                resp = requests.post(url, json=payload, headers=headers, timeout=90)
+                if resp.status_code == 200:
+                    raw = resp.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+                    raw = re.sub(r"^```(?:json)?\s*|\s*```$", "", raw)
+                    result = json.loads(raw)
+                    if cand != primary:
+                        print(f"✅ 폴백 모델 '{cand}'로 생성 성공")
+                    return result
+                if resp.status_code in RETRYABLE_STATUS:
+                    wait = min(60, retry_delay * (2 ** (attempt - 1)))  # 4,8,16,32...
+                    print(f"❌ {cand} 과부하/일시오류 (HTTP {resp.status_code}) — {wait}s 후 재시도 {attempt}/{max_retries}")
+                    time.sleep(wait)
+                    continue
+                # 400/404 등: 모델 자체 문제 → 재시도 말고 다음 모델로
+                print(f"⚠️ {cand} 사용 불가 (HTTP {resp.status_code}) — 다음 모델로 전환")
+                break
+            except Exception as e:
+                wait = min(60, retry_delay * (2 ** (attempt - 1)))
+                print(f"⚠️ {cand} 호출 오류: {e} — {wait}s 후 재시도 {attempt}/{max_retries}")
+                time.sleep(wait)
+        else:
+            # for-else: 재시도를 모두 소진(계속 503 등) → 다음 모델로
+            print(f"↪️ {cand} 재시도 소진 — 다음 모델로 폴백")
+    print("❌ 모든 후보 모델에서 생성 실패")
     return None
 
 
