@@ -1,0 +1,13 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'>
+<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#0071e3'/><stop offset='55%' stop-color='#0a4bd4'/><stop offset='100%' stop-color='#0a2a6b'/>
+</linearGradient></defs>
+<rect width='1200' height='630' fill='url(#g)'/>
+<circle cx='1050' cy='120' r='200' fill='rgba(255,255,255,0.10)'/>
+<circle cx='980' cy='560' r='140' fill='rgba(255,255,255,0.07)'/>
+<text x='80' y='150' font-size='70'>📝</text>
+<text x='80' y='285' font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size='96' font-weight='800' fill='#ffffff'>오토포스트PRO</text>
+<text x='84' y='360' font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size='40' font-weight='700' fill='#ffffff'>바쁜 전문직을 위한 AI 블로그 자동화</text>
+<text x='84' y='420' font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size='27' font-weight='500' fill='rgba(255,255,255,0.9)'>병원 · 동물병원 · 세무사 · 학원 블로그</text>
+<text x='80' y='575' font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size='26' font-weight='600' fill='rgba(255,255,255,0.85)'>aiblog.zionlabs.org</text>
+</svg>
