@@ -6,3 +6,4 @@ __pycache__/
 uploads/
 webui_run.log
 .webui_secret
+monitor.log
