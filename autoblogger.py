@@ -1461,8 +1461,11 @@ def git_sync(cfg, commit_message, max_retries=4):
         print(f"❌ git 커밋 실패: {e}")
         return False
 
-    # 원격에서 다른 변경이 있었을 수 있으므로 rebase 후 push (충돌 자동 회피)
-    pull = subprocess.run(["git", "pull", "--rebase", "origin", branch], cwd=BASE_DIR)
+    # 원격에서 다른 변경이 있었을 수 있으므로 rebase 후 push (충돌 자동 회피).
+    # --autostash: 추적 파일에 unstaged 변경이 남아 있어도 자동으로 치웠다 되돌려,
+    # "cannot pull with rebase: You have unstaged changes"로 rebase가 막히는 것을 방지한다.
+    pull = subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", branch],
+                          cwd=BASE_DIR)
     if pull.returncode != 0:
         # rebase가 중간에 멈춰 있으면 다음 스케줄 실행까지 전부 실패하므로 반드시 되돌린다
         subprocess.run(["git", "rebase", "--abort"], cwd=BASE_DIR,
