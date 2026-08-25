@@ -3,8 +3,9 @@
 
 cron으로 하루 1회(밤) 실행한다. 정상이면 조용하고, 문제가 있을 때만 푸시한다.
 점검 항목:
-  1) 블로그 새 글 신선도  — 일정 시간 넘게 새 글이 없으면 (cron/생성/푸시 어딘가 끊김)
-  2) Gemini API 접근성    — 키 만료/쿼터 소진 등 (자동블로그·오토포스트 Pro 공통 원인)
+  1) 블로그 새 글 신선도  — 일정 시간 넘게 새 글이 없으면 (cron/생성 중단)
+  2) push 적체            — 로컬에 있으나 origin에 안 올라간 커밋(생성됐지만 게시 실패)
+  3) Gemini API 접근성    — 키 만료/쿼터 소진 등 (자동블로그·오토포스트 Pro 공통 원인)
 
 .env(같은 폴더)에서 읽는 값:
   NTFY_TOPIC=zionlabs-alert-xxxx    (필수 — 폰 ntfy 앱에서 이 토픽을 구독)
@@ -22,6 +23,7 @@ import sys
 import glob
 import json
 import datetime
+import subprocess
 import urllib.request
 import urllib.error
 
@@ -95,6 +97,24 @@ def check_blog_freshness():
     return None
 
 
+def check_unpushed():
+    """로컬에 있으나 origin에 push되지 않은 커밋을 감지한다(발행 적체).
+    생성은 됐는데 push만 막히면 로컬 글 파일은 멀쩡해 신선도 검사로는 못 잡으므로,
+    origin과 직접 비교해 '글은 만들어졌지만 사이트에 안 올라간' 상황을 잡아낸다."""
+    try:
+        subprocess.run(["git", "fetch", "origin", "main"], cwd=BASE,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
+        out = subprocess.check_output(["git", "rev-list", "--count", "origin/main..HEAD"],
+                                      cwd=BASE, timeout=15).decode().strip()
+        ahead = int(out or "0")
+    except Exception:
+        return None  # git/네트워크 문제는 여기서 판단하지 않음
+    if ahead > 0:
+        return (f"로컬에 push되지 않은 커밋 {ahead}개가 있습니다(발행 적체 가능성). "
+                f"서버에서 `git push origin main` 상태를 확인하세요.")
+    return None
+
+
 def check_gemini():
     """Gemini API 키/접근이 살아있는지 확인. 문제면 메시지, 정상이면 None."""
     key = os.environ.get("GEMINI_API_KEY", "").strip()
@@ -126,7 +146,7 @@ def main():
         sys.exit(0 if ok else 1)
 
     problems = []
-    for check in (check_blog_freshness, check_gemini):
+    for check in (check_blog_freshness, check_unpushed, check_gemini):
         try:
             msg = check()
         except Exception as e:
