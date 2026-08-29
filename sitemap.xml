@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://blog.zionlabs.org/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>https://blog.zionlabs.org/</loc><lastmod>2026-08-30</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
 <url><loc>https://blog.zionlabs.org/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 <url><loc>https://blog.zionlabs.org/privacy.html</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
+<url><loc>https://blog.zionlabs.org/posts/post_20260830_001935.html</loc><lastmod>2026-08-30</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20260829_223019.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20260829_150011.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20260829_103023.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -137,6 +138,7 @@
 <url><loc>https://blog.zionlabs.org/tags/mbti.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/mbti궁합.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/mbti테스트.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/opcda.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/schd.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/seo.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/sk그룹.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -262,6 +264,7 @@
 <url><loc>https://blog.zionlabs.org/tags/대출-금리-추이.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/대치동은마아파트.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/대환대출.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/데이터연동.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/도시-계획.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/동남아-경제.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/동물등록제.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -352,6 +355,7 @@
 <url><loc>https://blog.zionlabs.org/tags/비타민d.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/뼈-건강.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/사도교육.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/사용자직접지정.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/사전증여.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/사회복귀.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/삼성바이오로직스.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -396,10 +400,12 @@
 <url><loc>https://blog.zionlabs.org/tags/수면부족.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/수면클리닉.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/숨은맛집.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/스마트팩토리.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/스타링크.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/스트레스-dsr.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/스페이스x.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/시력-보호.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/시온랩스.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/식단관리.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/식습관관리.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/식이섬유.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
