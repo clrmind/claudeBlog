@@ -3,6 +3,7 @@
 <url><loc>https://blog.zionlabs.org/</loc><lastmod>2026-08-29</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
 <url><loc>https://blog.zionlabs.org/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 <url><loc>https://blog.zionlabs.org/privacy.html</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
+<url><loc>https://blog.zionlabs.org/posts/post_20260829_223019.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20260829_150011.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20260829_103023.html</loc><lastmod>2026-08-29</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20260828_223018.html</loc><lastmod>2026-08-28</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -249,6 +250,7 @@
 <url><loc>https://blog.zionlabs.org/tags/뇌건강.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/뇌졸중.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/뇌출혈.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/뇌출혈-초기증상.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/눈-건강.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/눈에-좋은-음식.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/단리.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -370,6 +372,7 @@
 <url><loc>https://blog.zionlabs.org/tags/생활법률.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/생활비절약.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/생활습관.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/생활습관-관리.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/생활안정.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/생활정보.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/서청주-와이키즈.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -627,6 +630,7 @@
 <url><loc>https://blog.zionlabs.org/tags/행사-기획.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/행정서류.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/혈관-건강.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/혈관건강.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/혈관성-치매.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/혈당관리.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/혈압-관리.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
