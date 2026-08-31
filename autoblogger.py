@@ -1059,8 +1059,24 @@ def analytics_script(cfg):
     )
 
 
-def page_shell(cfg, title, meta_description, canonical, body_html, extra_head=""):
+def page_shell(cfg, title, meta_description, canonical, body_html, extra_head="", og_type="website"):
+    """모든 페이지 공통 뼈대. Open Graph 기본 태그(og:type/site_name/title/description/url)를
+    여기서 한 번만 내보내 홈·about·privacy 등 모든 페이지가 빠짐없이 갖도록 한다
+    (예전엔 개별 글 페이지에만 있어 네이버 서치어드바이저가 홈 OG 누락을 지적했다).
+    글 페이지는 og_type='article'로 호출하고, og:image·JSON-LD는 og_and_jsonld()가 추가로 얹는다."""
     name = html.escape(cfg["blog_name"])
+    title_esc = html.escape(title)
+    desc_esc = html.escape(meta_description)
+    og_meta = (
+        f"<meta property='og:type' content='{og_type}'>"
+        f"<meta property='og:site_name' content='{name}'>"
+        f"<meta property='og:title' content='{title_esc}'>"
+        f"<meta property='og:description' content='{desc_esc}'>"
+        f"<meta property='og:url' content='{canonical}'>"
+        "<meta name='twitter:card' content='summary'>"
+        f"<meta name='twitter:title' content='{title_esc}'>"
+        f"<meta name='twitter:description' content='{desc_esc}'>"
+    )
     header_html = (
         f"<header><a class='logo' href='/'>{name}</a>"
         "<div class='nav-links'><a href='/about.html'>About</a>"
@@ -1076,11 +1092,11 @@ def page_shell(cfg, title, meta_description, canonical, body_html, extra_head=""
     return (
         "<!DOCTYPE html><html lang='ko'><head><meta charset='utf-8'>"
         "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
-        f"<title>{html.escape(title)}</title>"
-        f"<meta name='description' content='{html.escape(meta_description)}'>"
+        f"<title>{title_esc}</title>"
+        f"<meta name='description' content='{desc_esc}'>"
         f"<link rel='canonical' href='{canonical}'>"
         f"<link rel='alternate' type='application/rss+xml' title='{name}' href='/rss.xml'>"
-        f"{verification_meta(cfg)}{adsense_head(cfg)}{extra_head}{CSS_STYLE}</head><body>"
+        f"{og_meta}{verification_meta(cfg)}{adsense_head(cfg)}{extra_head}{CSS_STYLE}</head><body>"
         f"{header_html}{body_html}{footer_html}{analytics_script(cfg)}</body></html>"
     )
 
@@ -1106,18 +1122,15 @@ def absolute_image_url(cfg, image):
 
 
 def og_and_jsonld(cfg, post):
+    """글 페이지 전용 추가 head 태그. og:type/title/description/url은 page_shell()이
+    이미 내보내므로(og_type='article'로 호출됨) 여기서는 og:image와 JSON-LD만 더한다
+    (중복 태그 방지)."""
     url = f"{cfg['blog_domain']}/posts/{post['filename']}.html"
     desc = post.get("meta_description") or strip_tags(post["content"])[:150]
     img_url = absolute_image_url(cfg, post["image"])
     # SVG는 카카오톡/페이스북 og:image 및 구글 리치 결과에서 지원되지 않으므로 제외
     usable_img = "" if img_url.lower().endswith(".svg") else img_url
-    og = (
-        f"<meta property='og:type' content='article'>"
-        f"<meta property='og:title' content='{html.escape(post['title'])}'>"
-        f"<meta property='og:description' content='{html.escape(desc)}'>"
-        + (f"<meta property='og:image' content='{usable_img}'>" if usable_img else "")
-        + f"<meta property='og:url' content='{url}'>"
-    )
+    og = f"<meta property='og:image' content='{usable_img}'>" if usable_img else ""
     data = {
         "@context": "https://schema.org",
         "@type": "Article",
@@ -1456,7 +1469,7 @@ def render_site(cfg):
         desc = p.get("meta_description") or strip_tags(p["content"])[:150]
         canonical = f"{cfg['blog_domain']}/posts/{p['filename']}.html"
         page = page_shell(cfg, p["title"], desc, canonical, body,
-                          extra_head=og_and_jsonld(cfg, p))
+                          extra_head=og_and_jsonld(cfg, p), og_type="article")
         with open(os.path.join(POSTS_DIR, f"{p['filename']}.html"), "w", encoding="utf-8") as f:
             f.write(page)
 
