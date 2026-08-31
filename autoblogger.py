@@ -58,7 +58,8 @@ DEFAULT_CONFIG = {
     "image_model": "gemini-2.5-flash-image",
     "image_mode": "ai",
     "adsense_client": "",
-    "counter_namespace": "",
+    "counter_namespace": "",  # (사용 안 함 — CounterAPI v1 서비스 종료. ga_measurement_id로 대체됨)
+    "ga_measurement_id": "",  # Google Analytics 4 측정 ID (G-XXXXXXXXXX). 비우면 분석 스크립트 미삽입
     "git_branch": "main",
     "posts_per_page": 9,
     "max_posts_per_day": 3,
@@ -1038,23 +1039,22 @@ def adsense_head(cfg):
 
 
 def analytics_script(cfg):
-    ns = cfg.get("counter_namespace", "").strip()
-    if not ns:
+    """Google Analytics 4(gtag.js) 삽입. config.json의 ga_measurement_id(G-XXXXXXXXXX)가
+    없으면 아무것도 넣지 않는다.
+    ⚠️ 예전엔 CounterAPI v1(api.counterapi.dev)로 자체 카운팅했으나 그 서비스가 2026년 기준
+    완전히 종료(HTTP 410 Gone)돼 항상 0회로 표시되는 상태였다. GA4는 무료이고, 방문자가
+    검색/직접/추천 중 어디서 왔는지까지 알 수 있어 SEO 원인 분석에도 필요하다."""
+    gid = cfg.get("ga_measurement_id", "").strip()
+    if not gid:
         return ""
+    gid_js = json.dumps(gid)
     return (
+        f"<script async src='https://www.googletagmanager.com/gtag/js?id={gid}'></script>\n"
         "<script>\n"
-        "window.addEventListener('DOMContentLoaded', function() {\n"
-        "  setTimeout(function() {\n"
-        "    try {\n"
-        "      var p = (location.pathname === '/' || location.pathname === '/index.html')\n"
-        "        ? 'main_root' : location.pathname.replace(/[^a-zA-Z0-9]/g, '_');\n"
-        "      var xhr = new XMLHttpRequest();\n"
-        "      xhr.timeout = 2000;\n"
-        "      xhr.open('GET', 'https://api.counterapi.dev/v1/" + ns + "/' + p + '/up', true);\n"
-        "      xhr.send();\n"
-        "    } catch (e) { }\n"
-        "  }, 500);\n"
-        "});\n"
+        "window.dataLayer = window.dataLayer || [];\n"
+        "function gtag(){dataLayer.push(arguments);}\n"
+        "gtag('js', new Date());\n"
+        f"gtag('config', {gid_js});\n"
         "</script>"
     )
 
@@ -1269,44 +1269,65 @@ def write_404_page(cfg, posts_data):
 
 
 def write_admin_dashboard(cfg, posts_data):
-    ns = cfg.get("counter_namespace", "").strip()
-    if not ns:
-        return
+    """관리자 대시보드. 예전엔 CounterAPI v1로 페이지별 조회수를 긁어왔으나 그 서비스가
+    완전히 종료(HTTP 410)돼 항상 0으로 표시되던 죽은 기능이었다. 외부 API 없이 로컬 데이터로
+    정확히 계산되는 발행 현황만 보여주고, 실제 방문자 통계는 GA4/서치콘솔/네이버서치어드바이저
+    등 신뢰할 수 있는 외부 대시보드를 직접 확인하도록 안내한다."""
     admin_style = (
         "<style>.admin-card { background: #fff; padding: 25px; border-radius: 12px; "
         "box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }\n"
+        ".stats-grid { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 15px; }\n"
+        ".stat-box { flex: 1; min-width: 140px; background: #f7fafc; border-radius: 10px; padding: 16px; }\n"
+        ".stat-box .num { font-size: 28px; font-weight: 800; color: #1a202c; }\n"
+        ".stat-box .lbl { font-size: 13px; color: #4a5568; margin-top: 4px; }\n"
         ".stats-table { width: 100%; border-collapse: collapse; margin-top: 15px; }\n"
-        ".stats-table th, .stats-table td { padding: 12px; border-bottom: 1px solid #edf2f7; text-align: left; font-size: 14px; }\n"
+        ".stats-table th, .stats-table td { padding: 10px 12px; border-bottom: 1px solid #edf2f7; text-align: left; font-size: 14px; }\n"
         ".stats-table th { background-color: #f7fafc; color: #4a5568; font-weight: 600; }\n"
-        ".badge { background: #e2fbf0; color: #2ed573; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }</style>"
+        ".ext-links a { display: inline-block; margin: 4px 8px 4px 0; padding: 8px 14px; background: #1a73e8; "
+        "color: #fff; border-radius: 8px; font-size: 13px; text-decoration: none; }</style>"
     )
-    filenames_js = json.dumps([p["filename"] for p in posts_data])
-    script = (
-        "<script>\n"
-        f"var NS = '{ns}';\n"
-        f"var posts = {filenames_js};\n"
-        "var tb = document.getElementById('statsTableBody');\n"
-        "var seq = 0;\n"
-        "function addRow(label, key) {\n"
-        "  var id = 'cnt_' + (seq++);\n"
-        "  var tr = document.createElement('tr');\n"
-        "  tr.innerHTML = '<td>' + label + '</td><td><span class=\"badge\">Active</span></td>' +\n"
-        "    '<td id=\"' + id + '\">불러오는 중...</td>';\n"
-        "  tb.appendChild(tr);\n"
-        "  fetch('https://api.counterapi.dev/v1/' + NS + '/' + key)\n"
-        "    .then(function(r){ return r.json(); })\n"
-        "    .then(function(d){ document.getElementById(id).innerText = (d.count || 0) + ' 회'; })\n"
-        "    .catch(function(){ document.getElementById(id).innerText = '0 회'; });\n"
-        "}\n"
-        "addRow('/ (메인)', 'main_root');\n"
-        "posts.forEach(function(f){ addRow('/posts/' + f + '.html', '_posts_' + f + '_html'); });\n"
-        "</script>"
-    )
+    today = datetime.date.today()
+    week_ago = today - datetime.timedelta(days=7)
+
+    def parse_dt(p):
+        try:
+            return datetime.datetime.strptime(p["filename"].split("post_")[-1], "%Y%m%d_%H%M%S")
+        except (ValueError, IndexError):
+            return None
+
+    dts = [(p, parse_dt(p)) for p in posts_data]
+    today_cnt = sum(1 for _, d in dts if d and d.date() == today)
+    week_cnt = sum(1 for _, d in dts if d and d.date() >= week_ago)
+    recent = sorted(dts, key=lambda x: x[1] or datetime.datetime.min, reverse=True)[:8]
+    recent_rows = "".join(
+        f"<tr><td><a href='/posts/{p['filename']}.html' target='_blank'>{html.escape(p['title'])}</a></td>"
+        f"<td>{p['date']}</td></tr>" for p, _ in recent)
+
+    ga_line = ("Google Analytics 연결됨 (측정 ID 설정됨)" if cfg.get("ga_measurement_id", "").strip()
+              else "⚠️ Google Analytics 미설정 — 아래 링크로 GA4 속성을 만들고 측정 ID를 "
+                   "config.json의 ga_measurement_id에 넣으세요.")
     body = (
         "<div class='container'><div class='admin-card' style='margin-top: 30px;'>"
-        "<h2>📈 페이지별 조회수 대시보드</h2>"
-        "<table class='stats-table'><thead><tr><th>페이지 경로</th><th>상태</th><th>조회수(PV)</th></tr></thead>"
-        "<tbody id='statsTableBody'></tbody></table></div></div>" + script
+        "<h2>📊 발행 현황</h2>"
+        "<div class='stats-grid'>"
+        f"<div class='stat-box'><div class='num'>{len(posts_data)}</div><div class='lbl'>총 발행 글</div></div>"
+        f"<div class='stat-box'><div class='num'>{today_cnt}</div><div class='lbl'>오늘 발행</div></div>"
+        f"<div class='stat-box'><div class='num'>{week_cnt}</div><div class='lbl'>최근 7일 발행</div></div>"
+        "</div>"
+        "<h3 style='margin-top:24px;font-size:15px'>최근 발행 글</h3>"
+        "<table class='stats-table'><thead><tr><th>제목</th><th>날짜</th></tr></thead>"
+        f"<tbody>{recent_rows}</tbody></table>"
+        "</div>"
+        "<div class='admin-card'>"
+        "<h2>📈 실제 방문자·유입 통계</h2>"
+        f"<p style='color:#4a5568;font-size:14px'>{ga_line}</p>"
+        "<p style='color:#4a5568;font-size:13px'>이 페이지는 외부 API 없이 로컬 발행 데이터만 "
+        "보여줍니다. 방문자·검색유입 통계는 아래에서 직접 확인하세요.</p>"
+        "<div class='ext-links'>"
+        "<a href='https://analytics.google.com/' target='_blank'>Google Analytics</a>"
+        "<a href='https://search.google.com/search-console' target='_blank'>Google 서치콘솔</a>"
+        "<a href='https://searchadvisor.naver.com/' target='_blank'>네이버 서치어드바이저</a>"
+        "</div></div></div>"
     )
     page = page_shell(cfg, f"대시보드 - {cfg['blog_name']}", "관리자 대시보드",
                       f"{cfg['blog_domain']}/admin.html", body,
