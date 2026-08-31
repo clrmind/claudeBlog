@@ -63,7 +63,7 @@ DEFAULT_CONFIG = {
     "git_branch": "main",
     "posts_per_page": 9,
     "max_posts_per_day": 3,
-    "keyword_source": "trends",
+    "keyword_source": "evergreen",  # trends(실시간 트렌드)는 신생 도메인엔 노출이 거의 안 됨 — 기본은 evergreen 권장
     "verification_meta": {},
     "target_audience": "",
     "topic_focus": ""
@@ -77,6 +77,38 @@ FALLBACK_KEYWORDS = [
     "노후 자산관리 포트폴리오", "개인연금 IRP 세액공제", "중장년 재취업 지원 제도",
     "기초연금 수급 자격", "상속세 절세 방법", "전원주택 귀촌 준비",
     "무릎 관절에 좋은 운동", "눈 건강 지키는 습관", "단백질 보충 식단",
+]
+
+# 실시간 트렌드/연예 이슈는 대형 언론사·포털이 이미 장악해 신생 도메인은 노출이 거의 안 된다
+# (검색결과에 뜨지도 못함). 반대로 아래처럼 구체적이고 상시 검색되는 '정보성 롱테일' 키워드는
+# 경쟁이 상대적으로 적어 신생 사이트도 노출될 여지가 있다. keyword_source="evergreen"의 후보 풀.
+# 카테고리를 넓게 섞어 매일 같은 주제만 반복되지 않게 한다.
+EVERGREEN_KEYWORDS = [
+    # 연금·복지
+    "국민연금 예상수령액 조회 방법", "국민연금 추납제도 활용법", "기초연금 수급 자격과 신청 방법",
+    "실업급여 조건과 신청 절차", "육아휴직 급여 신청 방법", "청년내일채움공제 조건",
+    "장애인연금 대상자와 지급액", "근로장려금 신청 자격", "기초생활수급자 조건",
+    # 세금·절세
+    "종합소득세 신고 방법과 기한", "연말정산 환급 많이 받는 법", "1가구 2주택 양도소득세",
+    "상속세 면제 한도와 계산법", "증여세 면제 한도 부부 자녀", "프리랜서 세금 신고 방법",
+    "부가가치세 신고 기한과 방법", "재산세 부과 기준과 납부 시기",
+    # 부동산
+    "전세보증금 반환보증 가입 방법", "청약통장 1순위 조건", "전세사기 예방 확인사항",
+    "부동산 취득세 계산 방법", "임대차 3법 계약갱신청구권", "재건축 재개발 절차와 기간",
+    # 보험·금융
+    "실비보험 가입 전 확인사항", "자동차보험 할인 특약 종류", "IRP 개인형퇴직연금 세액공제",
+    "청년도약계좌 조건과 혜택", "신용점수 올리는 방법", "예금자보호 한도와 적용 범위",
+    # 건강관리
+    "혈압 낮추는 생활 습관", "당뇨 초기 증상과 관리법", "고지혈증 낮추는 식단",
+    "역류성 식도염 증상과 치료", "허리디스크 초기 증상", "손목터널증후군 증상과 예방",
+    "불면증 개선하는 생활 습관", "빈혈 증상과 철분 보충 식품", "갑상선 기능저하증 증상",
+    # 육아·교육
+    "어린이집 입소 대기 신청 방법", "초등학교 입학 준비물 체크리스트", "육아기 근로시간 단축 제도",
+    "다자녀 가구 혜택 총정리", "청소년 방과후 돌봄 지원",
+    # 취업·생활법률
+    "퇴직금 계산 방법과 지급 기준", "연차수당 계산법과 발생 기준", "임금체불 신고 방법과 절차",
+    "층간소음 신고 절차와 기준", "반려동물 등록 방법과 과태료", "자동차 정기검사 기간과 과태료",
+    "운전면허 적성검사 갱신 기간", "주민등록등본 인터넷 발급 방법",
 ]
 
 # 50대 시청층이 두터운 건강/식품 정보 프로그램 (방송 직후 소재 검색량이 급증하고 경쟁 글은 적음)
@@ -463,6 +495,30 @@ def select_keyword(cfg, candidates, history, api_key, model, source="trends"):
             f'  "category": "{" | ".join(IMAGE_CATEGORIES)} 중 하나 (건강이면 health, 음식이면 food)"\n'
             "}"
         )
+    elif source == "evergreen":
+        prompt = (
+            "너는 대한민국 정보 블로그의 편집장이다.\n"
+            f"{aud}\n"
+            "아래 '정보성 키워드 후보' 중에서 검색 유입 가치가 가장 큰 키워드 1개를 골라, "
+            "필요하면 더 구체적인 질문형으로 다듬어라.\n\n"
+            "★이 사이트는 신생 도메인이라 실시간 트렌드·연예 이슈는 대형 언론사에 밀려 검색 노출이 "
+            "거의 되지 않는다. 그래서 일부러 경쟁이 적은 '상시 검색되는 정보성 롱테일 키워드'만 다룬다. "
+            "절대 연예인 이슈·속보성 뉴스로 바꾸지 마라.\n\n"
+            "★선정 기준:\n"
+            "1. 검색 의도가 명확한 구체적 정보(조건/방법/기간/금액/절차)를 다루는 키워드\n"
+            "2. 광고 단가가 높은 분야(건강, 금융/재테크, 세금, 부동산, 보험, 법률) 우선\n"
+            "3. 상시 검색량이 있고 특정 시점에 의존하지 않는 주제(에버그린)\n\n"
+            "★제외 기준:\n"
+            f"- 최근 발행 이력에 이미 있는 키워드/주제:\n{recent_text}\n\n"
+            f"★정보성 키워드 후보:\n{candidates_text}\n\n"
+            "후보가 모두 부적합하거나 비어 있으면, 검색량이 많은 상시 정보성 주제를 직접 1개 제안하라.\n\n"
+            "★출력 형식: 반드시 아래 JSON 구조로만 출력하라.\n"
+            "{\n"
+            '  "keyword": "선정(또는 다듬은)한 키워드",\n'
+            '  "selection_reason": "이 키워드를 고른 이유 1~2문장",\n'
+            f'  "category": "{" | ".join(IMAGE_CATEGORIES)} 중 하나"\n'
+            "}"
+        )
     else:
         prompt = (
             "너는 대한민국 정보 블로그의 편집장이다.\n"
@@ -498,7 +554,12 @@ def select_keyword(cfg, candidates, history, api_key, model, source="trends"):
             }
 
     # Gemini 실패 시: 이력에 없는 상시 인기 주제 중 랜덤 선택
-    source_pool = TV_FALLBACK_KEYWORDS if source == "tv" else FALLBACK_KEYWORDS
+    if source == "tv":
+        source_pool = TV_FALLBACK_KEYWORDS
+    elif source == "evergreen":
+        source_pool = EVERGREEN_KEYWORDS
+    else:
+        source_pool = FALLBACK_KEYWORDS
     pool = [k for k in source_pool if k not in recent] or source_pool
     kw = random.choice(pool)
     default_cat = "food" if source == "tv" else "lifestyle"
@@ -1526,8 +1587,9 @@ def git_sync(cfg, commit_message, max_retries=4):
 def main():
     parser = argparse.ArgumentParser(description="AI 자동 블로그 발행기")
     parser.add_argument("--keyword", help="키워드 직접 지정 (트렌드 수집 생략)")
-    parser.add_argument("--source", choices=["trends", "tv"],
-                        help="키워드 소스 (trends: 실시간 트렌드 / tv: 방송 편성표 건강·식품). "
+    parser.add_argument("--source", choices=["trends", "tv", "evergreen"],
+                        help="키워드 소스 (trends: 실시간 트렌드 / tv: 방송 편성표 건강·식품 / "
+                             "evergreen: 상시 검색되는 정보성 롱테일 — 신생 도메인에 권장). "
                              "생략 시 config.json의 keyword_source를 따름")
     parser.add_argument("--render-only", action="store_true", help="글 생성 없이 사이트만 재빌드")
     parser.add_argument("--no-push", action="store_true", help="git 커밋/푸시 생략")
@@ -1564,6 +1626,13 @@ def main():
         print("📺 방송 편성표에서 건강·식품 소재를 수집합니다...")
         candidates = fetch_tv_program_topics()
         selection = select_keyword(cfg, candidates, history, api_key, cfg["model_name"], source="tv")
+    elif source == "evergreen":
+        print("🌲 상시 검색되는 정보성 키워드 풀에서 후보를 고릅니다 (실시간 트렌드는 신생 도메인엔 "
+              "노출이 거의 안 돼 제외)...")
+        recent_kw = [h["keyword"] for h in history[-30:]]
+        pool = [k for k in EVERGREEN_KEYWORDS if k not in recent_kw] or EVERGREEN_KEYWORDS
+        candidates = random.sample(pool, min(15, len(pool)))
+        selection = select_keyword(cfg, candidates, history, api_key, cfg["model_name"], source="evergreen")
     else:
         print("📡 실시간 트렌드 키워드를 수집합니다...")
         candidates = fetch_trending_keywords()
