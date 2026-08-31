@@ -14,7 +14,10 @@ Termux에서 실행하는 Flask 웹서버. 폰 브라우저(안드로이드/아�
 
 비밀번호:
   최초 실행 시 콘솔에 임시 비밀번호가 출력됩니다.
-  config.json의 "webui_password" 또는 환경변수 WEBUI_PASSWORD로 고정할 수 있습니다.
+  .env 파일의 WEBUI_PASSWORD(설정 화면에서 변경하면 여기 저장됨) 또는 시스템
+  환경변수 WEBUI_PASSWORD로 고정할 수 있습니다. .env는 git에 절대 커밋되지
+  않으므로(⚠️ config.json은 공개 저장소에 커밋되니 비밀번호를 절대 넣지 말 것),
+  이 방식이 안전합니다.
 """
 
 import datetime
@@ -99,7 +102,11 @@ def save_env(env):
 
 
 def get_password():
+    """우선순위: 시스템 환경변수(systemd Environment=) → .env 파일(설정 화면에서 저장한 값,
+    git에 커밋되지 않음) → config.json의 webui_password(예전 방식, 읽기만 지원 — 공개
+    저장소에 평문 노출되므로 더 이상 여기에 쓰지 않음) → 임시 비밀번호."""
     return (os.environ.get("WEBUI_PASSWORD")
+            or load_env().get("WEBUI_PASSWORD")
             or load_config().get("webui_password")
             or _TEMP_PASSWORD)
 
@@ -643,11 +650,19 @@ def settings_git():
 
 @app.route("/settings/pw", methods=["POST"])
 def settings_pw():
+    """비밀번호는 .env에 저장한다(git에 커밋되지 않음). config.json에는 절대 쓰지 않는다 —
+    이 저장소는 GitHub Pages 무료 운영을 위해 public이라, config.json에 평문 비밀번호를
+    쓰면 자동발행 때마다(git add -A) 그대로 공개 커밋된다."""
     pw = request.form.get("webui_password", "").strip()
     if pw:
+        env = load_env()
+        env["WEBUI_PASSWORD"] = pw
+        save_env(env)
+        # 예전 방식으로 config.json에 남아있던 값이 있으면 정리(더 이상 여기 쓰지 않음)
         cfg = load_config()
-        cfg["webui_password"] = pw
-        save_config(cfg)
+        if "webui_password" in cfg:
+            cfg.pop("webui_password", None)
+            save_config(cfg)
         return render("설정", "settings", "<div class='card'>비밀번호를 변경했습니다.</div>",
                       flash="비밀번호를 변경했습니다.")
     return redirect(url_for("settings"))
@@ -690,7 +705,8 @@ _TEMP_PASSWORD = None
 def main():
     global _TEMP_PASSWORD
     # 고정 비밀번호가 없으면 임시 비밀번호 생성
-    if not (os.environ.get("WEBUI_PASSWORD") or load_config().get("webui_password")):
+    if not (os.environ.get("WEBUI_PASSWORD") or load_env().get("WEBUI_PASSWORD")
+            or load_config().get("webui_password")):
         _TEMP_PASSWORD = secrets.token_urlsafe(6)
         print("=" * 46)
         print("  최초 로그인 임시 비밀번호:", _TEMP_PASSWORD)
