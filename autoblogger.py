@@ -612,6 +612,51 @@ def generate_blog_content(cfg, keyword, context, api_key, model):
     return result
 
 
+def polish_user_draft(cfg, raw_text, hint_keyword, api_key, model):
+    """사용자가 직접 쓴 원고를 다듬어 블로그 포스트로 만든다. generate_blog_content()와
+    달리 새 글을 만들지 않고, 이미 있는 원고의 사실·의도를 그대로 유지한 채 맞춤법·문단
+    구성·소제목·SEO 제목/메타/태그만 다듬는다. 반환 스키마는 generate_blog_content()와
+    동일해 이후 발행 파이프라인(이미지 결정·저장·빌드·배포)을 그대로 공유한다."""
+    kw_line = f"참고 키워드/주제(있으면 제목·태그에 반영): '{hint_keyword}'\n" if hint_keyword else ""
+    prompt = (
+        "너는 대한민국 정보 블로그의 전문 편집자다. 아래는 사용자가 이미 직접 작성한 원고다.\n"
+        f"{kw_line}"
+        f"{audience_lines(cfg)}\n\n"
+        "★매우 중요: 이것은 사용자가 이미 쓴 글이다. 새로운 사실·수치·정보를 지어내거나 "
+        "원고에 없는 내용을 추가하지 마라. 사용자가 쓴 내용과 의도, 핵심 메시지를 그대로 "
+        "유지하면서 아래만 다듬어라:\n"
+        "1. 맞춤법·띄어쓰기·문장 교정. 원고의 말투(반말/존댓말 등)는 유지한다.\n"
+        "2. <h2> 소제목으로 단락을 자연스럽게 구분한다(원고 길이에 맞게. 억지로 분량을 "
+        "늘리거나 소제목을 과도하게 쪼개지 않는다).\n"
+        "3. 핵심 문구 2~3곳만 <strong> 태그로 마킹. 목록이 어울리는 곳은 <ul><li> 사용.\n"
+        "4. 검색 노출에 도움이 되는 제목(키워드 포함, 60자 이내)과 메타 설명(150자 이내), "
+        "관련 태그 3~5개를 생성한다.\n\n"
+        "★원고가 짧거나 단순해도 내용을 부풀리지 말고 있는 그대로 다듬기만 하라.\n\n"
+        f"★사용자 원고:\n{raw_text}\n\n"
+        "★출력 형식: 반드시 아래 JSON 구조로만 출력하라.\n"
+        "{\n"
+        '  "title": "다듬은 제목 (60자 이내)",\n'
+        '  "meta_description": "검색 결과에 노출될 요약문 (150자 이내)",\n'
+        '  "trend_reason": "",\n'
+        '  "tags": ["관련태그1", "관련태그2", "관련태그3"],\n'
+        f'  "image_category": "{" | ".join(IMAGE_CATEGORIES)} 중 하나",\n'
+        '  "person_name": "",\n'
+        '  "image_prompt": "대표 이미지 생성용 영어 프롬프트 1~2문장. 글의 주제를 상징하는 '
+        '장면을 묘사하되 사람 얼굴과 글자는 넣지 말 것",\n'
+        '  "content": "<h2>소제목</h2><p>다듬어진 본문... <strong>강조</strong></p>"\n'
+        "}"
+    )
+    print("🖋️ 사용자 원고를 다듬는 중입니다...")
+    result = call_gemini_json(prompt, api_key, model)
+    if not result:
+        return None
+    for field in ("title", "content"):
+        if not result.get(field):
+            print(f"❌ 응답에 '{field}' 필드가 없습니다.")
+            return None
+    return result
+
+
 def pick_image(category):
     pool = IMAGE_POOL.get(category) or IMAGE_POOL["society"]
     return random.choice(pool)
@@ -1587,6 +1632,9 @@ def git_sync(cfg, commit_message, max_retries=4):
 def main():
     parser = argparse.ArgumentParser(description="AI 자동 블로그 발행기")
     parser.add_argument("--keyword", help="키워드 직접 지정 (트렌드 수집 생략)")
+    parser.add_argument("--polish-file",
+                        help="사용자가 직접 쓴 원고 파일 경로 — 새로 생성하지 않고 이 내용을 "
+                             "다듬어(맞춤법·구조·SEO 제목/태그) 발행한다. 지정 시 --source는 무시됨")
     parser.add_argument("--source", choices=["trends", "tv", "evergreen"],
                         help="키워드 소스 (trends: 실시간 트렌드 / tv: 방송 편성표 건강·식품 / "
                              "evergreen: 상시 검색되는 정보성 롱테일 — 신생 도메인에 권장). "
@@ -1618,34 +1666,58 @@ def main():
         print(f"ℹ️ 오늘 발행량({limit}개)을 이미 채웠습니다. 종료합니다.")
         return
 
-    # 1) 키워드 결정
-    source = args.source or cfg.get("keyword_source", "trends")
-    if args.keyword:
-        selection = {"keyword": args.keyword, "reason": "사용자 직접 지정", "category": "society"}
-    elif source == "tv":
-        print("📺 방송 편성표에서 건강·식품 소재를 수집합니다...")
-        candidates = fetch_tv_program_topics()
-        selection = select_keyword(cfg, candidates, history, api_key, cfg["model_name"], source="tv")
-    elif source == "evergreen":
-        print("🌲 상시 검색되는 정보성 키워드 풀에서 후보를 고릅니다 (실시간 트렌드는 신생 도메인엔 "
-              "노출이 거의 안 돼 제외)...")
-        recent_kw = [h["keyword"] for h in history[-30:]]
-        pool = [k for k in EVERGREEN_KEYWORDS if k not in recent_kw] or EVERGREEN_KEYWORDS
-        candidates = random.sample(pool, min(15, len(pool)))
-        selection = select_keyword(cfg, candidates, history, api_key, cfg["model_name"], source="evergreen")
+    if args.polish_file:
+        # 사용자가 이미 쓴 원고를 다듬는 모드 — 키워드 소스 선택·신규 생성을 건너뛴다.
+        try:
+            with open(args.polish_file, "r", encoding="utf-8") as f:
+                raw_text = f.read().strip()
+        except OSError as e:
+            print(f"❌ 원고 파일을 읽을 수 없습니다: {e}")
+            sys.exit(1)
+        if not raw_text:
+            print("❌ 원고 내용이 비어 있습니다.")
+            sys.exit(1)
+        blog_json = polish_user_draft(cfg, raw_text, args.keyword or "", api_key, cfg["model_name"])
+        if not blog_json:
+            print("❌ 원고 다듬기에 실패하여 종료합니다.")
+            sys.exit(1)
+        keyword = args.keyword or blog_json["title"][:40]
+        polish_cat = blog_json.get("image_category")
+        selection = {"category": polish_cat if polish_cat in IMAGE_CATEGORIES else "society"}
+        print(f"🖋️ 원고 다듬기 완료 → 「{blog_json['title']}」")
+        try:
+            os.remove(args.polish_file)
+        except OSError:
+            pass
     else:
-        print("📡 실시간 트렌드 키워드를 수집합니다...")
-        candidates = fetch_trending_keywords()
-        selection = select_keyword(cfg, candidates, history, api_key, cfg["model_name"], source="trends")
+        # 1) 키워드 결정
+        source = args.source or cfg.get("keyword_source", "trends")
+        if args.keyword:
+            selection = {"keyword": args.keyword, "reason": "사용자 직접 지정", "category": "society"}
+        elif source == "tv":
+            print("📺 방송 편성표에서 건강·식품 소재를 수집합니다...")
+            candidates = fetch_tv_program_topics()
+            selection = select_keyword(cfg, candidates, history, api_key, cfg["model_name"], source="tv")
+        elif source == "evergreen":
+            print("🌲 상시 검색되는 정보성 키워드 풀에서 후보를 고릅니다 (실시간 트렌드는 신생 도메인엔 "
+                  "노출이 거의 안 돼 제외)...")
+            recent_kw = [h["keyword"] for h in history[-30:]]
+            pool = [k for k in EVERGREEN_KEYWORDS if k not in recent_kw] or EVERGREEN_KEYWORDS
+            candidates = random.sample(pool, min(15, len(pool)))
+            selection = select_keyword(cfg, candidates, history, api_key, cfg["model_name"], source="evergreen")
+        else:
+            print("📡 실시간 트렌드 키워드를 수집합니다...")
+            candidates = fetch_trending_keywords()
+            selection = select_keyword(cfg, candidates, history, api_key, cfg["model_name"], source="trends")
 
-    keyword = selection["keyword"]
-    print(f"🎯 선정 키워드: [{keyword}] — {selection['reason']}")
+        keyword = selection["keyword"]
+        print(f"🎯 선정 키워드: [{keyword}] — {selection['reason']}")
 
-    # 2) 본문 생성
-    blog_json = generate_blog_content(cfg, keyword, selection["reason"], api_key, cfg["model_name"])
-    if not blog_json:
-        print("❌ 콘텐츠 생성에 실패하여 종료합니다.")
-        sys.exit(1)
+        # 2) 본문 생성
+        blog_json = generate_blog_content(cfg, keyword, selection["reason"], api_key, cfg["model_name"])
+        if not blog_json:
+            print("❌ 콘텐츠 생성에 실패하여 종료합니다.")
+            sys.exit(1)
 
     # 3) 포스트 데이터 저장
     now = datetime.datetime.now()

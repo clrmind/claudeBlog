@@ -414,7 +414,7 @@ def home():
 @app.route("/new")
 def new_post():
     body = """
-    <div class='card'><h2>✍️ 직접 글쓰기</h2>
+    <div class='card'><h2>✍️ 키워드로 새 글 만들기</h2>
     <form method='post' action='/publish' enctype='multipart/form-data'>
       <input type='hidden' name='mode' value='keyword'>
       <label>키워드 (필수)</label>
@@ -430,8 +430,57 @@ def new_post():
         <input type='checkbox' name='no_push' style='width:auto'> 테스트만 (GitHub 발행 안 함)</label>
       <button class='btn' type='submit'>글 생성 & 발행 ▶</button>
     </form></div>
+
+    <div class='card'><h2>🖋️ 내가 쓴 글 다듬기</h2>
+    <p class='hint' style='margin-top:-4px'>이미 써둔 원고를 붙여넣으면 새로 내용을 지어내지 않고
+    맞춤법·문단 구성·소제목·SEO 제목만 다듬어서 그대로 발행합니다.</p>
+    <form method='post' action='/publish' enctype='multipart/form-data'>
+      <input type='hidden' name='mode' value='polish'>
+      <label>내 원고 (필수)</label>
+      <textarea name='content' rows='8' placeholder='여기에 직접 쓴 글을 붙여넣으세요' required></textarea>
+      <label>키워드/주제 (선택 — 제목·태그에 참고됨)</label>
+      <input type='text' name='keyword' placeholder='예: 제주도 가족여행 후기'>
+      <label>제목 직접 지정 (선택)</label>
+      <input type='text' name='title' placeholder='비우면 AI가 다듬은 제목 사용'>
+      <label>대표 이미지 첨부 (선택)</label>
+      <input type='file' name='image' accept='image/*'>
+      <small class='hint'>첨부하면 자동 생성 대신 이 이미지를 사용합니다.</small>
+      <label class='switch' style='margin-top:16px'>
+        <input type='checkbox' name='ignore_limit' style='width:auto' checked> 하루 발행 제한 무시</label>
+      <label class='switch'>
+        <input type='checkbox' name='no_push' style='width:auto'> 테스트만 (GitHub 발행 안 함)</label>
+      <button class='btn' type='submit'>다듬어서 발행 ▶</button>
+    </form></div>
     """
     return render("새 글", "new", body)
+
+
+def _save_uploaded_image():
+    """업로드된 대표 이미지를 uploads/에 저장하고 경로를 반환한다(없으면 None)."""
+    f = request.files.get("image")
+    if not (f and f.filename):
+        return None
+    os.makedirs(UPLOAD_DIR, exist_ok=True)
+    ext = os.path.splitext(f.filename)[1].lower() or ".jpg"
+    dest = os.path.join(UPLOAD_DIR, f"up_{int(time.time())}{ext}")
+    f.save(dest)
+    return dest
+
+
+def _common_publish_flags():
+    """키워드 발행·원고 다듬기 두 모드가 공유하는 옵션(제목·이미지·발행제한·테스트모드)."""
+    args = []
+    title = (request.form.get("title") or "").strip()
+    if title:
+        args += ["--title", title]
+    img = _save_uploaded_image()
+    if img:
+        args += ["--image", img]
+    if request.form.get("ignore_limit"):
+        args.append("--ignore-daily-limit")
+    if request.form.get("no_push"):
+        args.append("--no-push")
+    return args
 
 
 @app.route("/publish", methods=["POST"])
@@ -447,22 +496,20 @@ def publish():
         keyword = (request.form.get("keyword") or "").strip()
         if not keyword:
             return redirect(url_for("new_post"))
-        args += ["--keyword", keyword]
-        title = (request.form.get("title") or "").strip()
-        if title:
-            args += ["--title", title]
-        if request.form.get("ignore_limit"):
-            args.append("--ignore-daily-limit")
-        if request.form.get("no_push"):
-            args.append("--no-push")
-        # 이미지 업로드 처리
-        f = request.files.get("image")
-        if f and f.filename:
-            os.makedirs(UPLOAD_DIR, exist_ok=True)
-            ext = os.path.splitext(f.filename)[1].lower() or ".jpg"
-            dest = os.path.join(UPLOAD_DIR, f"up_{int(time.time())}{ext}")
-            f.save(dest)
-            args += ["--image", dest]
+        args += ["--keyword", keyword] + _common_publish_flags()
+    elif mode == "polish":
+        content = (request.form.get("content") or "").strip()
+        if not content:
+            return redirect(url_for("new_post"))
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
+        draft_path = os.path.join(UPLOAD_DIR, f"draft_{int(time.time())}.txt")
+        with open(draft_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        args += ["--polish-file", draft_path]
+        keyword = (request.form.get("keyword") or "").strip()
+        if keyword:
+            args += ["--keyword", keyword]
+        args += _common_publish_flags()
     else:  # auto
         source = request.form.get("source", "trends")
         args += ["--source", source]
@@ -566,8 +613,9 @@ def settings():
       <input type='text' name='topic_focus' value="{g('topic_focus')}" placeholder='예: 육아, 반려동물, 재테크'>
       <label>기본 키워드 소스</label>
       <select name='keyword_source'>
-        <option value='trends' {'selected' if g('keyword_source')=='trends' else ''}>실시간 트렌드</option>
-        <option value='tv' {'selected' if g('keyword_source')=='tv' else ''}>방송 건강·식품</option>
+        <option value='evergreen' {'selected' if g('keyword_source')=='evergreen' else ''}>정보성 롱테일(에버그린) — 신생 도메인 권장</option>
+        <option value='trends' {'selected' if g('keyword_source')=='trends' else ''}>실시간 트렌드 (경쟁이 세서 신생 도메인엔 비추천)</option>
+        <option value='tv' {'selected' if g('keyword_source')=='tv' else ''}>방송 편성표 건강·식품</option>
       </select>
       <label>이미지 모드</label>
       <select name='image_mode'>
