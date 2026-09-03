@@ -11,11 +11,11 @@
   "git_branch": "main",
   "posts_per_page": 9,
   "max_posts_per_day": 6,
-  "keyword_source": "evergreen",
+  "keyword_source": "trends",
   "verification_meta": {
     "naver-site-verification": "5085c30a26ad2d1ede612aa6b646ff288e680427",
     "google-site-verification": "OzInJE6Z3j4irpLggWnM71EZmlrR-uRxzTkTbMOme78"
   },
-  "target_audience": "",
-  "topic_focus": ""
+  "target_audience": "개발자",
+  "topic_focus": "It 통신"
 }
