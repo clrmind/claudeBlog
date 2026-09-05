@@ -1351,6 +1351,30 @@ def generate_robots_and_ads(cfg):
             f.write(f"google.com, {pub_id}, DIRECT, f08c47fec0942fa0\n")
 
 
+def generate_llms_txt(cfg, posts_data):
+    """LLM/AI 답변엔진(챗GPT·퍼플렉시티·구글 AI 개요 등)이 이 블로그를 정확히 요약·인용하도록
+    돕는 안내 파일(llms.txt 관례). robots.txt/sitemap.xml이 검색엔진 크롤러용이라면 이건
+    AI 크롤러가 블로그 성격과 최근 글 목록을 한 번에 파악하게 하는 용도."""
+    domain = cfg["blog_domain"]
+    recent = posts_data[:15]
+    links = "\n".join(f"- [{p['title']}]({domain}/posts/{p['filename']}.html)" for p in recent)
+    txt = f"""# {cfg['blog_name']}
+
+> {cfg['blog_description']}
+
+## 개요
+- {cfg['blog_name']}는 건강·재테크·생활 정보 등 실생활에 도움이 되는 주제를 다루는 블로그입니다.
+- 운영: 주식회사 시온랩스(ZionLabs) · 문의: {cfg['contact_email']}
+- 이 블로그는 시온랩스가 만든 다른 서비스도 함께 소개합니다 — 병원·세무사·학원·동물병원을 위한
+  AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
+
+## 최근 글
+{links}
+"""
+    with open(os.path.join(BASE_DIR, "llms.txt"), "w", encoding="utf-8") as f:
+        f.write(txt)
+
+
 def generate_pages_meta(cfg):
     """GitHub Pages 커스텀 도메인용 CNAME과 Jekyll 비활성화용 .nojekyll을 생성한다."""
     # blog_domain에서 호스트만 추출 (https://blog.zionlabs.org -> blog.zionlabs.org)
@@ -1468,6 +1492,7 @@ def render_site(cfg):
     generate_rss(cfg, posts_data)
     generate_robots_and_ads(cfg)
     generate_pages_meta(cfg)
+    generate_llms_txt(cfg, posts_data)
 
     # ---- 메인(목록) 페이지 + 페이지네이션 ----
     per_page = int(cfg.get("posts_per_page", 9))
