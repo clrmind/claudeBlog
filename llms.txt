@@ -9,6 +9,8 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [장시간 책상에 앉아 있는 현대인을 위한 고질병 완화 스트레칭](https://blog.zionlabs.org/posts/post_20260906_223018.html)
+- [우리은행 팀코리아 적금 7.5% 가입 조건과 금리 혜택 분석](https://blog.zionlabs.org/posts/post_20260906_103011.html)
 - [장시간 화면을 보는 직장인을 위한 안구건조증 예방 및 눈 피로 완화 가이드](https://blog.zionlabs.org/posts/post_20260905_223019.html)
 - [삼성전자 DX 노조 집회로 보는 국내 IT 제조 대기업의 변화](https://blog.zionlabs.org/posts/post_20260905_150010.html)
 - [포스코 미국 제철소 진출과 글로벌 인프라 통신망 분석](https://blog.zionlabs.org/posts/post_20260905_103010.html)
@@ -22,5 +24,3 @@
 - [실패 없는 제철 나물 무침 레시피와 영양 손실 막는 조리법](https://blog.zionlabs.org/posts/post_20260902_223036.html)
 - [실업급여 수급 자격 조건과 신청 절차 총정리](https://blog.zionlabs.org/posts/post_20260902_150008.html)
 - [기초연금 수급 자격과 신청 방법 완벽 가이드](https://blog.zionlabs.org/posts/post_20260902_103009.html)
-- [관절 건강을 지키는 올바른 걷기 운동법과 스트레칭 요령](https://blog.zionlabs.org/posts/post_20260901_223019.html)
-- [부동산 취득세 계산 방법 및 감면 혜택 조건 총정리](https://blog.zionlabs.org/posts/post_20260901_150020.html)
