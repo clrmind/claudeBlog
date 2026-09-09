@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [KAIST AI 데이터센터가 그리는 미래 인프라의 청사진](https://blog.zionlabs.org/posts/post_20260909_103020.html)
 - [장시간 앉아 있는 현대인을 위한 손목 터널 증후군 예방 및 스트레칭 방법](https://blog.zionlabs.org/posts/post_20260908_223019.html)
 - [차세대 인공지능 인프라의 핵심, gpt 아스트라 도입 전략](https://blog.zionlabs.org/posts/post_20260908_103008.html)
 - [장시간 앉아 있는 현대인을 위한 허리 디스크 예방 스트레칭과 바른 자세 가이드](https://blog.zionlabs.org/posts/post_20260907_223018.html)
@@ -23,4 +24,3 @@
 - [고금리 시기 IT 자산 포트폴리오의 해법, 국채 투자 가이드](https://blog.zionlabs.org/posts/post_20260904_103012.html)
 - [직장인 거북목 증후군 예방하는 올바른 자세와 스트레칭 방법](https://blog.zionlabs.org/posts/post_20260903_223019.html)
 - [티빙 정보 유출 사태로 보는 디지털 보안과 실효적 대처 방안](https://blog.zionlabs.org/posts/post_20260903_150009.html)
-- [OPC통신이란](https://blog.zionlabs.org/posts/post_20260903_122244.html)
