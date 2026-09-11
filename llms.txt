@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [KB손해보험 AI 사원번호 도입으로 본 엔터프라이즈 자동화 실무](https://blog.zionlabs.org/posts/post_20260911_103010.html)
 - [수면 부족이 뇌 건강에 미치는 영향과 숙면을 위한 영양소 관리법](https://blog.zionlabs.org/posts/post_20260910_223020.html)
 - [애플워치 센서 API 활용과 런타임 성능 최적화 가이드](https://blog.zionlabs.org/posts/post_20260910_103010.html)
 - [장시간 컴퓨터 작업 직장인의 거북목 증후군 예방 스트레칭](https://blog.zionlabs.org/posts/post_20260909_223017.html)
@@ -23,4 +24,3 @@
 - [삼성전자 DX 노조 집회로 보는 국내 IT 제조 대기업의 변화](https://blog.zionlabs.org/posts/post_20260905_150010.html)
 - [포스코 미국 제철소 진출과 글로벌 인프라 통신망 분석](https://blog.zionlabs.org/posts/post_20260905_103010.html)
 - [장시간 모니터를 보는 직장인을 위한 눈 피로 회복 방법과 영양 성분](https://blog.zionlabs.org/posts/post_20260904_223252.html)
-- [신한라이프 FDS 고도화로 보는 차세대 금융 보안 아키텍처](https://blog.zionlabs.org/posts/post_20260904_150014.html)
