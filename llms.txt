@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [LUMI 서비스와 성향 분석 데이터의 기술적 활용](https://blog.zionlabs.org/posts/post_20260912_193022.html)
 - [종합소득세 신고 방법과 기한: 홈택스 절차 및 일정 총정리](https://blog.zionlabs.org/posts/post_20260912_080009.html)
 - [KB손해보험 AI 사원번호 도입으로 본 엔터프라이즈 자동화 실무](https://blog.zionlabs.org/posts/post_20260911_103010.html)
 - [수면 부족이 뇌 건강에 미치는 영향과 숙면을 위한 영양소 관리법](https://blog.zionlabs.org/posts/post_20260910_223020.html)
@@ -23,4 +24,3 @@
 - [우리은행 팀코리아 적금 7.5% 가입 조건과 금리 혜택 분석](https://blog.zionlabs.org/posts/post_20260906_103011.html)
 - [장시간 화면을 보는 직장인을 위한 안구건조증 예방 및 눈 피로 완화 가이드](https://blog.zionlabs.org/posts/post_20260905_223019.html)
 - [삼성전자 DX 노조 집회로 보는 국내 IT 제조 대기업의 변화](https://blog.zionlabs.org/posts/post_20260905_150010.html)
-- [포스코 미국 제철소 진출과 글로벌 인프라 통신망 분석](https://blog.zionlabs.org/posts/post_20260905_103010.html)
