@@ -1,0 +1,22 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'>
+<defs>
+<linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='#0d1b33'/><stop offset='55%' stop-color='#11284d'/><stop offset='100%' stop-color='#0a1526'/>
+</linearGradient>
+<linearGradient id='heat' x1='0' y1='0' x2='1' y2='0'>
+<stop offset='0%' stop-color='#1e5fd0'/><stop offset='38%' stop-color='#21b07a'/>
+<stop offset='62%' stop-color='#f2c230'/><stop offset='82%' stop-color='#f08a24'/><stop offset='100%' stop-color='#e0403a'/>
+</linearGradient>
+</defs>
+<rect width='1200' height='630' fill='url(#bg)'/>
+<circle cx='1060' cy='110' r='210' fill='rgba(80,150,255,0.09)'/>
+<circle cx='990' cy='580' r='150' fill='rgba(240,138,36,0.07)'/>
+<text x='80' y='150' font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size='25' font-weight='700' fill='#5aa9ff' letter-spacing='3'>ZION LABS</text>
+<text x='80' y='268' font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size='84' font-weight='800' fill='#ffffff'>ThermalBridge AI</text>
+<text x='84' y='344' font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size='38' font-weight='700' fill='#ffffff'>열화상 기반 AI 이상 탐지 · 예지보전</text>
+<text x='84' y='402' font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size='26' font-weight='500' fill='rgba(255,255,255,0.86)'>발전소 · 변전소 · 산업설비 24시간 무중단 감시</text>
+<rect x='84' y='444' width='620' height='16' rx='8' fill='url(#heat)'/>
+<text x='84' y='498' font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size='21' font-weight='600' fill='rgba(255,255,255,0.62)'>-20°C</text>
+<text x='640' y='498' font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size='21' font-weight='600' fill='rgba(255,255,255,0.62)'>350°C</text>
+<text x='80' y='578' font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size='25' font-weight='600' fill='#7fc2ff'>EWMA 이상 탐지 · ETA 예측 · 모바일 실시간 알림</text>
+</svg>

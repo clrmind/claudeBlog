@@ -1,0 +1,43 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700' viewBox='0 0 1200 700'>
+<defs><marker id='a2' markerWidth='10' markerHeight='8' refX='9' refY='4' orient='auto'>
+<path d='M0,0 L10,4 L0,8 Z' fill='#8fa3bd'/></marker></defs>
+<style>
+.t{font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;}
+.h{font-size:34px;font-weight:800;fill:#fff;}
+.s{font-size:19px;font-weight:500;fill:#9fb3cc;}
+.n{font-size:19px;font-weight:700;}
+.d{font-size:15px;font-weight:500;fill:#8fa3bd;}
+</style>
+<rect width='1200' height='700' fill='#0d1626'/>
+<text class='t h' x='600' y='58' text-anchor='middle'>예지보전(Predictive Maintenance) ETA 예측</text>
+<text class='t s' x='600' y='94' text-anchor='middle'>EWMA 기울기 기반으로 설비 이상까지 남은 시간을 예측</text>
+
+<rect x='680' y='150' width='400' height='170' rx='14' fill='#3a2410' stroke='#f0a024' stroke-width='2.5'/>
+<text class='t' x='880' y='190' text-anchor='middle' font-size='19' font-weight='700' fill='#f0a024'>예지보전 ETA 예측 결과</text>
+<text class='t' x='880' y='243' text-anchor='middle' font-size='46' font-weight='800' fill='#fff'>약 46시간 후</text>
+<text class='t d' x='880' y='276' text-anchor='middle' fill='#d9c3a0'>현재 온도 상승 기울기 기준</text>
+<text class='t d' x='880' y='302' text-anchor='middle' fill='#d9c3a0'>계획정비 일정 선제 조율 가능</text>
+<path d='M760 328 C 745 372, 700 388, 660 392' fill='none' stroke='#f08a24' stroke-width='3' marker-end='url(#a2)'/>
+
+<path d='M180 380 C 320 376, 420 350, 540 300 C 620 268, 700 250, 760 246'
+      fill='none' stroke='#2f9fe0' stroke-width='4.5' stroke-linecap='round'/>
+
+<line x1='100' y1='438' x2='1110' y2='438' stroke='#5f7186' stroke-width='3' marker-end='url(#a2)'/>
+<circle cx='180' cy='438' r='14' fill='#2ecc71'/>
+<text class='t n' x='180' y='482' text-anchor='middle' fill='#2ecc71'>정상</text>
+<text class='t d' x='180' y='508' text-anchor='middle'>Baseline 학습</text>
+<circle cx='450' cy='438' r='14' fill='#f2c230'/>
+<text class='t n' x='450' y='482' text-anchor='middle' fill='#f2c230'>경고 (±2σ)</text>
+<text class='t d' x='450' y='508' text-anchor='middle'>온도 상승 추세 감지</text>
+<circle cx='720' cy='438' r='14' fill='#f08a24'/>
+<text class='t n' x='720' y='482' text-anchor='middle' fill='#f08a24'>알람 (±3σ)</text>
+<text class='t d' x='720' y='508' text-anchor='middle'>즉시 현장 확인 필요</text>
+<circle cx='990' cy='438' r='14' fill='#e0403a'/>
+<text class='t n' x='990' y='482' text-anchor='middle' fill='#e0403a'>예상 고장 시점</text>
+<text class='t d' x='990' y='508' text-anchor='middle'>ETA 예측 결과</text>
+
+<rect x='100' y='560' width='1000' height='108' rx='12' fill='none' stroke='#2b3c5c' stroke-width='2'/>
+<text class='t' x='130' y='596' font-size='18' font-weight='700' fill='#fff'>계획정비 vs 돌발정지 비용 비교</text>
+<text class='t d' x='130' y='626' fill='#c9d6e6'>돌발정지: 생산 중단, 긴급 부품 조달, 안전사고 위험 → 고비용</text>
+<text class='t d' x='130' y='652' fill='#c9d6e6'>ETA 기반 계획정비: 사전 부품 준비, 정기 정비 일정에 편입 → 저비용</text>
+</svg>

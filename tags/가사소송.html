@@ -19,6 +19,11 @@ header a.logo { font-size: 22px; font-weight: 900; color: #1a1a1a; text-decorati
 .trend-reason-box { background-color: #f1f3f9; border-left: 4px solid #4a90e2; padding: 15px 20px; border-radius: 0 8px 8px 0; font-size: 15px; color: #4a5568; margin-bottom: 30px; line-height: 1.6; }
 .article-body { font-size: 17px; color: #2d3748; line-height: 1.85; letter-spacing: -0.2px; }
 .article-body h2 { font-size: 23px; color: #1a1a1a; margin-top: 45px; margin-bottom: 15px; border-bottom: 2px solid #edf2f7; padding-bottom: 8px; }
+/* 본문에 삽입한 그림·도표. 지금까지는 대표 이미지만 썼지만, 설명 도식이 필요한 글에서는
+   본문 중간에 이미지를 넣는다. 규칙이 없으면 원본 크기 그대로 나와 본문 폭을 넘어간다. */
+.article-body figure { margin: 32px 0; }
+.article-body img { width: 100%; height: auto; display: block; border-radius: 10px; }
+.article-body figcaption { font-size: 14px; color: #718096; text-align: center; margin-top: 10px; line-height: 1.6; }
 .article-body h3 { font-size: 18px; color: #1a1a1a; margin-top: 30px; margin-bottom: 10px; }
 .article-body p { margin-bottom: 25px; text-align: justify; }
 .article-body ul { margin-bottom: 25px; padding-left: 22px; }
