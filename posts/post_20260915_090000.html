@@ -82,6 +82,11 @@ footer { background: #fff; border-top: 1px solid #edf2f7; padding: 40px 20px; ma
 
 <p>문제는 설비 고장이 갑자기 오지 않는다는 데 있습니다. 베어링 마찰열, 전기 접속부 과열, 배관 단열재 손상은 며칠에서 몇 주에 걸쳐 온도가 조금씩 올라갑니다. 하루 한두 번 순찰로는 이 완만한 곡선을 잡아내기 어렵습니다. 사람 눈에 '뜨겁다'고 느껴질 때는 이미 늦은 경우가 대부분입니다.</p>
 
+<figure>
+<img src="/images/thermal_roi.jpg" width="547" height="410" alt="발전소 설비를 촬영한 실제 열화상 화면 — 관심 영역별 평균 온도가 157.1°C, 184.3°C로 표시되어 있다" loading="lazy">
+<figcaption>실제 현장 열화상 화면. 관심 영역(ROI)별 평균 온도가 함께 표시됩니다</figcaption>
+</figure>
+
 <p><strong>ThermalBridge AI</strong>는 이 간극을 메우려고 만든 열화상 기반 실시간 이상 탐지·예지보전 솔루션입니다.</p>
 
 <h2 id='sec1'>이미 설치된 카메라를 그대로 쓰는 미들웨어</h2>
@@ -140,6 +145,11 @@ footer { background: #fff; border-top: 1px solid #edf2f7; padding: 40px 20px; ma
 <p>관심 영역(ROI)은 정해진 태그 네이밍 규칙에 따라 자동으로 매핑됩니다. 특정 브랜드나 모델에 종속되지 않고 OPC를 지원하는 장비라면 폭넓게 붙일 수 있어, 신규 설비를 추가하거나 카메라를 교체할 때 손볼 것이 적습니다.</p>
 
 <p>모든 온도 데이터는 일 단위 CSV로 자동 기록됩니다. 이상이 발생했을 때 "그때 무슨 일이 있었는지"를 되짚을 수 있고, 몇 달치를 모으면 설비 상태가 어떤 방향으로 변해가는지도 볼 수 있습니다. 실제 카메라를 연결하기 전에 동작을 확인할 수 있도록 데모·검증용 목(Mock) 모드도 지원합니다.</p>
+
+<figure>
+<img src="/images/thermal_sim.jpg" width="547" height="413" alt="ThermalBridge AI 대시보드의 과열 시뮬레이션 화면 — ROI01~ROI04의 현재 온도와 온도 위치, 트렌드, 상태가 표로 표시되고 아래에 EWMA 기준선과 ±2σ·±3σ 밴드를 겹친 추이 그래프가 있다" loading="lazy">
+<figcaption>과열 시뮬레이션 모드 화면. ROI별 현재 온도와 함께 EWMA 기준선·±2σ·±3σ 밴드를 겹쳐 보여줍니다</figcaption>
+</figure>
 
 <h2 id='sec6'>이런 현장에 맞습니다</h2>
 
