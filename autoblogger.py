@@ -831,9 +831,9 @@ def generate_svg_cover(title, category, blog_name, filename):
         "<circle cx='1060' cy='110' r='190' fill='rgba(255,255,255,0.08)'/>"
         "<circle cx='960' cy='540' r='130' fill='rgba(255,255,255,0.06)'/>"
         f"<text x='80' y='150' font-size='64'>{emoji}</text>"
-        f"<text font-family=\"'Apple SD Gothic Neo','Malgun Gothic',sans-serif\" "
+        f"<text font-family=\"'Nanum Gothic','Apple SD Gothic Neo','Malgun Gothic',sans-serif\" "
         f"font-size='58' font-weight='800' fill='#ffffff'>{tspans}</text>"
-        f"<text x='80' y='565' font-family=\"'Apple SD Gothic Neo','Malgun Gothic',sans-serif\" "
+        f"<text x='80' y='565' font-family=\"'Nanum Gothic','Apple SD Gothic Neo','Malgun Gothic',sans-serif\" "
         f"font-size='26' font-weight='600' fill='rgba(255,255,255,0.85)'>{html.escape(blog_name)}</text>"
         "</svg>"
     )
@@ -911,8 +911,14 @@ def resolve_post_image(cfg, api_key, blog_json, category):
 # ==========================================
 
 CSS_STYLE = """
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; line-height: 1.75; color: #333; margin: 0; padding: 0; background-color: #f9f9fb; }
+/* 글꼴은 나눔고딕으로 통일한다(오토포스트 Pro·투워크와 동일). 400/700/800만 제공되는
+   글꼴이라 600을 지정하면 700으로 대체된다. 웹폰트를 못 받아오는 환경을 위해
+   기존 시스템 글꼴을 뒤에 남겨둔다. */
+body { font-family: 'Nanum Gothic', '나눔고딕', NanumGothic, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; line-height: 1.75; color: #333; margin: 0; padding: 0; background-color: #f9f9fb; }
 .container { max-width: 900px; margin: 0 auto; padding: 4px 20px 80px 20px; box-sizing: border-box; }
 header { background: #fff; border-bottom: 1px solid #edf2f7; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
 header a.logo { font-size: 22px; font-weight: 900; color: #1a1a1a; text-decoration: none; letter-spacing: -0.5px; }
