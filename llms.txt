@@ -9,6 +9,12 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [서버 장애 대응을 위한 사내 비상 연락망 및 에스컬레이션 절차 수립 방법](https://blog.zionlabs.org/posts/post_20260921_080009.html)
+- [국민연금 추납제도 활용법 및 납부 조건 총정리](https://blog.zionlabs.org/posts/post_20260920_080009.html)
+- [부가가치세 신고 기한과 방법 완벽 가이드](https://blog.zionlabs.org/posts/post_20260919_080010.html)
+- [연차수당 계산법과 발생 기준: 실전 산정 가이드](https://blog.zionlabs.org/posts/post_20260918_080010.html)
+- [안전한 자산 관리를 위한 예금자보호 한도와 적용 범위 분석](https://blog.zionlabs.org/posts/post_20260917_080010.html)
+- [자동차보험 할인 특약 종류 및 요율 구조 총정리](https://blog.zionlabs.org/posts/post_20260916_080009.html)
 - [ThermalBridge AI — 발전소·산업설비 열화상 AI 이상 탐지와 예지보전](https://blog.zionlabs.org/posts/post_20260915_090000.html)
 - [청년도약계좌 조건과 혜택, 자산 형성을 위한 실질적 가이드](https://blog.zionlabs.org/posts/post_20260915_080010.html)
 - [IRP 개인형퇴직연금 세액공제 한도와 계산 방법의 모든 것](https://blog.zionlabs.org/posts/post_20260914_080009.html)
@@ -18,9 +24,3 @@
 - [KB손해보험 AI 사원번호 도입으로 본 엔터프라이즈 자동화 실무](https://blog.zionlabs.org/posts/post_20260911_103010.html)
 - [수면 부족이 뇌 건강에 미치는 영향과 숙면을 위한 영양소 관리법](https://blog.zionlabs.org/posts/post_20260910_223020.html)
 - [애플워치 센서 API 활용과 런타임 성능 최적화 가이드](https://blog.zionlabs.org/posts/post_20260910_103010.html)
-- [장시간 컴퓨터 작업 직장인의 거북목 증후군 예방 스트레칭](https://blog.zionlabs.org/posts/post_20260909_223017.html)
-- [KAIST AI 데이터센터가 그리는 미래 인프라의 청사진](https://blog.zionlabs.org/posts/post_20260909_103020.html)
-- [장시간 앉아 있는 현대인을 위한 손목 터널 증후군 예방 및 스트레칭 방법](https://blog.zionlabs.org/posts/post_20260908_223019.html)
-- [차세대 인공지능 인프라의 핵심, gpt 아스트라 도입 전략](https://blog.zionlabs.org/posts/post_20260908_103008.html)
-- [장시간 앉아 있는 현대인을 위한 허리 디스크 예방 스트레칭과 바른 자세 가이드](https://blog.zionlabs.org/posts/post_20260907_223018.html)
-- [비대면 주민등록 사실조사 시스템 구조와 인증 연동 가이드](https://blog.zionlabs.org/posts/post_20260907_103010.html)
