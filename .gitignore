@@ -7,3 +7,7 @@ uploads/
 webui_run.log
 .webui_secret
 monitor.log
+
+# 갈라진 글을 합치기 전에 남기는 백업. 저장소에 올리지 않는다.
+data.json.before-merge-*
+.images-keep-*

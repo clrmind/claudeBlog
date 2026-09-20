@@ -29,6 +29,7 @@ import json
 import os
 import random
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -1624,6 +1625,121 @@ def render_site(cfg):
 # 5단계: GitHub 자동 배포
 # ==========================================
 
+def _git(*args, quiet=False):
+    """git 한 번. (성공여부, 출력)."""
+    r = subprocess.run(["git"] + list(args), cwd=BASE_DIR,
+                       capture_output=True, text=True)
+    if not quiet and r.returncode != 0:
+        print((r.stderr or r.stdout).strip()[:400])
+    return r.returncode == 0, (r.stdout or "") + (r.stderr or "")
+
+
+def merge_posts_json(ours, theirs):
+    """갈라진 data.json 두 벌을 filename 기준으로 합친다.
+
+    같은 글이 양쪽에 있으면 **원격 것을 쓴다.** 사람이 손으로 고친 내용(사진
+    추가, 문구 수정)이 원격에 있고, 크론은 그걸 모른 채 옛 판을 들고 있기 때문이다.
+    """
+    def key(p):
+        return p.get("filename") or f"{p.get('date','')}|{p.get('title','')}"
+    merged = {}
+    for post in ours:
+        merged[key(post)] = post
+    for post in theirs:
+        merged[key(post)] = post
+    return sorted(merged.values(),
+                  key=lambda p: (p.get("date", ""), p.get("filename", "")))
+
+
+def recover_diverged(branch):
+    """원격과 갈라져 rebase 로는 못 풀리는 상태를 되살린다.
+
+    왜 필요한가: 사람이 GitHub 에 직접 push 하고 서버가 그걸 안 받아오면
+    갈라진다. 그 뒤로는 크론이 돌 때마다 rebase 가 **생성 파일에서** 충돌한다 —
+    글 하나를 쓸 때마다 data.json 과 빌드된 HTML 이 통째로 바뀌기 때문이다.
+    예전 코드는 충돌하면 rebase 를 되돌리고 그대로 push 를 시도했는데, 되돌렸으니
+    될 리가 없다. 그래서 6일치가 조용히 쌓인 적이 있다.
+
+    생성 파일은 충돌을 풀 이유가 없다 — 다시 만들면 된다. 진짜 원본은
+    data.json 과 images 뿐이므로, 그 둘만 합치고 나머지는 재빌드한다.
+    """
+    print("🔧 원격과 갈라졌습니다. data.json 을 합치고 다시 빌드합니다.")
+
+    ok, _ = _git("fetch", "origin", branch)
+    if not ok:
+        print("❌ fetch 실패 — 네트워크/인증을 확인하세요.")
+        return False
+
+    # 우리 것을 먼저 떠 둔다. 아래 reset 이 지워 버리기 때문이다.
+    try:
+        with open(DATA_PATH, encoding="utf-8") as f:
+            ours = json.load(f)
+    except (OSError, ValueError):
+        ours = []
+    stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    backup = os.path.join(BASE_DIR, f"data.json.before-merge-{stamp}")
+    try:
+        with open(backup, "w", encoding="utf-8") as f:
+            json.dump(ours, f, ensure_ascii=False, indent=2)
+        print(f"   백업 {os.path.basename(backup)} ({len(ours)}편)")
+    except OSError as e:
+        print(f"❌ 백업을 만들지 못해 멈춥니다: {e}")
+        return False
+
+    # 이미지는 추적 파일이라 reset 에 같이 지워진다. 임시로 옮겨 두고 되살린다.
+    tmp_images = os.path.join(BASE_DIR, f".images-keep-{stamp}")
+    if os.path.isdir(IMAGES_DIR):
+        shutil.copytree(IMAGES_DIR, tmp_images)
+
+    try:
+        ok, _ = _git("reset", "--hard", f"origin/{branch}")
+        if not ok:
+            print("❌ 원격 상태로 맞추지 못했습니다.")
+            return False
+
+        try:
+            with open(DATA_PATH, encoding="utf-8") as f:
+                theirs = json.load(f)
+        except (OSError, ValueError):
+            theirs = []
+
+        merged = merge_posts_json(ours, theirs)
+        # 합친 결과가 어느 한쪽보다 적으면 뭔가 잘못된 것이다. 덮지 않는다.
+        if len(merged) < max(len(ours), len(theirs)):
+            print(f"❌ 합친 결과가 더 적습니다({len(merged)} < "
+                  f"{max(len(ours), len(theirs))}). 덮지 않고 멈춥니다.")
+            print(f"   백업: {backup}")
+            return False
+        print(f"   우리 {len(ours)}편 + 원격 {len(theirs)}편 → {len(merged)}편")
+
+        # CLAUDE.md 규칙: 반드시 indent=2, ensure_ascii=False.
+        with open(DATA_PATH, "w", encoding="utf-8") as f:
+            json.dump(merged, f, ensure_ascii=False, indent=2)
+
+        # 원격에 없던 이미지를 되살린다. 원격 것을 덮지는 않는다.
+        if os.path.isdir(tmp_images):
+            for root, _dirs, files in os.walk(tmp_images):
+                rel = os.path.relpath(root, tmp_images)
+                dest_dir = os.path.join(IMAGES_DIR, rel) if rel != "." else IMAGES_DIR
+                os.makedirs(dest_dir, exist_ok=True)
+                for name in files:
+                    dest = os.path.join(dest_dir, name)
+                    if not os.path.exists(dest):
+                        shutil.copy2(os.path.join(root, name), dest)
+    finally:
+        shutil.rmtree(tmp_images, ignore_errors=True)
+
+    render_site(load_config())
+    _git("add", "-A")
+    if subprocess.run(["git", "diff", "--cached", "--quiet"],
+                      cwd=BASE_DIR).returncode == 0:
+        print("ℹ️ 합친 뒤 바뀐 것이 없습니다.")
+        return True
+    ok, _ = _git("commit", "-m",
+                 f"merge: 원격과 갈라진 글 합침 ({len(merged)}편)")
+    return ok
+
+
 def git_sync(cfg, commit_message, max_retries=4):
     branch = cfg.get("git_branch", "main")
     try:
@@ -1637,16 +1753,21 @@ def git_sync(cfg, commit_message, max_retries=4):
         print(f"❌ git 커밋 실패: {e}")
         return False
 
-    # 원격에서 다른 변경이 있었을 수 있으므로 rebase 후 push (충돌 자동 회피).
+    # 원격에서 다른 변경이 있었을 수 있으므로 rebase 후 push.
     # --autostash: 추적 파일에 unstaged 변경이 남아 있어도 자동으로 치웠다 되돌려,
     # "cannot pull with rebase: You have unstaged changes"로 rebase가 막히는 것을 방지한다.
     pull = subprocess.run(["git", "pull", "--rebase", "--autostash", "origin", branch],
                           cwd=BASE_DIR)
     if pull.returncode != 0:
-        # rebase가 중간에 멈춰 있으면 다음 스케줄 실행까지 전부 실패하므로 반드시 되돌린다
+        # rebase가 중간에 멈춰 있으면 다음 실행까지 전부 실패하므로 반드시 되돌린다.
         subprocess.run(["git", "rebase", "--abort"], cwd=BASE_DIR,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        print("⚠️ 원격 동기화(rebase) 실패 — rebase를 되돌리고 push를 시도합니다.")
+        # 되돌린 채로 push 하면 non-fast-forward 로 막힌다 — 예전에는 그걸 네 번
+        # 재시도하고 포기했고, 그래서 아무도 모르게 엿새치가 쌓였다.
+        # 충돌은 거의 전부 생성 파일에서 난다. 다시 만들면 되는 것들이다.
+        if not recover_diverged(branch):
+            print("❌ 원격과 갈라진 상태를 풀지 못했습니다. 사람이 봐야 합니다.")
+            return False
 
     delay = 2
     for attempt in range(1, max_retries + 1):

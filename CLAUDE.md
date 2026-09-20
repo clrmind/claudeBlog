@@ -82,6 +82,36 @@ systemd 유닛에 `Environment=WEBUI_PASSWORD=`가 있으면 `.env`를 고쳐도
 평문으로 비교하므로 다른 서비스와 같은 비밀번호를 쓰지 말 것.
 예전에 `config.json`에 평문으로 커밋된 이력이 git 히스토리에 남아 있다.
 
+## 원격과 갈라졌을 때
+
+크론이 매일 push 하는데 사람이 GitHub 에 직접 push 하고 서버가 그걸 안 받아오면
+갈라진다. 그 뒤로는 크론이 돌 때마다 `git pull --rebase` 가 **생성 파일에서**
+충돌한다 — 글 하나를 쓸 때마다 `data.json` 과 빌드된 HTML 이 통째로 바뀌기 때문이다.
+
+예전 코드는 충돌하면 `rebase --abort` 하고 **그대로 push 를 시도**했다. 되돌렸으니
+될 리가 없다. 네 번 재시도하고 포기하는데 아무도 모른다 — 실제로 엿새치가 쌓였다.
+
+지금은 `recover_diverged()` 가 스스로 푼다.
+
+- **생성 파일은 충돌을 풀 이유가 없다. 다시 만들면 된다.** 진짜 원본은
+  `posts/data.json` 과 `images/` 뿐이므로 그 둘만 합치고 나머지는 재빌드한다
+- `data.json` 은 `filename` 기준 합집합이다. **같은 글이 양쪽에 있으면 원격이
+  이긴다** — 사람이 손으로 고친 판이 거기 있고 크론은 옛 판을 들고 있다
+- 합친 결과가 어느 한쪽보다 **적으면 덮지 않고 멈춘다.** 백업을 남긴 뒤에 한다
+- `reset --hard` 가 추적 파일인 이미지를 지우므로, 미리 옮겨 뒀다가
+  **원격 것을 덮지 않고** 되살린다
+
+### 손으로 고쳐야 할 때
+
+```
+sudo -u medi git -C /home/medi/claudeBlog fetch origin main
+sudo -u medi git -C /home/medi/claudeBlog checkout origin/main -- autoblogger.py
+sudo -u medi python3 /home/medi/claudeBlog/autoblogger.py --render-only
+```
+
+`autoblogger.py` 만 먼저 받아 오는 것이 요령이다. 갈라진 상태에서는 `git pull`
+자체가 충돌하지만 `checkout origin/main -- 파일` 은 그 파일만 가져온다.
+
 ## 주의
 
 - 서버의 `venv`에는 `requests`가 빠져 있다. 빌드는 시스템 `python3`로 돌아간다
