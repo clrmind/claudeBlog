@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [실비보험 가입 전 꼭 확인해야 할 면책사항과 보장 제외 항목](https://blog.zionlabs.org/posts/post_20260925_080008.html)
 - [국민연금 추납제도 활용법으로 은퇴 자산 공백 메우는 전략](https://blog.zionlabs.org/posts/post_20260924_080012.html)
 - [부가가치세 신고 기한과 방법: 완벽 가이드](https://blog.zionlabs.org/posts/post_20260923_080011.html)
 - [안전한 자산 관리를 위한 예금자보호 한도와 적용 범위](https://blog.zionlabs.org/posts/post_20260922_080011.html)
@@ -23,4 +24,3 @@
 - [IRP 개인형퇴직연금 세액공제 한도와 계산 방법의 모든 것](https://blog.zionlabs.org/posts/post_20260914_080009.html)
 - [프리랜서 3.3% 원천징수 세금 환급 신고 방법과 절차 총정리](https://blog.zionlabs.org/posts/post_20260913_080010.html)
 - [LUMI 서비스와 성향 분석 데이터의 기술적 활용](https://blog.zionlabs.org/posts/post_20260912_193022.html)
-- [종합소득세 신고 방법과 기한: 홈택스 절차 및 일정 총정리](https://blog.zionlabs.org/posts/post_20260912_080009.html)
