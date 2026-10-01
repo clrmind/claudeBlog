@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [서버 통신 속도 개선을 위한 HTTP/2와 HTTP/3 성능 차이](https://blog.zionlabs.org/posts/post_20261002_080009.html)
 - [서버 장애 예방을 위한 AWS 가용영역과 리전 아키텍처 설계 기준](https://blog.zionlabs.org/posts/post_20261001_080011.html)
 - [서버 통신 오류 방지를 위한 gRPC 타임아웃과 리트라이 설정 방법](https://blog.zionlabs.org/posts/post_20260930_080009.html)
 - [연말정산 환급 많이 받는 법, 구조적 절세 전략의 모든 것](https://blog.zionlabs.org/posts/post_20260929_080010.html)
@@ -23,4 +24,3 @@
 - [국민연금 추납제도 활용법 및 납부 조건 총정리](https://blog.zionlabs.org/posts/post_20260920_080009.html)
 - [부가가치세 신고 기한과 방법 완벽 가이드](https://blog.zionlabs.org/posts/post_20260919_080010.html)
 - [연차수당 계산법과 발생 기준: 실전 산정 가이드](https://blog.zionlabs.org/posts/post_20260918_080010.html)
-- [안전한 자산 관리를 위한 예금자보호 한도와 적용 범위 분석](https://blog.zionlabs.org/posts/post_20260917_080010.html)
