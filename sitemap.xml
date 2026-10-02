@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://blog.zionlabs.org/</loc><lastmod>2026-10-02</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>https://blog.zionlabs.org/</loc><lastmod>2026-10-03</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
 <url><loc>https://blog.zionlabs.org/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 <url><loc>https://blog.zionlabs.org/privacy.html</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
+<url><loc>https://blog.zionlabs.org/posts/post_20261003_080010.html</loc><lastmod>2026-10-03</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20261002_080009.html</loc><lastmod>2026-10-02</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20261001_080011.html</loc><lastmod>2026-10-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20260930_080009.html</loc><lastmod>2026-09-30</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -300,6 +301,7 @@
 <url><loc>https://blog.zionlabs.org/tags/국민연금조기수령.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/국민연금조회.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/국민임대주택.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/국세청홈택스.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/국제유가-급등.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/국채.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/국채투자.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -491,6 +493,7 @@
 <url><loc>https://blog.zionlabs.org/tags/부동산정보.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/부동산취득세.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/부동산투자.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/부부증여세.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/부산숙면.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/분양권시세.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/불면증.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -733,6 +736,7 @@
 <url><loc>https://blog.zionlabs.org/tags/임대주택신청.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/임종.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/자녀교육.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/자녀증여세.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/자동블로그.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/자동차보험.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/자동차보험-할인-특약-종류.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -776,6 +780,7 @@
 <url><loc>https://blog.zionlabs.org/tags/전세보증금보호.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/전세사기방지.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/전세사기예방.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/절세가이드.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/절세전략.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/정기-검진.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/정기예금.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -807,6 +812,7 @@
 <url><loc>https://blog.zionlabs.org/tags/증시-전망.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/증시전망.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/증여세.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/증여세면제한도.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/지방세법.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/지방소멸.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/지속가능성.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
