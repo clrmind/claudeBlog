@@ -325,12 +325,28 @@ def logged_in():
     return session.get("auth") is True
 
 
+# ── 브라우저를 닫으면 로그아웃된다 ────────────────────────────────
+#
+# `session.permanent` 를 켜지 않으면 쿠키가 **세션 쿠키**가 되어 브라우저가
+# 닫힐 때 사라진다. 예전에는 30일짜리 영구 쿠키였다.
+#
+# ⚠️ 크롬·엣지의 '이어서 보기'(세션 복원)는 **세션 쿠키까지 되살린다.**
+#    그래서 쉰 시간도 같이 본다. 둘 중 하나만으로는 안 닫힌다.
+IDLE_LOGOUT_MIN = int(os.environ.get("IDLE_LOGOUT_MIN", "480"))   # 8시간
+
+
 @app.before_request
 def require_login():
     if request.endpoint in ("login", "static"):
         return
     if not logged_in():
         return redirect(url_for("login"))
+    if IDLE_LOGOUT_MIN > 0:
+        last = int(session.get("seen_at") or 0)
+        if last and int(time.time()) - last > IDLE_LOGOUT_MIN * 60:
+            session.clear()
+            return redirect(url_for("login"))
+        session["seen_at"] = int(time.time())
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -339,7 +355,7 @@ def login():
     if request.method == "POST":
         if request.form.get("password") == get_password():
             session["auth"] = True
-            session.permanent = True
+            session["seen_at"] = int(time.time())
             return redirect(url_for("home"))
         err = "비밀번호가 틀렸습니다."
     return render_template_string(LOGIN_HTML, err=err)
@@ -761,7 +777,7 @@ def main():
         print("  (설정 화면에서 고정 비밀번호로 바꾸세요)")
         print("=" * 46)
 
-    app.permanent_session_lifetime = datetime.timedelta(days=30)
+    app.permanent_session_lifetime = datetime.timedelta(minutes=IDLE_LOGOUT_MIN)
     host = os.environ.get("WEBUI_HOST", "0.0.0.0")
     port = int(os.environ.get("WEBUI_PORT", "8080"))
     print(f"🌐 컨트롤 패널: http://localhost:{port}  (같은 WiFi의 다른 기기는 http://<폰IP>:{port})")
