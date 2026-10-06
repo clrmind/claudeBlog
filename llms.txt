@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [퇴직금 계산 방법과 지급 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261007_080010.html)
 - [신용점수 올리는 방법과 단기간 신용등급 관리 가이드](https://blog.zionlabs.org/posts/post_20261006_080011.html)
 - [1가구 2주택 양도소득세 비과세 요건과 계산 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261005_080011.html)
 - [서버 간 데이터 유실 방지를 위한 메시지 큐 도입 기준](https://blog.zionlabs.org/posts/post_20261004_080010.html)
@@ -23,4 +24,3 @@
 - [실비보험 가입 전 꼭 확인해야 할 면책사항과 보장 제외 항목](https://blog.zionlabs.org/posts/post_20260925_080008.html)
 - [국민연금 추납제도 활용법으로 은퇴 자산 공백 메우는 전략](https://blog.zionlabs.org/posts/post_20260924_080012.html)
 - [부가가치세 신고 기한과 방법: 완벽 가이드](https://blog.zionlabs.org/posts/post_20260923_080011.html)
-- [안전한 자산 관리를 위한 예금자보호 한도와 적용 범위](https://blog.zionlabs.org/posts/post_20260922_080011.html)
