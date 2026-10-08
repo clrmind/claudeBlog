@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [국민연금 예상수령액 조회 방법 및 가입 기간 늘리는 팁](https://blog.zionlabs.org/posts/post_20261009_080008.html)
 - [전세보증금 반환보증 가입 방법: 안전한 자산 보호를 위한 완벽 가이드](https://blog.zionlabs.org/posts/post_20261008_080019.html)
 - [퇴직금 계산 방법과 지급 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261007_080010.html)
 - [신용점수 올리는 방법과 단기간 신용등급 관리 가이드](https://blog.zionlabs.org/posts/post_20261006_080011.html)
@@ -23,4 +24,3 @@
 - [서버 간 통신에서 gRPC와 REST API 성능 차이와 선택 기준](https://blog.zionlabs.org/posts/post_20260927_080009.html)
 - [매년 나가는 고정비 절감, 자동차보험 할인 특약 종류 총정리](https://blog.zionlabs.org/posts/post_20260926_080009.html)
 - [실비보험 가입 전 꼭 확인해야 할 면책사항과 보장 제외 항목](https://blog.zionlabs.org/posts/post_20260925_080008.html)
-- [국민연금 추납제도 활용법으로 은퇴 자산 공백 메우는 전략](https://blog.zionlabs.org/posts/post_20260924_080012.html)
