@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [임대차 3법 계약갱신청구권 행사 조건과 거절 사유는 무엇인가요?](https://blog.zionlabs.org/posts/post_20261011_080009.html)
 - [AI 자동 블로그](https://blog.zionlabs.org/posts/post_20261010_102540.html)
 - [임금체불 진정서 제출 방법과 체당금 신청 절차는 무엇인가요?](https://blog.zionlabs.org/posts/post_20261010_080010.html)
 - [국민연금 예상수령액 조회 방법 및 가입 기간 늘리는 팁](https://blog.zionlabs.org/posts/post_20261009_080008.html)
@@ -23,4 +24,3 @@
 - [서버 통신 오류 방지를 위한 gRPC 타임아웃과 리트라이 설정 방법](https://blog.zionlabs.org/posts/post_20260930_080009.html)
 - [연말정산 환급 많이 받는 법, 구조적 절세 전략의 모든 것](https://blog.zionlabs.org/posts/post_20260929_080010.html)
 - [서버 장애 대응을 위한 AWS 가용영역(AZ)과 리전의 구조적 차이점](https://blog.zionlabs.org/posts/post_20260928_080009.html)
-- [서버 간 통신에서 gRPC와 REST API 성능 차이와 선택 기준](https://blog.zionlabs.org/posts/post_20260927_080009.html)
