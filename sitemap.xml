@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://blog.zionlabs.org/</loc><lastmod>2026-10-13</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>https://blog.zionlabs.org/</loc><lastmod>2026-10-14</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
 <url><loc>https://blog.zionlabs.org/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 <url><loc>https://blog.zionlabs.org/privacy.html</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
+<url><loc>https://blog.zionlabs.org/posts/post_20261014_080011.html</loc><lastmod>2026-10-14</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20261013_080009.html</loc><lastmod>2026-10-13</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20261012_080008.html</loc><lastmod>2026-10-12</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20261011_080009.html</loc><lastmod>2026-10-11</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -563,6 +564,7 @@
 <url><loc>https://blog.zionlabs.org/tags/상조.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/새마을금고.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/생성형ai.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/생애최초취득세.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/생일-축하.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/생활-금융.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/생활-습관.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -892,6 +894,7 @@
 <url><loc>https://blog.zionlabs.org/tags/출판시장.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/충북맛집.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/취득세감면.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/취득세감면조건.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/취득세계산기.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/취득세계산방법.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/층간소음.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
