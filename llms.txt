@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [예금자보호 한도와 금융기관별 적용 범위는 무엇인가요?](https://blog.zionlabs.org/posts/post_20261023_080011.html)
 - [프리랜서 종합소득세 신고 방법과 필요경비 인정 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261022_080010.html)
 - [클라우드 인프라 비용 절감: AWS RI와 세이빙스 플랜 선택 기준](https://blog.zionlabs.org/posts/post_20261021_080011.html)
 - [IRP 개인형퇴직연금 세액공제 한도와 계산 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261020_080012.html)
@@ -23,4 +24,3 @@
 - [임대차 3법 계약갱신청구권 행사 조건과 거절 사유는 무엇인가요?](https://blog.zionlabs.org/posts/post_20261011_080009.html)
 - [AI 자동 블로그](https://blog.zionlabs.org/posts/post_20261010_102540.html)
 - [임금체불 진정서 제출 방법과 체당금 신청 절차는 무엇인가요?](https://blog.zionlabs.org/posts/post_20261010_080010.html)
-- [국민연금 예상수령액 조회 방법 및 가입 기간 늘리는 팁](https://blog.zionlabs.org/posts/post_20261009_080008.html)
