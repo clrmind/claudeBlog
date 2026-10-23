@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://blog.zionlabs.org/</loc><lastmod>2026-10-23</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+<url><loc>https://blog.zionlabs.org/</loc><lastmod>2026-10-24</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
 <url><loc>https://blog.zionlabs.org/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 <url><loc>https://blog.zionlabs.org/privacy.html</loc><changefreq>monthly</changefreq><priority>0.3</priority></url>
+<url><loc>https://blog.zionlabs.org/posts/post_20261024_080009.html</loc><lastmod>2026-10-24</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20261023_080011.html</loc><lastmod>2026-10-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20261022_080010.html</loc><lastmod>2026-10-22</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 <url><loc>https://blog.zionlabs.org/posts/post_20261021_080011.html</loc><lastmod>2026-10-21</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -268,6 +269,7 @@
 <url><loc>https://blog.zionlabs.org/tags/간-건강.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/간-질환-예방.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/간에-좋은-음식.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/간이과세자.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/강남재건축.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/개인-브랜딩.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/개인정보-보호.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -529,6 +531,7 @@
 <url><loc>https://blog.zionlabs.org/tags/복지정책.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/복지제도.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/부가가치세.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/부가가치세-신고-기한.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/부과기준.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/부동산.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/부동산-대책.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -562,6 +565,7 @@
 <url><loc>https://blog.zionlabs.org/tags/사도교육.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/사무직-스트레칭.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/사무직건강관.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/사업자-세금.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/사업자세금.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/사용자직접지정.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/사전증여.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
@@ -797,6 +801,7 @@
 <url><loc>https://blog.zionlabs.org/tags/인프라최적화.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/인플레이션.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/일론머스크.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
+<url><loc>https://blog.zionlabs.org/tags/일반과세자.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/일본엔.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/일시적2주택.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
 <url><loc>https://blog.zionlabs.org/tags/임금산정.html</loc><changefreq>weekly</changefreq><priority>0.4</priority></url>
