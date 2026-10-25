@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [부가가치세 일반과세자와 간이과세자의 업종별 기준 및 신고 방법](https://blog.zionlabs.org/posts/post_20261026_080008.html)
 - [클라우드 인프라 네트워크 트래픽 비용 절감 가이드](https://blog.zionlabs.org/posts/post_20261025_080009.html)
 - [부가가치세 신고 기한과 일반과세자 간이과세자 전환 기준](https://blog.zionlabs.org/posts/post_20261024_080009.html)
 - [예금자보호 한도와 금융기관별 적용 범위는 무엇인가요?](https://blog.zionlabs.org/posts/post_20261023_080011.html)
@@ -23,4 +24,3 @@
 - [부동산 취득세 계산 방법과 감면 조건은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261014_080011.html)
 - [연차수당 계산법과 발생 기준 완벽 정리](https://blog.zionlabs.org/posts/post_20261013_080009.html)
 - [상속세 면제 한도와 계산법: 자산 이전의 정확한 기준](https://blog.zionlabs.org/posts/post_20261012_080008.html)
-- [임대차 3법 계약갱신청구권 행사 조건과 거절 사유는 무엇인가요?](https://blog.zionlabs.org/posts/post_20261011_080009.html)
