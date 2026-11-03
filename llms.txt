@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [증여세 면제 한도 부부 자녀별 공제 금액과 신고 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261104_080009.html)
 - [육아기 근로시간 단축 제도 신청 요건과 급여 계산 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261103_080013.html)
 - [클라우드 환경에서 고가용성(HA) 데이터베이스 구축을 위한 멀티 리전 Replication 설정 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261102_080010.html)
 - [실비보험 가입 전 확인사항 및 보장 내용 비교 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261101_080009.html)
@@ -23,4 +24,3 @@
 - [예금자보호 한도와 금융기관별 적용 범위는 무엇인가요?](https://blog.zionlabs.org/posts/post_20261023_080011.html)
 - [프리랜서 종합소득세 신고 방법과 필요경비 인정 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261022_080010.html)
 - [클라우드 인프라 비용 절감: AWS RI와 세이빙스 플랜 선택 기준](https://blog.zionlabs.org/posts/post_20261021_080011.html)
-- [IRP 개인형퇴직연금 세액공제 한도와 계산 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261020_080012.html)
