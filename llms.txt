@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [서버 구축 시 고정 IP와 유동 IP의 차이점 및 네트워크 설정 방법](https://blog.zionlabs.org/posts/post_20261108_080010.html)
 - [자동차보험 할인 특약 종류 및 가입 조건은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261107_080010.html)
 - [서버 장애 예방을 위한 VPN 이중화와 페일오버 설정 가이드](https://blog.zionlabs.org/posts/post_20261106_080011.html)
 - [IPv4 주소 고갈 대응을 위한 공인 IP 절감 및 사설 IP 네트워크 주소 변환(NAT) 구성 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261105_080008.html)
@@ -23,4 +24,3 @@
 - [클라우드 네이티브 환경에서 API Gateway 도입 기준과 라우팅](https://blog.zionlabs.org/posts/post_20261027_080009.html)
 - [부가가치세 일반과세자와 간이과세자의 업종별 기준 및 신고 방법](https://blog.zionlabs.org/posts/post_20261026_080008.html)
 - [클라우드 인프라 네트워크 트래픽 비용 절감 가이드](https://blog.zionlabs.org/posts/post_20261025_080009.html)
-- [부가가치세 신고 기한과 일반과세자 간이과세자 전환 기준](https://blog.zionlabs.org/posts/post_20261024_080009.html)
