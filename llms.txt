@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [1가구 2주택 비과세 요건 및 양도소득세 계산 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261110_080009.html)
 - [IPv6 전환 절차와 기존 네트워크 호환성을 위한 듀얼 스택 설정](https://blog.zionlabs.org/posts/post_20261109_080008.html)
 - [서버 구축 시 고정 IP와 유동 IP의 차이점 및 네트워크 설정 방법](https://blog.zionlabs.org/posts/post_20261108_080010.html)
 - [자동차보험 할인 특약 종류 및 가입 조건은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261107_080010.html)
@@ -23,4 +24,3 @@
 - [청년도약계좌 조건과 혜택 및 중도해지 시 지원금 유지 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261029_080009.html)
 - [클라우드 기반 대용량 트래픽 처리를 위한 CDN 캐시 히트율 최적화 설정 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261028_080012.html)
 - [클라우드 네이티브 환경에서 API Gateway 도입 기준과 라우팅](https://blog.zionlabs.org/posts/post_20261027_080009.html)
-- [부가가치세 일반과세자와 간이과세자의 업종별 기준 및 신고 방법](https://blog.zionlabs.org/posts/post_20261026_080008.html)
