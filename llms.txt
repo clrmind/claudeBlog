@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [API 트래픽 급증에 따른 Rate Limiting 구현 알고리즘별 특징과 선택 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261112_080009.html)
 - [신용점수 올리는 방법과 신용등급제 폐지 이후 평가 기준](https://blog.zionlabs.org/posts/post_20261111_080027.html)
 - [1가구 2주택 비과세 요건 및 양도소득세 계산 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261110_080009.html)
 - [IPv6 전환 절차와 기존 네트워크 호환성을 위한 듀얼 스택 설정](https://blog.zionlabs.org/posts/post_20261109_080008.html)
@@ -23,4 +24,3 @@
 - [청약통장 1순위 조건 및 가입 기간 산정 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261031_080010.html)
 - [부가가치세 신고 기한과 방법: IT 프로젝트 정산 가이드](https://blog.zionlabs.org/posts/post_20261030_080009.html)
 - [청년도약계좌 조건과 혜택 및 중도해지 시 지원금 유지 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261029_080009.html)
-- [클라우드 기반 대용량 트래픽 처리를 위한 CDN 캐시 히트율 최적화 설정 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261028_080012.html)
