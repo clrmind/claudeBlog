@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [법인 사업자 인터넷 전용회선 요금 체계와 SLA 계약 시 필수 확인 사항](https://blog.zionlabs.org/posts/post_20261119_080009.html)
 - [연차수당 계산법과 미사용 수당 지급 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261118_080012.html)
 - [실업급여 조건과 신청 절차는 무엇인가요?](https://blog.zionlabs.org/posts/post_20261117_080048.html)
 - [전세보증금 반환보증 가입 방법 및 보증료 산정 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261116_080008.html)
@@ -23,4 +24,3 @@
 - [자동차보험 할인 특약 종류 및 가입 조건은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261107_080010.html)
 - [서버 장애 예방을 위한 VPN 이중화와 페일오버 설정 가이드](https://blog.zionlabs.org/posts/post_20261106_080011.html)
 - [IPv4 주소 고갈 대응을 위한 공인 IP 절감 및 사설 IP 네트워크 주소 변환(NAT) 구성 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261105_080008.html)
-- [증여세 면제 한도 부부 자녀별 공제 금액과 신고 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261104_080009.html)

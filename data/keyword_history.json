@@ -1,10 +1,5 @@
 [
   {
-    "keyword": "시온랩스 OPC DA",
-    "date": "2026-08-30",
-    "title": "시온랩스 OPC DA 활용법과 사용자 직접 지정의 이해"
-  },
-  {
     "keyword": "시온랩스 OPC guardian https://zionlabs.org",
     "date": "2026-08-30",
     "title": "시온랩스 OPC guardian https://zionlabs.org 활용 가이드"
@@ -498,5 +493,10 @@
     "keyword": "연차수당 계산법과 미사용 수당 지급 기준은 무엇인가요?",
     "date": "2026-11-18",
     "title": "연차수당 계산법과 미사용 수당 지급 기준은 무엇인가요?"
+  },
+  {
+    "keyword": "법인 사업자 인터넷 전용회선 요금 체계와 SLA 계약 시 필수 확인 사항은 무엇인가요?",
+    "date": "2026-11-19",
+    "title": "법인 사업자 인터넷 전용회선 요금 체계와 SLA 계약 시 필수 확인 사항"
   }
 ]
