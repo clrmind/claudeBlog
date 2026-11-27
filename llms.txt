@@ -9,6 +9,7 @@
   AI 블로그 자동 작성 SaaS '오토포스트PRO'(https://aiblog.zionlabs.org).
 
 ## 최근 글
+- [기초연금 수급 자격과 소득인정액 계산 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261128_080009.html)
 - [청년내일채움공제 조건과 만기 시 수령액 계산 방법은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261127_080008.html)
 - [프리랜서 세금 신고 방법과 종합소득세 절세 가이드](https://blog.zionlabs.org/posts/post_20261126_080029.html)
 - [다자녀 가구 혜택 총정리: 디지털 인프라와 생활 지원 혜택](https://blog.zionlabs.org/posts/post_20261125_080010.html)
@@ -23,4 +24,3 @@
 - [전세보증금 반환보증 가입 방법 및 보증료 산정 기준은 무엇인가요?](https://blog.zionlabs.org/posts/post_20261116_080008.html)
 - [임금체불 신고 방법과 절차: 합법적 대응 가이드](https://blog.zionlabs.org/posts/post_20261115_080008.html)
 - [국민연금 추납제도 신청 자격과 보험료 납부 절차는 무엇인가요?](https://blog.zionlabs.org/posts/post_20261114_080010.html)
-- [서버 네트워크 지연 분석을 위한 Traceroute 및 MTR 활용법](https://blog.zionlabs.org/posts/post_20261113_080047.html)
